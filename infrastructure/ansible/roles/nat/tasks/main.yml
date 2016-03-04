@@ -1,0 +1,4 @@
+- name: Setup iptables for port forwarding
+  command: iptables -t nat 10.0.5.132 -I PREROUTING -p tcp --dport 80 -j DNAT --to 10.0.20.119:80
+  command: iptables-save > fw_conf_'date +%F'
+  command: /etc/init.d/iptables save

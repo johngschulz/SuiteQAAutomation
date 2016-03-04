@@ -1,0 +1,17 @@
+# Main task file for nginx server role
+- name: install nginx
+  apt: name=nginx update_cache=yes state=present
+
+- name: install apache2-utils
+  apt: name=apache2-utils state=present
+
+- name: create password file
+  command: htpasswd -cb /etc/nginx/.htpasswd boundless Open4Test!
+
+- name: create default site config
+  copy: src=nginx.conf dest=/etc/nginx/sites-available/default
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+

@@ -1,0 +1,35 @@
+### Install robot
+- name: Install Robot Framework
+  pip: name=robotframework state=latest
+
+### Install robot selenium library
+- name: Install RF Selenium2 library
+  pip: name=robotframework-selenium2library state=latest
+
+### Install robot http library
+- name: Install RF http library
+  pip: name=robotframework-httplibrary state=latest
+
+### Install docker-py required for Docker module
+- name: install docker-py
+  pip: name=docker-py
+
+### Install and start Docker
+- name: Install Docker
+  yum: name=docker state=latest
+
+- name: start docker
+  service: name=docker  state=started
+
+### pull and start selenium hub image
+- name: Selenium Grid Hub container
+  docker:
+    name: selenium-hub
+    image: selenium/hub:latest
+    state: reloaded
+    pull: missing
+
+
+### get suite-war.zip and suite-exts.zip
+
+### get robot tests and test data

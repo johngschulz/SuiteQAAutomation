@@ -1,0 +1,6 @@
+# main tasks for node role
+  - name: download selenium-server jar
+    get_url: url="http://selenium-release.storage.googleapis.com/{{ selenium_version }}/selenium-server-standalone-{{ selenium_version }}.0.jar"
+
+  - name: start selenium grid node
+    script: start_node.sh

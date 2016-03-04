@@ -1,0 +1,272 @@
+### Create QAan VPC ###
+- name: "Provision VPC in {{ aws_region }}"
+  ec2_vpc_net:
+    cidr_block: 10.0.0.0/16
+    region: "{{ aws_region }}"
+    name: suite-qa
+  register: vpc
+  tags:
+    - vpcsetup
+- debug: var=vpc
+
+### Create Internet Gateway ###
+- name: Set Internet Gateway
+  ec2_vpc_igw:
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ aws_region }}"
+  register: igw_qa
+  tags:
+    - vpcsetup
+
+### Create NAT Subnet ###
+- name: Create NAT Subnet
+  ec2_vpc_subnet:
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ aws_region }}"
+    cidr: "{{ subnet_nat }}"
+    resource_tags:
+      Name: NAT Subnet
+  register: nat_subnet
+  tags:
+    - vpcsetup
+- debug: var=nat_subnet
+
+### Create Internal Subnet ###
+- name: Create Internal Subnet
+  ec2_vpc_subnet:
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ aws_region }}"
+    cidr: "{{ subnet_internal }}"
+    resource_tags:
+      Name: Internal Subnet
+  register: internal_subnet
+  tags:
+    - vpcsetup
+
+### Create NAT Subnet Route Table ###
+- name: Set up NAT Subnet route table
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ aws_region }}"
+    subnets:
+      - "{{ nat_subnet.subnet.id }}"
+    routes:
+      - dest: 10.0.0.0/16
+        gateway_id: local
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ igw_qa.gateway_id }}"
+    resource_tags:
+      Name: QA NAT table
+  tags:
+    - vpcsetup
+
+### Create Internal Security Group ###
+- name: Provision Internal Security Group
+  local_action:
+        module: ec2_group
+        state: present
+        name: qa-internal-sg
+        description: "Internal security group"
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ aws_region }}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 10.0.5.0/24
+          - proto: icmp
+            from_port: -1
+            to_port: -1
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 443
+            to_port: 443
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            from_port: all
+            to_port: all
+            cidr_ip: 0.0.0.0/0
+  retries: 5
+  register: internal_securitygroup
+  tags:
+    - vpcsetup
+
+### Create NAT Security Group ###
+- name: Provision NAT Security Group
+  local_action:
+        module: ec2_group
+        state: present
+        name: qa-nat-sg
+        description: "NAT security group"
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ aws_region }}"
+        rules:
+          - proto: icmp
+            from_port: 1
+            to_port: 1
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 443
+            to_port: 443
+            cidr_ip: 10.0.16.0/20
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 184.66.136.51/32
+        rules_egress:
+          - proto: all
+            from_port: 0
+            to_port: 65535
+            cidr_ip: 0.0.0.0/0
+  retries: 5
+  register: natsecuritygroup
+  tags:
+    - vpcsetup
+
+### Create NAT Instance ###
+- name: Launch NAT instance
+  ec2:
+    vpc_subnet_id: "{{ nat_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-robot
+    group_id: "{{ natsecuritygroup.group_id }}"
+    image: "{{ nat_aws_image }}"
+    instance_type: "{{ nat_aws_instance_type }}"
+    source_dest_check: false
+    instance_tags:
+      type: "nat"
+      Name: "QA NAT"
+    exact_count: 1
+    count_tag:
+      type: "nat"
+      Name: "NAT"
+    wait: yes
+  register: nat
+  tags:
+    - vpcsetup
+
+- name: Set the fact for NAT Instance variable
+  set_fact:
+    nat_instance="{{ nat.instances[0].id }}"
+  when: nat|changed
+  tags:
+    - vpcsetup
+
+### Associate Elastic IP to NAT Instance ###
+- name: Associate an EIP to the NAT instance
+  ec2_eip:
+    device_id: "{{ nat_instance }}"
+    region: "{{ aws_region }}"
+    in_vpc: yes
+  when: nat|changed
+  tags:
+    - vpcsetup
+
+### Create internal Subnet Routing Table ###
+- name: Set up internal Subnet route table
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ aws_region }}"
+    subnets:
+      - "{{ internal_subnet.subnet.id }}"
+    routes:
+      - dest: 10.0.0.0/16
+        gateway_id: local
+      - dest: 0.0.0.0/0
+        instance_id: "{{ nat_instance }}"
+    resource_tags:
+      Name: Internal table
+  when: nat|changed
+  tags:
+    - vpcsetup
+
+### Create QA Hub Instance ###
+- name: Launch QA Grid Hub Instance
+  ec2:
+    vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-robot
+    assign_public_ip: false
+    group_id: "{{ internal_securitygroup.group_id }}"
+    image: "{{ hub_aws_image }}"
+    instance_type: "{{ hub_aws_instance_type }}"
+    instance_tags:
+      type: "hub"
+      Name: "QA Grid Hub"
+    exact_count: 1
+    count_tag:
+      type: "hub"
+      Name: "QA Grid Hub"
+    wait: yes
+  register: qa_hub
+  tags:
+    - vpcsetup
+
+### Create Win10 Node Instance ###
+- name: Launch Win10 Node instance
+  ec2:
+    vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-robot
+    assign_public_ip: false
+    group_id: "{{ internal_securitygroup.group_id }}"
+    image: "{{ win10_aws_image }}"
+    instance_type: "{{ win10_aws_instance_type }}"
+    instance_tags:
+      type: "win10"
+      Name: "QA Win10 Node"
+    exact_count: 1
+    count_tag:
+      type: "win10"
+      Name: "Win10 Node"
+    wait: yes
+  register: win10_node
+  tags:
+    - vpcsetup
+
+### Create NGINX Instance
+- name: Launch NGINX Ubuntux 14.04 instance
+  ec2:
+    vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-robot
+    assign_public_ip: false
+    group_id: "{{ internal_securitygroup.group_id }}"
+    image: "{{ nginx_aws_image }}"
+    instance_type: "{{ nginx_aws_instance_type }}"
+    instance_tags:
+      type: "nginx"
+      Name: "QA nginx"
+    exact_count: 1
+    count_tag:
+      type: "nginx"
+      Name: "QA nginx"
+    wait: yes
+  register: qa_nginx
+  tags:
+    -vpcsetup
+
+
+### Post Tasks ###
+- debug: msg="NAT value for ssh file is "{{ nat.instances[0].public_ip }}""
+  when: nat|changed
+
+- debug: msg="QA Hub value for ssh file is "{{ qa_hub.instances[0].public_ip }}""
+  when: qa_hub|changed
+
+- debug: msg="Win10 value for ssh file is "{{ win10_node.instances[0].public_ip }}""
+  when: win10_node|changed
+
+- debug: msg="nginx value for ssh file is "{{ qa_nginx.instances[0].public_ip }}""
+  when: win10_node|changed
+
+- pause: prompt="Make sure your ssh config file is set up properly before continuing"

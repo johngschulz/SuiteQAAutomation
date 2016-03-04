@@ -1,0 +1,14 @@
+beautifulsoup4==4.4.1
+decorator==4.0.6
+docutils==0.12
+jsonpatch==1.12
+jsonpointer==1.10
+requests==2.9.1
+robotframework==3.0
+robotframework-httplibrary==0.4.2
+robotframework-selenium2library==1.7.4
+selenium==2.50.0
+six==1.10.0
+waitress==0.8.10
+WebOb==1.5.1
+WebTest==2.0.20

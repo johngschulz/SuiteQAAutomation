@@ -1,0 +1,26 @@
+- name: Provision dependencies on hub instance
+  hosts: hub
+  remote_user: ec2-user
+  sudo: yes
+  roles:
+    - hub
+
+- name: Setup ip forwarding on NAT
+  hosts: gateway
+  remote_user: ec2-user
+  sudo: yes
+  roles:
+    - nat
+
+- name: provision win10 node
+  hosts: win10_node
+  remote_user: Administrator
+  roles:
+    - win_node
+
+- name: provision nginx server
+  hosts: nginx
+  remote_user: ubuntu
+  sudo: yes
+  roles:
+    - nginx
