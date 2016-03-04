@@ -1,0 +1,12 @@
+aws_region: us-east-1
+aws_zone: us-east-1a
+subnet_nat: 10.0.5.0/24
+subnet_internal: 10.0.16.0/20
+nat_aws_image: ami-68115b02
+nat_aws_instance_type: t2.micro
+hub_aws_image: ami-8fcee4e5
+hub_aws_instance_type: m4.large
+win10_aws_image: ami-78a69812
+win10_aws_instance_type: t2.medium
+nginx_aws_image: ami-fce3c696
+nginx_aws_instance_type: t2.micro
