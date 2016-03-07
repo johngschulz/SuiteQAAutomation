@@ -14,4 +14,7 @@
 - name: restart nginx
   service: name=nginx state=restarted
 
+- name: get basic website files
+  subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/reports force=yes export=yes username=user password=pass dest=/usr/share/nginx/html
+
 
