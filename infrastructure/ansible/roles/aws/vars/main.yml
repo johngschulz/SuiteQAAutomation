@@ -8,5 +8,5 @@ hub_aws_image: ami-8fcee4e5
 hub_aws_instance_type: m4.large
 win10_aws_image: ami-78a69812
 win10_aws_instance_type: t2.medium
-nginx_aws_image: ami-fce3c696
+nginx_aws_image: ami-8fcee4e5
 nginx_aws_instance_type: t2.micro

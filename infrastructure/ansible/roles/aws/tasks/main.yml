@@ -234,7 +234,7 @@
     - vpcsetup
 
 ### Create NGINX Instance
-- name: Launch NGINX Ubuntux 14.04 instance
+- name: Launch NGINX instance
   ec2:
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
