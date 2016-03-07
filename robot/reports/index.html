@@ -1,0 +1,160 @@
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<style>
+	.reltime {
+		font-size: 12px;
+	}
+</style>
+</head>
+
+	<body>
+		<h1>Integration Test Results</h1>
+
+		<div ng-app="testresultapp" ng-controller="TestResultsController">
+			{{helloTo.title}}
+			<table border=1>
+				<tr>
+					<td></td>
+					<td  style="padding:10px"  ng-repeat="bname in allBrowserNames"> 
+						{{bname}}
+					</td>
+
+				</tr>
+				<tr ng-repeat="result in allTestResults"> 
+					<td style="padding:10px" > {{result[0].hostconfig}} </td>
+					<td align=center style="padding:10px" ng-repeat="item in result">
+							<div ng-if="item.runresult == 'fail'">
+								<!-- https://openclipart.org/detail/161515/red-not-ok-failure-symbol -->
+								<a  href="{{item.hostconfig}}/{{item.browsername}}/report.html">
+									<img width=24 src="ok-2-300px.png" /></a>
+									<br/>
+									<span class=reltime>{{item.relativeDate}}</span>
+							</div>
+							<div ng-if="item.runresult == 'success'">
+								<a  href="{{item.hostconfig}}/{{item.browsername}}/report.html">
+									<!-- https://openclipart.org/detail/161503/green-ok-success-symbol -->
+									<img width=24 src="ok-1-300px.png" /></a>
+								<br/>
+								<span class=reltime>{{item.relativeDate}}</span>
+							</div>
+							<div ng-if="item.runresult == 'inprogress'">
+								<span>
+									<!-- http://www.ajaxload.info/  -->
+									<img width=24 src="ajax-loader.gif" />
+									<br/>
+									<span class=reltime>{{item.relativeDate}}</span>
+								</span>
+							</div>
+							<div ng-if="item.runresult == '-'">
+								<span>{{item.runresult}}</span>
+							</div>
+					</td>
+				</tr>
+			</table>
+		 	 
+		</div>
+
+	</body>
+
+	<script>
+angular.module("testresultapp", [])
+    .controller("TestResultsController", function($scope,$http) {
+       
+       $http.get("data.json").then(function (response) {
+       	//input is a list of all the test runs
+       	// this;
+       	// 1. finds all the hostconfigs and browser names
+       	// 2. organizes
+       	//     for each
+       		//find all hostconfigs
+       		var hostconfigs =[];
+       		$(response.data).each(function (idx) {hostconfigs.push( response.data[idx].hostconfig)} );
+       		hostconfigs = hostconfigs.unique();
+
+       		//find all browsername
+       		var browsernames =[];
+       		$(response.data).each(function (idx) {browsernames.push( response.data[idx].browsername)} );
+       		browsernames = browsernames.unique();
+
+       		//add in "34 minutes ago"
+			for (var t=0;t<response.data.length;t++)
+       		{
+       			response.data[t].relativeDate = timeAgo ( Date.parse(response.data[t].whenUTC));
+       		}
+
+       		//reorg
+       		var testresults = [];
+       		for (var t=0;t<hostconfigs.length;t++)
+       		{
+       				var currentHostConfigName = hostconfigs[t];
+       				//get all the test results for this config
+       				var thisHostConfigResults = [];
+
+       				for (var bni=0;bni<browsernames.length;bni++)
+       				{
+       					//default
+       					var itemResult = {browsername: browsernames[bni], hostconfig :currentHostConfigName, runresult:"-", whenUTC:"" };
+       					//look for corresponding item in results
+       					for (var i=0;i<response.data.length;i++)
+       					{
+       						var dataitem = response.data[i];
+       						if ( (dataitem.browsername== browsernames[bni]) && (dataitem.hostconfig == currentHostConfigName) )
+       						{
+       							itemResult = dataitem;
+       						}
+       					}
+       					thisHostConfigResults.push(itemResult);
+       				}
+       				testresults.push(thisHostConfigResults);
+       		}
+       		$scope.allTestResults = testresults;
+       		$scope.allBrowserNames = browsernames;
+       });
+
+       
+    } );
+
+
+    Array.prototype.unique = function () {
+	    var arr = this;
+	    return $.grep(arr, function (v, i) {
+	        return $.inArray(v, arr) === i;
+    });
+	}
+
+function timeAgo(datetimeUTC) {
+
+	    var seconds = Math.floor((  Date.now() - datetimeUTC) / 1000); //remove ms
+
+	    var interval = Math.floor(seconds / 31536000); //365 days (in seconds)
+
+	    if (interval > 1) {
+	        return interval + " years ago";
+	    }
+	    interval = Math.floor(seconds / 2592000); //30 days
+	    if (interval > 1) {
+	        return interval + " months ago";
+	    }
+	    interval = Math.floor(seconds / 86400); //24 hr
+	    if (interval > 1) {
+	        return interval + " days ago";
+	    }
+	    interval = Math.floor(seconds / 3600); //hour
+	    if (interval > 1) {
+	        return interval + " hours ago";
+	    }
+	    interval = Math.floor(seconds / 60); //minute
+	    if (interval > 1) {
+	        return interval + " minutes ago";
+	    }
+	    return Math.floor(seconds) + " seconds ago";
+	}
+
+ 
+
+
+	</script>
+</html>
