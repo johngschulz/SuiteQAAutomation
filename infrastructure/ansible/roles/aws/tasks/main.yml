@@ -227,7 +227,7 @@
     exact_count: 1
     count_tag:
       type: "win10"
-      Name: "Win10 Node"
+      Name: "QA Win10 Node"
     wait: yes
   register: win10_node
   tags:
@@ -249,7 +249,7 @@
     exact_count: 1
     count_tag:
       type: "win2012"
-      Name: "Win2012"
+      Name: "QA Win2012"
     wait: yes
   register: win2012
   tags:
