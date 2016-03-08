@@ -233,6 +233,29 @@
   tags:
     - vpcsetup
 
+
+- name: Launch Win2012 instance
+  ec2:
+    vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-robot
+    assign_public_ip: false
+    group_id: "{{ internal_securitygroup.group_id }}"
+    image: "{{ win2012_image }}"
+    instance_type: "{{ win2012_aws_instance_type }}"
+    instance_tags:
+      type: "win2012"
+      Name: "QA Win2012"
+    exact_count: 1
+    count_tag:
+      type: "win2012"
+      Name: "Win2012"
+    wait: yes
+  register: win2012
+  tags:
+    - vpcsetup
+
+
 ### Create NGINX Instance
 - name: Launch NGINX instance
   ec2:
