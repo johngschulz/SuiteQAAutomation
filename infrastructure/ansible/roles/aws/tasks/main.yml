@@ -148,7 +148,7 @@
     exact_count: 1
     count_tag:
       type: "nat"
-      Name: "NAT"
+      Name: "QA NAT"
     wait: yes
   register: nat
   tags:
