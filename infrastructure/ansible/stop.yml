@@ -1,0 +1,17 @@
+- hosts: linux_boxes
+  gather_facts: True
+  remote_user: ec2-user
+  vars:
+    - region: 'us-east-1'
+  tasks:
+    - name: gather ec2-facts
+      action: ec2_facts
+      register: linux_facts
+    - debug: msg="{{ hostvars[inventory_hostname]['ec2_id'] }}"
+
+    - name: stop things
+      local_action:
+        module: ec2
+        state: 'stopped'
+        region: us-east-1
+        instance_ids: "{{ ansible_ec2_instance_id }}"
