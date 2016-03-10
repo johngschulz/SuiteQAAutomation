@@ -1,10 +1,3 @@
-- name: Provision dependencies on hub instance
-  hosts: hub
-  remote_user: ec2-user
-  sudo: yes
-  roles:
-    - hub
-
 - name: Setup ip forwarding on NAT
   hosts: gateway
   remote_user: ec2-user
@@ -12,15 +5,30 @@
   roles:
     - nat
 
-- name: provision win10 node
-  hosts: win10_node
-  remote_user: Administrator
+- name: Provision dependencies on hub instance
+  hosts: tag_type_hub
+  remote_user: ec2-user
+  sudo: yes
   roles:
-    - win_node
+    - hub
 
 - name: provision nginx server
-  hosts: nginx
+  hosts: tag_type_nginx
   remote_user: ubuntu
   sudo: yes
   roles:
     - nginx
+
+- name: provision win10 node
+  hosts: tag_type_win10
+  remote_user: Administrator
+  roles:
+    - win_node
+
+- name: provision win2012 node
+  hosts: tag_type_win2012
+  remote_user: Administrator
+  roles:
+    - win2012_node
+
+
