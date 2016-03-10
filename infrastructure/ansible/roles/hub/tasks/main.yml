@@ -33,3 +33,6 @@
 ### get suite-war.zip and suite-exts.zip
 
 ### get robot tests and test data
+- name: Retrieve test files from git
+  subversion: repo=svn+ssh://github.com/boundlessgeo/SuiteQAAutomation/robot/tests dest=~/robot/tests export=True force=yes username=boundlessQA password=QA4Good!
+
