@@ -32,7 +32,10 @@
 
 ### get suite-war.zip and suite-exts.zip
 
+- name: install subversion
+  yum: name=subversion state=latest
+
 ### get robot tests and test data
 - name: Retrieve test files from git
-  subversion: repo=svn+ssh://github.com/boundlessgeo/SuiteQAAutomation/robot/tests dest=~/robot/tests export=True force=yes username=boundlessQA password=QA4Good!
+  subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/ dest=~/robot export=yes force=yes username=boundlessQA password=QA4Good!
 
