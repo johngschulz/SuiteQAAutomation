@@ -1,3 +1,10 @@
+#- name: Set NAT public IP in ssh.cfg
+#  hosts: localhost
+#  connection: local
+#  tasks:
+#    - name: modify ssh.cfg
+#      local_action:
+
 - name: Setup ip forwarding on NAT
   hosts: gateway
   remote_user: ec2-user
@@ -29,6 +36,4 @@
   hosts: tag_type_win2012
   remote_user: Administrator
   roles:
-    - win2012_node
-
-
+    - win_2012
