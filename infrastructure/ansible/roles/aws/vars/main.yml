@@ -6,9 +6,9 @@ nat_aws_image: ami-68115b02
 nat_aws_instance_type: t2.micro
 hub_aws_image: ami-8fcee4e5
 hub_aws_instance_type: m4.large
-win10_aws_image: ami-bb5f58d1
+win10_aws_image: ami-fcaea896
 win10_aws_instance_type: t2.medium
 nginx_aws_image: ami-fce3c696
 nginx_aws_instance_type: t2.micro
 win2012_aws_instance_type: m4.large
-win2012_image: ami-8f6265e5
+win2012_image: ami-4fafa925
