@@ -1,0 +1,9 @@
+- hosts: all_boxes
+  gather_facts: false
+  tasks:
+  - name: start AWS instances
+    local_action:
+      module: ec2
+      state: 'running'
+      region: us-east-1
+      instance_ids: "{{ hostvars[inventory_hostname]['ec2_id'] }}"
