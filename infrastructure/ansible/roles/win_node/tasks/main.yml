@@ -1,7 +1,37 @@
 # main tasks for node role
 - name: test windows connection
-  copy: src=selenium-server-standalone-2.52.0.jar dest=~/selenium-server-standalone-2.52.0.jar
+  copy: src=selenium-server-standalone-2.52.0.jar dest=~/selenium-server-standalone-2.52.0.jar mode=777
 
-#- name: start the grid node
-#  command: ping
-  #command: java -jar selenium-server-standalone-2.52.0.jar -role webdriver -hub http://10.0.217.57:32768/grid/register -browser browserName=firefox,maxInstances=1,platform=WINDOWS -browser browserName=chrome,maxInstances=1,platform=WINDOWS -browser browserName=MicrosoftEdge,maxInstances=1,platform=WINDOWS -browser browserName="internet explorer",maxInstances=1,platform=WINDOWS  -Dwebdriver.ie.driver="C:\source\Microsoft Web Driver\IEDriverServer x32 - 2.49b.exe" -Dwebdriver.chrome.driver="C:\source\Microsoft Web Driver\chromedriver - 2.20.exe" -Dwebdriver.edge.driver="C:\source\Microsoft Web Driver\MicrosoftWebDriver - 2.0.exe"
+- name: copy script
+  copy: src=start_node.sh dest=~/start_node.sh mode=777
+
+- name: download nssm
+  get_url: url=http://nssm.cc/release/nssm-2.24.zip dest=~/nssm-2.24.zip
+
+- name: unzip nssm
+  command: unzip -o   nssm-2.24.zip
+
+- name: move nssm out of zip dir
+  command: mv nssm-2.24/win64/nssm.exe ~/nssm.exe
+  command: chmod +x ~/nssm.exe
+
+- name: copy cygwin sudo script
+  copy: src=sudo dest=/bin/sudo
+
+- name: edit bashrc
+  copy: src=.bashrc dest=~/.bashrc force=yes
+
+- name: create Selenium Node service
+  command: ./start_node.sh
+
+- name: set service to autostart
+  command: sudo nssm set SelNode Start SERVICE_AUTO_START
+
+- name: setup service logs (stdout)
+  command: sudo /home/Administrator/nssm.exe set SelNode AppStdout C:\out.log
+
+- name: setup service logs (stderr)
+  command: sudo /home/Administrator/nssm.exe set SelNode AppStderr C:\error.log
+
+- name: restart the node service
+  command: sudo /home/Administrator/nssm.exe restart SelNodeService
