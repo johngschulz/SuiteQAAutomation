@@ -1,14 +1,36 @@
-#- name: Set NAT public IP in ssh.cfg
-#  hosts: localhost
-#  connection: local
-#  tasks:
-#    - name: modify ssh.cfg
-#      local_action:
+- name: Set NAT public IP in ssh.cfg
+  hosts: tag_type_nat
+  gather_facts: false
+  vars:
+    eip: "{{ hostvars[inventory_hostname]['ec2_ip_address'] }}"
+  tasks:
+  - name: update IP for gateway post-deploy
+    local_action:
+      module: lineinfile dest=~/SuiteQAAutomation/infrastructure/ansible/ssh.cfg regexp="ec2-user@" insertafter="ec2-user@" line="  ProxyCommand  ssh -W %h:%p ec2-user@{{ eip }}"
+
+- name: provision nginx server
+  hosts: tag_type_nginx
+  remote_user: ubuntu
+  sudo: yes
+  roles:
+    - nginx
 
 - name: Setup ip forwarding on NAT
-  hosts: gateway
+  hosts: tag_type_nat
   remote_user: ec2-user
   sudo: yes
+  pre_tasks:
+  - name: get nginx private ip
+    sudo: n
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name": QA nginx
+    register: nginx_facts
+  vars:
+    nat_ip: "{{ hostvars[inventory_hostname]['ec2_private_ip_address'] }}"
+    nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
   roles:
     - nat
 
@@ -18,13 +40,6 @@
   sudo: yes
   roles:
     - hub
-
-- name: provision nginx server
-  hosts: tag_type_nginx
-  remote_user: ubuntu
-  sudo: yes
-  roles:
-    - nginx
 
 - name: provision win10 node
   hosts: tag_type_win10

@@ -1,4 +1,10 @@
 - name: Setup iptables for port forwarding
-  command: iptables -t nat -A PREROUTING -p tcp -d 10.0.5.82 --dport 80 -j DNAT --to 10.0.27.97:80
-  command: iptables-save > fw_conf_'date +%F'
+  command: "iptables -t nat -A PREROUTING -p tcp -d {{ nat_ip }} --dport 80 -j DNAT --to {{ nginx_ip }}:80"
+
+#what is this supposed to do? works without this
+#- name: save conf
+#  command: "iptables-save > fw_conf_'date +%F'"
+
+- name: save iptable
   command: /etc/init.d/iptables save
+
