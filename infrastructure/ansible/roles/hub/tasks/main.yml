@@ -26,6 +26,7 @@
   docker:
     name: selenium-hub
     image: selenium/hub:latest
+    ports: 4444:4444
     state: reloaded
     pull: missing
 
