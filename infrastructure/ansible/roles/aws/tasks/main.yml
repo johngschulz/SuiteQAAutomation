@@ -93,10 +93,11 @@
           - proto: tcp
             from_port: 4444
             to_port: 4444
-            cidr_ip: 10.0.5.0/24
+            cidr_ip: 10.0.16.0/20
           - proto: tcp
             to_port: 5555
             from_port: 5555
+            cidr_ip: 10.0.16.0/20
         rules_egress:
           - proto: all
             from_port: all
