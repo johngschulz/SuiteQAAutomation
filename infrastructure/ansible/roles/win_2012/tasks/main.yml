@@ -2,22 +2,25 @@
   file: path=~/war state=directory
 
 - name: copy install script
-  copy: src=install dest=~/war/install mode=700 force=yes
+  copy: src=install.sh dest=~/war/install.sh force=yes mode=0700
 
 - name: copy jce policy
   copy: src=jce_policy-8.zip dest=~/war/jce_policy-8.zip force=yes
 
 - name: copy marlin jar
-  copy: src=marlin-0.7.3-Unsafe.jar dest=~/war/marlin-0.7.3-Unsafe.jar force=yes
+  copy: src=marlin-0.7.3-Unsafe.jar dest=~/war/marlin-0.7.3-Unsafe.jar force=yes mode=700
 
 - name: copy apache
-  copy: src=apache-tomact-8.0.32.exe dest=~/war/apache-tomact-8.0.32.exe
+  copy: src=apache-tomcat-8.0.32.exe dest=~/war/apache-tomcat-8.0.32.exe mode=700
 
 - name: copy jre
-  copy: src=jre-8u73-windows-x64.exe dest=~/war/jre-8u73-windows-x64.exe
+  copy: src=jre-8u73-windows-x64.exe dest=~/war/jre-8u73-windows-x64.exe mode=700
 
 - name: copy libjpeg
-  copy: src=libjpeg-turbo-1.4.2-vc64.exe dest=~/war/libjpeg-turbo-1.4.2-vc64.exe
+  copy: src=libjpeg-turbo-1.4.2-vc64.exe dest=~/war/libjpeg-turbo-1.4.2-vc64.exe mode=700
+
+- name: copy geoserver data directory
+  copy: src=geoserverDataDir.zip dest=/cygdrive/c/geoserverDataDir.zip
 
 - name: run the script
-  command: ~/war/install
+  command: ./install.sh chdir=~/war
