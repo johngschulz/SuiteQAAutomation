@@ -1,6 +1,9 @@
 # main tasks for node role
-- name: test windows connection
+- name: copy selenium server
   copy: src=selenium-server-standalone-2.52.0.jar dest=~/selenium-server-standalone-2.52.0.jar mode=777
+
+- name: copy test data
+  copy: src=test_data dest=/cygdrive/c/
 
 - name: copy script
   copy: src=start_node.sh dest=~/start_node.sh mode=777 force=yes
