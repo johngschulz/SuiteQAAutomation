@@ -1,6 +1,9 @@
 - name: create directory
   file: path=~/war state=directory
 
+- name: open port 8080
+  command: netsh firewall add portopening TCP 8080 "Allow port 8080"
+
 - name: copy install script
   copy: src=install.sh dest=~/war/install.sh force=yes mode=0700
 
@@ -18,6 +21,9 @@
 
 - name: copy libjpeg
   copy: src=libjpeg-turbo-1.4.2-vc64.exe dest=~/war/libjpeg-turbo-1.4.2-vc64.exe mode=700
+
+- name: copy test data
+  copy: src=test_data dest=/cygdrive/c/
 
 - name: copy geoserver data directory
   copy: src=geoserverDataDir.zip dest=/cygdrive/c/geoserverDataDir.zip
