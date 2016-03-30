@@ -98,6 +98,14 @@
             to_port: 5555
             from_port: 5555
             cidr_ip: 10.0.16.0/20
+          - proto: tcp
+            to_port: 5432
+            from_port: 5432
+            cidr_ip: 10.0.16.0/20
+          - proto: tcp
+            to_port: 8080
+            from_port: 8080
+            cidr_ip: 10.0.16.0/20
         rules_egress:
           - proto: all
             from_port: all

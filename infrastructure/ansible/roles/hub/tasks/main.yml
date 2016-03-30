@@ -4,7 +4,14 @@
 
 ### Install robot selenium library
 - name: Install RF Selenium2 library
-  pip: name=robotframework-selenium2library state=latest
+  pip: name=robotframework-selenium2library state=present version=1.7.4
+
+# patch selenium library
+- name: Patch Selenium2 Library for Edge
+  copy:
+    remote_src: True
+    src: /home/ec2-user/robot/robot_sel2_patch/_browsermanagement.py
+    dest: /usr/local/lib/python2.7/site-packages/Selenium2Library/keywords/_browsermanagement.py
 
 ### Install robot http library
 - name: Install RF http library
@@ -30,7 +37,6 @@
     state: reloaded
     pull: missing
 
-
 ### get suite-war.zip and suite-exts.zip
 
 - name: install subversion
@@ -38,5 +44,8 @@
 
 ### get robot tests and test data
 - name: Retrieve test files from git
-  subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/ dest=~/robot export=yes force=yes username=boundlessQA password=QA4Good!
+  subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/ dest=/home/ec2-user/robot export=yes force=yes username=boundlessQA password=QA4Good!
+
+- name: give Robot folder RW permissions
+  command: chmod -R 777 robot/
 

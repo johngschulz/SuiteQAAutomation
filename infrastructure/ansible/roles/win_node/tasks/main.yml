@@ -1,9 +1,18 @@
 # main tasks for node role
-- name: test windows connection
+- name: copy selenium server
   copy: src=selenium-server-standalone-2.52.0.jar dest=~/selenium-server-standalone-2.52.0.jar mode=777
 
+- name: copy test data
+  copy: src=test_data dest=/cygdrive/c/
+
 - name: copy script
-  copy: src=start_node.sh dest=~/start_node.sh mode=777
+  copy: src=start_node.sh dest=~/start_node.sh mode=777 force=yes
+
+- name: update start_node IP
+  replace:
+    dest: "~/start_node.sh"
+    regexp: '\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
+    replace: '{{ hub_ip }}'
 
 - name: download nssm
   get_url: url=http://nssm.cc/release/nssm-2.24.zip dest=~/nssm-2.24.zip
@@ -13,10 +22,12 @@
 
 - name: move nssm out of zip dir
   command: mv nssm-2.24/win64/nssm.exe ~/nssm.exe
+
+- name: chmod
   command: chmod +x ~/nssm.exe
 
 - name: copy cygwin sudo script
-  copy: src=sudo dest=/bin/sudo
+  copy: src=sudo dest=/bin/sudo mode=777
 
 - name: edit bashrc
   copy: src=.bashrc dest=~/.bashrc force=yes
@@ -28,10 +39,10 @@
   command: sudo nssm set SelNode Start SERVICE_AUTO_START
 
 - name: setup service logs (stdout)
-  command: sudo /home/Administrator/nssm.exe set SelNode AppStdout C:\out.log
+  command: sudo /home/Administrator/nssm.exe set SelNode AppStdout C:/out.log
 
 - name: setup service logs (stderr)
-  command: sudo /home/Administrator/nssm.exe set SelNode AppStderr C:\error.log
+  command: sudo /home/Administrator/nssm.exe set SelNode AppStderr C:/error.log
 
 - name: restart the node service
-  command: sudo /home/Administrator/nssm.exe restart SelNodeService
+  command: sudo /home/Administrator/nssm.exe restart SelNode
