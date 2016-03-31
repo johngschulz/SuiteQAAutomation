@@ -298,18 +298,23 @@
   tags:
     -vpcsetup
 
-
-### Post Tasks ###
-- debug: msg="NAT value for ssh file is "{{ nat.instances[0].public_ip }}""
-  when: nat|changed
-
-- debug: msg="QA Hub value for ssh file is "{{ qa_hub.instances[0].public_ip }}""
-  when: qa_hub|changed
-
-- debug: msg="Win10 value for ssh file is "{{ win10_node.instances[0].public_ip }}""
-  when: win10_node|changed
-
-- debug: msg="nginx value for ssh file is "{{ qa_nginx.instances[0].public_ip }}""
-  when: qa_nginx|changed
-
-- pause: prompt="Make sure your ssh config file is set up properly before continuing"
+- name: Launch Ubuntu GS instance
+  ec2:
+    vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-robot
+    assign_public_ip: false
+    group_id: "{{ internal_securitygroup.group_id }}"
+    image: "{{ ubuntu_gs_aws_image }}"
+    instance_type: "{{ ubuntu_gs_aws_instance_type }}"
+    instance_tags:
+      type: "ubuntu_gs"
+      Name: "QA Ubuntu gs"
+    exact_count: 1
+    count_tag:
+      type: "ubuntu_gs"
+      Name: "QA Ubuntu gs"
+    wait: yes
+  register: qa_ubuntu_gs
+  tags:
+    -vpcsetup

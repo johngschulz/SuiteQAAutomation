@@ -12,3 +12,5 @@ nginx_aws_image: ami-fce3c696
 nginx_aws_instance_type: t2.micro
 win2012_aws_instance_type: m4.large
 win2012_image: ami-4fafa925
+ubuntu_gs_aws_image: ami-fce3c696
+ubuntu_gs_aws_instance_type: t2.medium

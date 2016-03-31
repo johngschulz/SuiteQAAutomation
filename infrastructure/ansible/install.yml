@@ -63,3 +63,10 @@
   remote_user: Administrator
   roles:
     - win_2012
+
+- name: provision ubuntu GS machine
+  hosts: tag_type_ubuntu_gs
+  remote_user: ubuntu
+  sudo: yes
+  roles:
+    - ubuntu_gs

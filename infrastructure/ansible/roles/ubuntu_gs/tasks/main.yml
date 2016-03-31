@@ -1,0 +1,17 @@
+- name: import boundless gpg key
+  apt_key: url=https://apt.boundlessgeo.com/gpg.key state=present
+
+- name: add Suite repo
+  apt_repository: repo='deb https://apt.boundlessgeo.com/suite/latest/ubuntu/ trusty main' state=present
+
+- name: update repo
+  apt: update_cache=yes
+
+- name: install Suite
+  apt: name=opengeo state=latest
+
+- name: restart tomcat
+  service: name=tomcat7 state=restarted
+
+- name: restart postgres
+  service: name=postgresql state=restarted
