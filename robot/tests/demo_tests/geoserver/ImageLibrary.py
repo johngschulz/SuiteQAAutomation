@@ -4,7 +4,7 @@ from io import BytesIO
 
 class ImageLibrary:
 
-    def images_should_be_equal(self,fnameRefImage,imageBytes):
+    def images_should_be_equal(self,fnameRefImage,imageBytes,maxBad=20):
          print '*DEBUG* fname = %s, other image has %i bytes' % (fnameRefImage, len(imageBytes))
          refImage = self._loadImageFromDisk(fnameRefImage)
          otherImage = self._loadImageFromBytes(imageBytes)
@@ -14,8 +14,8 @@ class ImageLibrary:
 
          badPixels = self._nPixelsDifferent(refImage, otherImage)
          print '*DEBUG* number of different pixels = %i' % badPixels
-         if badPixels > 20 :
-            raise AssertionError('reference image and test image are different!')
+         if badPixels > maxBad :
+            raise AssertionError('reference image and test image are different! %i pixels are different.' % badPixels)
 
     def read_file_bytes(self, fname) :
         return open(fname,"rb").read()
