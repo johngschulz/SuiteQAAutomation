@@ -15,6 +15,7 @@ class ImageLibrary:
          badPixels = self._nPixelsDifferent(refImage, otherImage)
          print '*DEBUG* number of different pixels = %i' % badPixels
          if badPixels > maxBad :
+            otherImage.save("_badimage.png","PNG")
             raise AssertionError('reference image and test image are different! %i pixels are different.' % badPixels)
 
     def read_file_bytes(self, fname) :
