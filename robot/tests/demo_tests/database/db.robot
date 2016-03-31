@@ -1,6 +1,6 @@
 ***Settings***
 Library  DatabaseLibrary
-Library  PostgresqlDDL
+Library  PostgresqlDDL.py
 
 
 *** Variables ***
