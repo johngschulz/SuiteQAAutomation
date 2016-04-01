@@ -1,0 +1,33 @@
+#usage: AllRobotTests <machine keyword> <machine IP>
+
+
+
+if [ "$#" -ne 2 ]; then
+    echo " usage: AllRobotTests <machine keyword> <machine IP>"
+    exit 1
+fi
+
+declare hostkeyword=$1
+declare IP=$2
+
+declare HOME=`pwd`
+
+#clean
+rm -r reports/$hostkeyword
+
+#get current test status file
+rm  data.json
+scp ubuntu@10.0.26.55:/usr/share/nginx/html/data.json     data.json
+
+
+#run DB tests
+ssh ubuntu@10.0.26.55 "mkdir -p /usr/share/nginx/html/$hostkeyword-database/OTHER/"
+
+python updateJson.py data.json  $hostkeyword-database  OTHER  inprogress
+scp  data.json ubuntu@10.0.26.55:/usr/share/nginx/html/data.json    
+robot  --variable GEOSERVERHOST:"$IP:8080"   -L debug   -x xunit.xml -d reports/$hostkeyword/database  demo_tests/database
+python updateJson.py data.json $hostkeyword-database  OTHER $?
+
+scp -r reports/$hostkeyword/database/* ubuntu@10.0.26.55:/usr/share/nginx/html/$hostkeyword-database/OTHER
+scp  data.json ubuntu@10.0.26.55:/usr/share/nginx/html/data.json  
+ 
