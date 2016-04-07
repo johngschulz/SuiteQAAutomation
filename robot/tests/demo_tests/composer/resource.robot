@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     A resource fil with reusable keywords and variables.
+Documentation     A resource file with reusable keywords and variables.
 ...
 ...               The system specific keywords created here form our own
 ...               domain specific language. They utilize keywords provided
@@ -13,7 +13,7 @@ ${DELAY}          0
 ${VALID USER}     admin
 ${VALID PASSWORD}    geoserver
 ${COMPOSER URL}   http://${SERVER}/geoserver/composer
-${TEST DATA}    C:\\test_data
+${TEST DATA}    C:\\test_data\\
 
 *** Keywords ***
 Open Browser To Composer
