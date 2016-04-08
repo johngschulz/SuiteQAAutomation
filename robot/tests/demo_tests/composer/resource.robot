@@ -34,5 +34,8 @@ Login to Composer
     Wait Until Page Contains    admin
     Page Should Contain    admin
 
-Open Workspace Layer Page
+Open Workspace testws
     Go To    ${COMPOSER URL}/#/workspace/testws/maps/
+
+Open Workspace tutorial
+    Go To    ${COMPOSER URL}/#/workspace/tutorial/maps/
