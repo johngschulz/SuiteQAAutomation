@@ -8,10 +8,9 @@ Library           Selenium2Library
 Library           ImageLibrary.py
 Library           XML
 Library           HttpLibrary.HTTP
+Resource          ../../environment.robot
 
 *** Variables ***
-${SERVER}         10.0.217.57:8080
-${BROWSER}        firefox
 ${DELAY}          0
 ${VALID USER}     admin
 ${VALID PASSWORD}    geoserver
@@ -21,7 +20,7 @@ ${COMPOSER URL}   http://${SERVER}/geoserver/composer
 
 *** Keywords ***
 Open Browser To GeoServer
-    Open Browser    ${LOGIN URL}    ${BROWSER}  None    http://10.0.217.57:4444/wd/hub
+    Open Browser    ${LOGIN URL}    ${BROWSER}  None    ${REMOTE_URL}
     Maximize Browser Window
     Set Selenium Speed      0.2
     Title Should Be    GeoServer: Welcome

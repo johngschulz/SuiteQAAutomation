@@ -5,19 +5,17 @@ Documentation     A resource file with reusable keywords and variables.
 ...               domain specific language. They utilize keywords provided
 ...               by the imported Selenium2Library.
 Library           Selenium2Library
+Resource          ../../environment.robot
 
 *** Variables ***
-${SERVER}         10.0.217.57:8080
-${BROWSER}        firefox
 ${DELAY}          0
 ${VALID USER}     admin
 ${VALID PASSWORD}    geoserver
 ${COMPOSER URL}   http://${SERVER}/geoserver/composer
-${TEST DATA}    C:\\test_data\\
 
 *** Keywords ***
 Open Browser To Composer
-    Open Browser    ${COMPOSER URL}    ${BROWSER}    None    http://10.0.217.57:4444/wd/hub
+    Open Browser    ${COMPOSER URL}    ${BROWSER}    None    ${REMOTE_URL}
     Maximize Browser Window
     Set Selenium Speed      0.2
     Title Should Be    Composer

@@ -1,20 +1,19 @@
 *** Settings ***
- 
+
 Library           Selenium2Library
+Resource          ../../environment.robot
 
 Suite Setup          Open Browser To WPS Builder
 Test Setup           Reset WPS Builder Page
 Suite Teardown       Close Browser
 
 *** Variables ***
-${SERVER}         localhost:8080
-${BROWSER}        firefox
 ${WPSBUILDER_URL}   http://${SERVER}/wpsbuilder
 
 
 # POLYGON((0 0,10 0, 10 10, 0 10, 0 0))
 *** Test Cases ***
-Simple Geometry Process Test       
+Simple Geometry Process Test
        Move WPS Process to Canvas    area
        Set WPS Geom WKT     wkt=POLYGON((0 0,10 0, 10 10, 0 10, 0 0))
        Run WPS Process
@@ -37,12 +36,12 @@ Open Browser To WPS Builder
 
 Reset WPS Builder Page
     Click Element     id=btn-clear
- 
+
 
 Move WPS Process to Canvas
-       [arguments]     ${processName} 
+       [arguments]     ${processName}
        Page Should Contain Element  //*[@id='palette']//*[text()= '${processName}']     could not find wps process "${processName}"
-       Drag And Drop    //*[@id='palette']//*[text()= '${processName}']      id=chart 
+       Drag And Drop    //*[@id='palette']//*[text()= '${processName}']      id=chart
        Page Should Contain Element    //*[local-name()="text" and contains(text(),'${processName}')]/..         could not move wps process "${processName}" to canvas
 
 Set Features
