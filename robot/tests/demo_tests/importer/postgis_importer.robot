@@ -37,11 +37,6 @@ Test Upload to Postgis
 
     [Teardown]   Run Keywords    Delete Postgis Datastore         Drop Temp Postgis Database  #Close Browser
 
-Test0
-    ${filecontent}=     Get Binary File      ${CURDIR}\\aaa.png
-     Images Should Be Equal       ${CURDIR}\\parks.png     ${filecontent}
-
-
 
 
 ***Keywords***
