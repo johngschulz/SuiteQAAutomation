@@ -6,6 +6,11 @@ Resource          ${CURDIR}/../database/resource.robot
 Resource          ${CURDIR}/../geoserver/resource.robot
 
 
+ 
+Library           Collections
+Library           RequestsLibrary
+Library           OperatingSystem
+
 
 *** Variables ***
 ${DB_SERVER_IP}             localhost
@@ -21,12 +26,58 @@ ${TEST_POSTGIS_DATASTORE_NAME}    test_postgis_store
  
 Test Upload to Postgis 
     [Setup]      Run Keywords    Create Temp Postgis Database   Login To Geoserver     Create Postgis Datastore
-    Should Be Equal   1    1
+    Import File
+
+    Import Library    Dialogs
+    Pause Execution
+
+    ${img}      WMS Get Map     layernames=cite:parks      bbox=-122.96722412109375,42.247066497802734,-122.70355224609375,42.446537017822266   width=768       height=581   styles=polygon
+    Create Binary File   aaa.png    ${img}
+    Images Should Be Equal       ${CURDIR}\\parks.png  ${img}
+
     [Teardown]   Run Keywords    Delete Postgis Datastore         Drop Temp Postgis Database  #Close Browser
+
+Test0
+    ${filecontent}=     Get Binary File      ${CURDIR}\\aaa.png
+     Images Should Be Equal       ${CURDIR}\\parks.png     ${filecontent}
+
 
 
 
 ***Keywords***
+
+
+#https://github.com/bulkan/robotframework-requests/blob/master/tests/testcase.txt
+Import File
+        [arguments]    ${datastoreName}=${TEST_POSTGIS_DATASTORE_NAME}   ${namespace}=cite    ${fname}=parks.zip   ${fdir}=c:\\
+        ${auth}=     Create List   admin    geoserver
+        Create Session     RESTAPI    http://${SERVER}   auth=${auth}
+        &{headers}=  Create Dictionary     Content-type=application/json
+        ${data}=     Set Variable    {"import":{"targetWorkspace":{"workspace":{"name":"${namespace}"}},"targetStore":{"dataStore":{"name":"${datastoreName}"}}}}          
+        ${resp}=   POST Request    RESTAPI    /geoserver/rest/imports     data=${data}
+        Log     ${resp.content}
+        ${ID}=    Set Variable     ${resp.json()['import']['id']}
+         
+       
+        ${filecontent}=     Get Binary File      ${fdir}${fname}
+        &{files}=  Create Dictionary  ${fname}=${filecontent}
+        ${resp}=  Post Request  RESTAPI  /geoserver/rest/imports/${ID}/tasks  files=${files}
+        Log     ${resp.content}
+        Should Be Equal As Strings  ${resp.status_code}  201
+         
+        ${resp}=  Put Request     RESTAPI  /geoserver/rest/imports/${ID}/tasks/0/target   headers=${headers}     data={"dataStore":{"name":"test_postgis_store"}}
+        Log     ${resp.content}
+        Should Be Equal As Strings  ${resp.status_code}  204
+
+        ${resp}=   POST Request    RESTAPI    /geoserver/rest/imports/${ID} 
+        Log     ${resp.content}
+        Should Be Equal As Strings  ${resp.status_code}  204
+        Sleep    2 seconds
+
+        Delete All Sessions
+
+ 
+
 Create Postgis Datastore
     Click Element     //span[text()='Stores']/.. 
     Click Element     //a[text()="Add new Store"]
@@ -64,6 +115,7 @@ Put Text In Labelled Input
 Login To Geoserver
     Set Selenium Timeout     20 seconds
     Set Selenium Speed      .2
+    Set Selenium Implicit Wait   1 seconds
     Open Browser To GeoServer
     Input Username    admin
     Input Password    geoserver
