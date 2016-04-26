@@ -25,7 +25,7 @@ ssh ubuntu@10.0.26.55 "mkdir -p /usr/share/nginx/html/$hostkeyword-database/OTHE
 
 python updateJson.py data.json  $hostkeyword-database  OTHER  inprogress
 scp  data.json ubuntu@10.0.26.55:/usr/share/nginx/html/data.json    
-robot  --variable GEOSERVERHOST:"$IP:8080"   -L debug   -x xunit.xml -d reports/$hostkeyword/database  demo_tests/database
+robot  --variable GEOSERVERHOST:"$IP"   -L debug   -x xunit.xml -d reports/$hostkeyword/database  demo_tests/database
 python updateJson.py data.json $hostkeyword-database  OTHER $?
 
 scp -r reports/$hostkeyword/database/* ubuntu@10.0.26.55:/usr/share/nginx/html/$hostkeyword-database/OTHER
