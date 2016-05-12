@@ -9,13 +9,6 @@
 - name: Install RF Selenium2 library
   pip: name=robotframework-selenium2library state=present version=1.7.4
 
-# patch selenium library
-- name: Patch Selenium2 Library for Edge
-  copy:
-    remote_src: True
-    src: /home/ec2-user/robot/robot_sel2_patch/_browsermanagement.py
-    dest: /usr/local/lib/python2.7/site-packages/Selenium2Library/keywords/_browsermanagement.py
-
 - name: unininstall pil library
   pip: name=pil state=absent
 
@@ -51,18 +44,17 @@
   yum: name=docker state=latest
 
 - name: start docker
-  service: name=docker  state=started
+  service: name=docker  state=restarted
 
 ### pull and start selenium hub image
 - name: Selenium Grid Hub container
   docker:
+    docker_api_version: 1.21
     name: selenium-hub
     image: selenium/hub:latest
     ports: 4444:4444
     state: reloaded
     pull: missing
-
-### get suite-war.zip and suite-exts.zip
 
 - name: install subversion
   yum: name=subversion state=latest
@@ -73,6 +65,22 @@
 
 - name: give Robot folder RW permissions
   command: chmod -R 777 robot/
+
+### update ips for robot, server = geoserver(win2012 or ubuntu),remote_url =hub ip
+# for gs_ip, pass it in when play is called? 
+
+- name: update remote hub IP
+  replace:
+    dest: "/home/ec2-user/robot/tests/environment_ansible.robot"
+    regexp: '\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b:4444'
+    replace: '{{ hub_ip }}:4444'
+
+# patch selenium library
+- name: Patch Selenium2 Library for Edge
+  copy:
+    remote_src: True
+    src: /home/ec2-user/robot/robot_sel2_patch/_browsermanagement.py
+    dest: /usr/local/lib/python2.7/site-packages/Selenium2Library/keywords/_browsermanagement.py
 
 - name: copy test data
   copy: src=test_data dest=/home/ec2-user/
