@@ -17,7 +17,7 @@ Create New Workspace
     Close Browser
 
 Add Data To New Workspace
-    Open Workspace testws
+    Open Workspace  testws
     Click Element   xpath=//a[contains(.,"Add Data")]
     Wait Until Page Contains    Add Files
     Choose File     xpath=//input[@type='file']     ${TEST DATA}world.zip

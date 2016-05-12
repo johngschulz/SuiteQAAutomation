@@ -9,12 +9,12 @@ Resource          ../../environment.robot
 
 
 *** Variables ***
- 
+
 
 ***Testcases***
 Test0
-    [Setup]      Run Keywords     Login To Geoserver      
-    Empty Cached Layer      layer=topp:states
+    [Setup]      Run Keywords     Login To Geoserver
+    Empty Cached Layer      layer=usa:states
     ${cacheStatus}=    Get Test Image Cache Status
     Should be Equal    ${cacheStatus}   MISS
     ${cacheStatus2}=    Get Test Image Cache Status
@@ -23,21 +23,21 @@ Test0
 ***Keywords***
 
 Empty Cached Layer
-       [arguments]   ${layer}=topp:states
-       Click Element     //span[text()='Tile Layers']/.. 
-       Click Element      //span[text()='${layer}']/ancestor::tr//*[text()='Empty']/ancestor::a     
+       [arguments]   ${layer}=usa:states
+       Click Element     //span[text()='Tile Layers']/..
+       Click Element      //span[text()='${layer}']/ancestor::tr//*[text()='Empty']/ancestor::a
        Click Element       //*[@class="wicket-modal" ]//a[text()='OK']
 
 
 Get Test Image Cache Status
-	    [arguments]   ${layer}=topp:states
-		Create Session     GWC    http://${SERVER}  
+	    [arguments]   ${layer}=usa:states
+		Create Session     GWC    http://${SERVER}
 		&{data}=  Create Dictionary  LAYERS=${layer}   FORMAT=image/png    SERVICE=WMS   REQUEST=GetMap   Version=1.1.1      STYLES=     SRS=EPSG:4326   BBOX=-135,0,-90,45  WIDTH=256  HEIGHT=256
-		 ${resp}=   Get Request    GWC    /geoserver/gwc/service/wms      params=${data}  
-		 Log   ${resp.headers}		 
+		 ${resp}=   Get Request    GWC    /geoserver/gwc/service/wms      params=${data}
+		 Log   ${resp.headers}
 
 		 Should Be Equal As Strings  ${resp.status_code}  200
-		 
+
 		 Delete All Sessions
 		 [return]  ${resp.headers['geowebcache-cache-result']}
 
