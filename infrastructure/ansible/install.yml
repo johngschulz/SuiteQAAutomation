@@ -21,7 +21,7 @@
   sudo: yes
   pre_tasks:
   - name: get nginx private ip
-    sudo: n
+    sudo: no
     local_action:
       module: ec2_remote_facts
       region: us-east-1
@@ -38,6 +38,8 @@
   hosts: tag_type_hub
   remote_user: ec2-user
   sudo: yes
+  vars: 
+    hub_ip: "{{ hostvars[inventory_hostname]['ec2_private_ip_address'] }}"
   roles:
     - hub
 
@@ -55,8 +57,17 @@
     register: hub_facts
   vars:
     hub_ip: "{{ hub_facts.instances[0].private_ip_address }}"
+    node_id: "{{ hostvars[inventory_hostname]['ec2_id'] }}"
   roles:
     - win_node
+  post_tasks:
+  - name: restart win_node to activate autologon
+    sudo: no
+    command: shutdown /r
+    async: 0
+    poll: 0
+    ignore_errors: true
+
 
 - name: provision win2012 node
   hosts: tag_type_win2012
