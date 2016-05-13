@@ -1,5 +1,8 @@
-- name: Setup iptables for port forwarding
+- name: Setup iptables for port forwarding to nginx
   command: "iptables -t nat -A PREROUTING -p tcp -d {{ nat_ip }} --dport 80 -j DNAT --to {{ nginx_ip }}:80"
+
+- name: port forward windows rdp
+  command: "iptables -t nat -A PREROUTING -p tcp -d {{ nat_ip }} --dport 3389 -j DNAT --to {{ win10_ip }}:3389"
 
 #what is this supposed to do? works without this
 #- name: save conf

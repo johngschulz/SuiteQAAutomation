@@ -91,6 +91,10 @@
             to_port: 443
             cidr_ip: 0.0.0.0/0
           - proto: tcp
+            from_port: 3389
+            to_port: 3389
+            cidr_ip: 10.0.5.0/20
+          - proto: tcp
             from_port: 4444
             to_port: 4444
             cidr_ip: 10.0.16.0/20
@@ -141,6 +145,10 @@
           - proto: tcp
             from_port: 22
             to_port: 22
+            cidr_ip: 24.69.132.34/32
+          - proto: tcp
+            from_port: 3389
+            to_port: 3389
             cidr_ip: 24.69.132.34/32
         rules_egress:
           - proto: all
