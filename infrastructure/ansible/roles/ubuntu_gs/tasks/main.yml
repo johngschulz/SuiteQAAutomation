@@ -13,5 +13,35 @@
 - name: restart tomcat
   service: name=tomcat7 state=restarted
 
+- name: install pip
+  apt: name=python-pip state=latest
+
+- name: install python dev 
+  apt: name=python-dev state=latest
+
+- name: install psycopg2 dependency
+  apt: name=libpq-dev state=latest
+
+- name: install psycopg2
+  pip: name=psycopg2 state=latest
+
+# - name: configure postgres
+#   sudo: yes
+#   sudo_user: postgres
+#   postgresql_user: db=postgres user=postgres password=postgres
+
+# - name: update postgresql.conf
+#   copy: src=postgresql.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
+
+# - name: update pg_hba.conf
+#   copy: src=pg_hba.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
+
 - name: restart postgres
   service: name=postgresql state=restarted
+
+- name: install pointcloud
+  apt: name=postgresql-9.3-pointcloud
+
+- name: install pdal
+  apt: name=pdal state=latest
+
