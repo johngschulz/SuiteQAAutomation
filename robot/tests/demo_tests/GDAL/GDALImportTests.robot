@@ -17,7 +17,7 @@ Suite Teardown      Delete All Sessions
 
 
 *** Variables ***
-${SERVER}                   192.168.0.16:8080
+${SERVER}                   ${SUT_IP}:8080
 ${REST_USER}                admin
 ${REST_PASSWD}              geoserver
 ${NAMESPACE}                opengeo
