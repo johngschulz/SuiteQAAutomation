@@ -31,6 +31,7 @@
 									<img width=24 src="OK-2-300px.png" /></a>
 									<br/>
 									<span class=reltime>{{item.relativeDate}}</span>
+									<br><span class=reltime>{{item.nfails}} test failures</span>
 							</div>
 							<div ng-if="item.runresult == 'success'">
 								<a  href="{{item.hostconfig}}/{{item.browsername}}/report.html">
