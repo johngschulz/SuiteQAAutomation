@@ -4,7 +4,7 @@ Library  ${CURDIR}/PostgresqlDDL.py
 
 
 *** Variables ***
-${DB_SERVER_IP}             localhost
+${DB_SERVER_IP}             ${SUT_IP}
 ${DB_USER}                  postgres
 ${DB_PASS}                  postgres
 ${DB_PORT}                  5432
