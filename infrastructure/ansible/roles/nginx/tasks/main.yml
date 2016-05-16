@@ -17,5 +17,11 @@
 - name: get basic website files
   subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/reports force=yes export=yes username=boundlessQA password=QA4Good! dest=/usr/share/nginx/html
 
+- name: update html mod
+  command: chmod 777 /usr/share/nginx/html
+
+- name: update data.json mod
+  command: chmod 777 /usr/share/nginx/html/data.json
+
 - name: restart nginx
   service: name=nginx state=restarted
