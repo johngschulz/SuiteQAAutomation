@@ -51,7 +51,7 @@ Check Postgis Lib Version
 
 Check Postgis GEOS Version
     @{queryResults}    Query        SELECT postgis_GEOS_version()
-    Should Start With     ${queryResults[0][0]}    3.4.2    Incorrect GEOS version    
+    Should Start With     ${queryResults[0][0]}    3.5.0    Incorrect GEOS version    
 
 Check Postgis PROJ Version
     @{queryResults}    Query        SELECT postgis_PROJ_version()
