@@ -75,7 +75,7 @@ Verify PostGIS Working
 
 Validate Postgresql Version
     @{queryResults}    Query        SELECT version()
-    Should Start With     ${queryResults[0][0]}    PostgreSQL 9.3.5    Incorrect PostgreSQL version 
+    Should Start With     ${queryResults[0][0]}    PostgreSQL 9.3    Incorrect PostgreSQL version 
 
 Validate PCloud Version Number
      @{queryResults}    Query        SELECT pc_version()
