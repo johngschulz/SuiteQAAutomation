@@ -59,7 +59,7 @@ Check Postgis PROJ Version
 
 Check Postgis GDAL Version
     @{queryResults}    Query        SELECT postgis_GDAL_version()
-    Should Start With     ${queryResults[0][0]}    GDAL 1.11.1   Incorrect GDAL version  
+    Should Start With     ${queryResults[0][0]}    GDAL 1.11.   Incorrect GDAL version  
 
 Validate PostGIS Version Numbers
     Check Postgis Lib Version 
