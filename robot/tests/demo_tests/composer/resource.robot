@@ -20,7 +20,7 @@ Open Browser To Composer
     Set Selenium Speed      0.2
     Title Should Be    Composer
 
-Submit Credentials
+Submit Composer Credentials
     Input Text      //input[@type='text']         admin
     Input Text      //input[@type='password']     geoserver
     Click Button    Login
@@ -28,7 +28,7 @@ Submit Credentials
 Login to Composer
     Open Browser To Composer
     Wait Until Page Contains    Composer
-    Submit Credentials
+    Submit Composer Credentials
     Wait Until Page Contains    admin
     Page Should Contain    admin
 
