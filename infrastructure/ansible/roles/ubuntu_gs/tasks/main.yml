@@ -2,13 +2,16 @@
   apt_key: url=https://apt.boundlessgeo.com/gpg.key state=present
 
 - name: add Suite repo
-  apt_repository: repo='deb https://apt.boundlessgeo.com/suite/latest/ubuntu/ trusty main' state=present
+  apt_repository: repo='deb https://boundless:Open4Good!@apt-ee.boundlessgeo.com/suite/latest/ubuntu/ trusty main' state=present filename='opengeo'
 
 - name: update repo
   apt: update_cache=yes
 
 - name: install Suite
   apt: name=opengeo state=latest
+
+- name: install gdal extension
+  apt: name=geoserver-gdal state=latest
 
 - name: restart tomcat
   service: name=tomcat7 state=restarted
@@ -30,11 +33,11 @@
 #   sudo_user: postgres
 #   postgresql_user: db=postgres user=postgres password=postgres
 
-# - name: update postgresql.conf
-#   copy: src=postgresql.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
+- name: update postgresql.conf
+  copy: src=postgresql.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
 
-# - name: update pg_hba.conf
-#   copy: src=pg_hba.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
+- name: update pg_hba.conf
+  copy: src=pg_hba.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
 
 - name: restart postgres
   service: name=postgresql state=restarted
