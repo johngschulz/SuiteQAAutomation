@@ -41,10 +41,10 @@ Welcome Page Should Be Open
     Page Should Contain     Logged in as admin
 
 WMS Get Map
-     [arguments]    ${layernames}=    ${srs}=EPSG:4326     ${workspace}=    ${mimeType}=image/png     ${bbox}=-180.0,-90,180,90    ${width}=768    ${height}=370    ${styles}=
+     [arguments]   ${host}=${SERVER}   ${layernames}=    ${srs}=EPSG:4326     ${workspace}=    ${mimeType}=image/png     ${bbox}=-180.0,-90,180,90    ${width}=768    ${height}=370    ${styles}=
      ${url}=    Catenate    SEPARATOR=    /geoserver/  ${workspace}    /wms?service=WMS&version=1.1.0&request=GetMap&layers=    ${layernames}    &styles=    ${styles}    &bbox=    ${bbox}    &width=${width}&height=${height}&srs=   ${srs}    &format=    ${mimeType}
      Log    ${url}
-     Create Http Context    ${SERVER}    http
+     Create Http Context    ${host}    http
      HttpLibrary.HTTP.Get    ${url}
      Response Status Code Should Equal     200
      Response Header Should Not Equal    content-type    application/vnd.ogc.se_xml; charset=UTF-8
