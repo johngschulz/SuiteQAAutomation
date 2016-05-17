@@ -23,9 +23,6 @@ Test Upload to Postgis
     [Setup]      Run Keywords    Create Temp Postgis Database   Login To Geoserver     Create Postgis Datastore
     Import File
 
-    Import Library    Dialogs
-    Pause Execution
-
     ${img}      WMS Get Map     layernames=cite:parks      bbox=-122.96722412109375,42.247066497802734,-122.70355224609375,42.446537017822266   width=768       height=581   styles=polygon
     Create Binary File   aaa.png    ${img}
     Images Should Be Equal       ${CURDIR}\\parks.png  ${img}
