@@ -1,33 +1,62 @@
 #usage: AllRobotTests <machine keyword> <machine IP>
 
+#run_test(directory_name,browser_name)
+function run_test()
+{
+       declare test_dir_name=$1
+       declare browser_name=$2
 
 
-if [ "$#" -ne 2 ]; then
-    echo " usage: AllRobotTests <machine keyword> <machine IP>"
+        ssh ubuntu@$NGINX_IP "mkdir -p /usr/share/nginx/html/$hostkeyword-$test_dir_name/$browser_name/"
+
+        python updateJson.py data.json  $hostkeyword-$test_dir_name $browser_name inprogress
+        scp  data.json ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json
+        robot  --variable SUT_IP:"$IP" --variable BROWSER:$browser_name   -L debug   -x xunit.xml -d reports/$hostkeyword/$test_dir_name demo_tests/$test_dir_name
+        python updateJson.py data.json $hostkeyword-$test_dir_name $browser_name $?
+
+        scp -r reports/$hostkeyword/$test_dir_name/* ubuntu@$NGINX_IP:/usr/share/nginx/html/$hostkeyword-$test_dir_name/$browser_name
+        scp  data.json ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json
+}
+
+function run_test_nobrowser()
+{
+        declare test_dir_name=$1
+
+        run_test $test_dir_name  "OTHER"
+}
+
+
+function run_test_browser()
+{
+        declare test_dir_name=$1
+
+        run_test $test_dir_name  "FireFox"
+}
+
+
+if [ "$#" -ne 3 ]; then
+    echo " usage: AllRobotTests <machine keyword> <machine IP> <ngnx ip>"
     exit 1
 fi
 
 declare hostkeyword=$1
 declare IP=$2
+declare NGINX_IP=$3
 
 declare HOME=`pwd`
+
+#setup ssh
+if [ -z `ssh-keygen -F $NGINX_IP` ]; then
+  touch ~ec2-user/.ssh/known_hosts ; ssh-keyscan -H $NGINX_IP >> ~ec2-user/.ssh/known_hosts
+fi
 
 #clean
 rm -r reports/$hostkeyword
 
 #get current test status file
 rm  data.json
-scp ubuntu@10.0.26.55:/usr/share/nginx/html/data.json     data.json
+scp ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json     data.json
 
-
-#run DB tests
-ssh ubuntu@10.0.26.55 "mkdir -p /usr/share/nginx/html/$hostkeyword-database/OTHER/"
-
-python updateJson.py data.json  $hostkeyword-database  OTHER  inprogress
-scp  data.json ubuntu@10.0.26.55:/usr/share/nginx/html/data.json    
-robot  --variable GEOSERVERHOST:"$IP"   -L debug   -x xunit.xml -d reports/$hostkeyword/database  demo_tests/database
-python updateJson.py data.json $hostkeyword-database  OTHER $?
-
-scp -r reports/$hostkeyword/database/* ubuntu@10.0.26.55:/usr/share/nginx/html/$hostkeyword-database/OTHER
-scp  data.json ubuntu@10.0.26.55:/usr/share/nginx/html/data.json  
- 
+#run_test_nobrowser "database"
+#run_test_nobrowser "GDAL"
+run_test_browser "importer"
