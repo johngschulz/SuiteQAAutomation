@@ -8,7 +8,6 @@ Resource          ${CURDIR}/../geoserver/resource.robot
 Library           Collections
 Library           RequestsLibrary
 Library           OperatingSystem
-Library           Dialogs
 Library           Collections
 
 Suite Setup         Create Rest Session   
