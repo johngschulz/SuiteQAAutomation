@@ -24,7 +24,7 @@ Test Upload to Postgis
     Import File
 
     ${img}      WMS Get Map     layernames=cite:parks      bbox=-122.96722412109375,42.247066497802734,-122.70355224609375,42.446537017822266   width=768       height=581   styles=polygon
-    Create Binary File   aaa.png    ${img}
+   # Create Binary File   aaa.png    ${img}
     Images Should Be Equal       ${CURDIR}${/}parks.png  ${img}
 
     [Teardown]   Run Keywords    Delete Postgis Datastore         Drop Temp Postgis Database   Close Browser
