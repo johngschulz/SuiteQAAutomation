@@ -27,7 +27,7 @@ Test Upload to Postgis
     Create Binary File   aaa.png    ${img}
     Images Should Be Equal       ${CURDIR}${/}parks.png  ${img}
 
-    [Teardown]   Run Keywords    Delete Postgis Datastore         Drop Temp Postgis Database  #Close Browser
+    [Teardown]   Run Keywords    Delete Postgis Datastore         Drop Temp Postgis Database   Close Browser
 
 
 
