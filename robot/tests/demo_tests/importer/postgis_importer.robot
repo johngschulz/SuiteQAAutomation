@@ -13,12 +13,7 @@ Library           OperatingSystem
 
 
 *** Variables ***
-${DB_SERVER_IP}             localhost
-${DB_USER}                  postgres
-${DB_PASS}                  postgres
-${DB_PORT}                  5432
-${DB_POSTGIS_TMP_DB_NAME}   robot_postgis_test
-${DB_PCLOUD_TMP_DB_NAME}    robot_pcloud_test
+
 
 ${TEST_POSTGIS_DATASTORE_NAME}    test_postgis_store
 
