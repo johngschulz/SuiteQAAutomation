@@ -39,7 +39,7 @@ Test Upload to Postgis
 
 #https://github.com/bulkan/robotframework-requests/blob/master/tests/testcase.txt
 Import File
-        [arguments]    ${datastoreName}=${TEST_POSTGIS_DATASTORE_NAME}   ${namespace}=cite    ${fname}=parks.zip   ${fdir}=c:\\
+        [arguments]    ${datastoreName}=${TEST_POSTGIS_DATASTORE_NAME}   ${namespace}=cite    ${fname}=parks.zip   ${fdir}=${CURDIR}${/}
         ${auth}=     Create List   admin    geoserver
         Create Session     RESTAPI    http://${SERVER}   auth=${auth}
         &{headers}=  Create Dictionary     Content-type=application/json
