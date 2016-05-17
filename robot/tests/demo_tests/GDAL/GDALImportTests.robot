@@ -79,8 +79,13 @@ Upload File To Importer
 
         ${resp}=  Post Request  RESTAPI  /geoserver/rest/imports/${ID}/tasks  files=${files}   
 
-        Log     ${resp.content}
+        Log     ${resp.content}    ERROR
         Should Be Equal As Strings  ${resp.status_code}  201
+        
+        ${json}=   Set Variable   ${resp.json()}
+        Dictionary Should Contain Key  ${json}   task     Couldnt determine uploaded file's format
+
+        
         ${geoserverFormat}=     Set Variable    ${resp.json()['task']['data']['format']}
         Should Be Equal As Strings  ${geoserverFormat}   ${formatType}   "geoserver detected format type does not match expected type"
         [teardown]   Set Log Level   ${oldLogLevel}
