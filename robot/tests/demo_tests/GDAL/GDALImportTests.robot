@@ -79,7 +79,7 @@ Upload File To Importer
 
         ${resp}=  Post Request  RESTAPI  /geoserver/rest/imports/${ID}/tasks  files=${files}   
 
-        Log     ${resp.content}    ERROR
+        Log     ${resp.content}    WARN
         Should Be Equal As Strings  ${resp.status_code}  201
         
         ${json}=   Set Variable   ${resp.json()}
