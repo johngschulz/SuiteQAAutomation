@@ -15,10 +15,12 @@ class PostgresqlDDL:
                 cursor.execute(ddlCommand)
             except Exception as e:
                 print "*FAIL* ", e
+                raise e
             finally:
                 cursor.close()
         except Exception as e:
                 print "*FAIL* ", e
+                raise e
         finally:
              if dbconnection is not None:
                 dbconnection.close()
