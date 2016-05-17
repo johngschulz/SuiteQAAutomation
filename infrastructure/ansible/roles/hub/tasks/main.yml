@@ -1,13 +1,9 @@
-### Install robot
-- name: Install Robot Framework
-  pip: name={{ item }} state=latest
-  with_items:
-    - robotframework
-    - robotframework-httplibrary
-    - robotframework-databaselibrary
+### get robot tests and test data
+- name: Retrieve test files from git
+  subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/ dest=/home/ec2-user/robot export=yes force=yes username=boundlessQA password=QA4Good!
 
-- name: Install RF Selenium2 library
-  pip: name=robotframework-selenium2library state=present version=1.7.4
+- name: give Robot folder RW permissions
+  command: chmod -R 777 robot/
 
 - name: unininstall pil library
   pip: name=pil state=absent
@@ -26,14 +22,12 @@
     - libwebp-devel
     - tcl-devel
 
-- name: install pillow
-  pip: name=Pillow state=latest
-
 - name: install postgres
   yum: name=postgresql-devel state=latest
 
-- name: install psycopg2
-  pip: name=psycopg2 state=latest
+### Install RobotFramework and all packages needed for tests
+- name: install RobotFramework and test requirements
+  pip: requirements=/home/ec2-user/robot/tests/requirements.txt
 
 ### Install docker-py required for Docker module
 - name: install docker-py
@@ -58,13 +52,6 @@
 
 - name: install subversion
   yum: name=subversion state=latest
-
-### get robot tests and test data
-- name: Retrieve test files from git
-  subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/ dest=/home/ec2-user/robot export=yes force=yes username=boundlessQA password=QA4Good!
-
-- name: give Robot folder RW permissions
-  command: chmod -R 777 robot/
 
 ### update ips for robot, server = geoserver(win2012 or ubuntu),remote_url =hub ip
 # for gs_ip, pass it in when play is called? 
