@@ -35,11 +35,21 @@
       region: us-east-1
       filters:
         "tag:Name": QA Win10 Node
-    register: win10_facts
+    register: win2012_facts
+  - name: get win2012 private ip
+    sudo: no
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name":  QA Ubuntu gs
+    register: ubuntu_gs_facts
   vars:
     nat_ip: "{{ hostvars[inventory_hostname]['ec2_private_ip_address'] }}"
     nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
     win10_ip: "{{ win10_facts.instances[0].private_ip_address }}"
+    ubuntu_gs_ip: "{{ ubuntu_gs_facts.instances[0].private_ip_address }}"
+
   roles:
     - nat
 

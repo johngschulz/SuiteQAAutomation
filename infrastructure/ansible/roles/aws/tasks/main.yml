@@ -109,7 +109,7 @@
           - proto: tcp
             to_port: 8080
             from_port: 8080
-            cidr_ip: 10.0.16.0/20
+            cidr_ip: 0.0.0.0/0
         rules_egress:
           - proto: all
             from_port: all
@@ -149,6 +149,10 @@
           - proto: tcp
             from_port: 3389
             to_port: 3389
+            cidr_ip: 24.69.132.34/32
+          - proto: tcp
+            from_port: 8080
+            to_port: 8080
             cidr_ip: 24.69.132.34/32
         rules_egress:
           - proto: all

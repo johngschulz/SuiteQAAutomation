@@ -4,6 +4,9 @@
 - name: port forward windows rdp
   command: "iptables -t nat -A PREROUTING -p tcp -d {{ nat_ip }} --dport 3389 -j DNAT --to {{ win10_ip }}:3389"
 
+- name: port forward geoserver
+  command: "iptables -t nat -A PREROUTING -p tcp -d {{ nat_ip }} --dport 8080 -j DNAT --to {{ ubuntu_gs_ip }}:8080"
+
 #what is this supposed to do? works without this
 #- name: save conf
 #  command: "iptables-save > fw_conf_'date +%F'"
