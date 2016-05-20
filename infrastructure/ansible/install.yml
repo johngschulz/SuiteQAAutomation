@@ -35,8 +35,8 @@
       region: us-east-1
       filters:
         "tag:Name": QA Win10 Node
-    register: win2012_facts
-  - name: get win2012 private ip
+    register: win10_facts
+  - name: get ubuntu_gs private ip
     sudo: no
     local_action:
       module: ec2_remote_facts
@@ -100,3 +100,10 @@
   sudo: yes
   roles:
     - ubuntu_gs
+
+- name: provision centos GS machine
+  hosts: tag_type_centos_gs
+  remote_user: centos
+  sudo: yes
+  roles:
+    - centos

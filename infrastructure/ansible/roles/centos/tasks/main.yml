@@ -1,0 +1,35 @@
+- name: set boundless repo
+  command: bash -c 'printf "[boundless-third-party]\nname=Boundless Spatial Third Party Repo\nbaseurl=http://yum.boundlessgeo.com/third-party/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-third-party.repo'
+
+- name: insall suite 4.9
+  yum: name=/home/centos/centos_rpms/suite-geoserver-4.9.0rc-60.x86_64.rpm state=present
+
+- name: add libjpeg to tomcat conf
+  command: echo "JAVA_OPTS=\"-DJjava.library.path=/opt/libjpeg-turbo/lib64\"" >> /etc/tomcat8/tomcat8.conf
+
+- name: start tomcat8
+  service: name=tomcat8 state=restarted
+
+- name: install postgis
+  yum: name=postgis21-postgresql93.x86_64 state=present
+
+- name: init postgis
+  command: service postgresql-9.3 initdb
+
+- name: restart postgis
+  service: name=postgresql-9.3 state=started
+
+- name: install pointcloud
+  yum: name=pointcloud-postgresql93.x86_64 state=present
+
+- name: turn off iptables
+  command: chkconfig iptables off
+
+- name: stop iptables service
+  service: name=iptables state=stopped
+
+- name: set permissive
+  command: setenforce permissive
+
+- name: set sysconfig permissive
+  command: sed -i "s/SELINUX-enforcing/SELINUX=permissive/" /etc/sysconfig/selinux

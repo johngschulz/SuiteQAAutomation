@@ -330,3 +330,24 @@
   register: qa_ubuntu_gs
   tags:
     -vpcsetup
+
+- name: Launch CentOS GS instance
+  ec2:
+    vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-robot
+    assign_public_ip: false
+    group_id: "{{ internal_securitygroup.group_id }}"
+    image: "{{ centos_aws_image }}"
+    instance_type: "{{ centos_aws_instance_type }}"
+    instance_tags:
+      type: "centos_gs"
+      Name: "QA centos gs"
+    exact_count: 1
+    count_tag:
+      type: "centos_gs"
+      Name: "QA centos gs"
+    wait: yes
+  register: qa_centos_gs
+  tags:
+    -vpcsetup
