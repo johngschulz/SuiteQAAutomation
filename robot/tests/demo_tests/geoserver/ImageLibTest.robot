@@ -1,6 +1,6 @@
 *** Settings ***
 Library     ImageLibrary.py
-
+Resource    ../../environment.robot
 
 *** Test Case ***
 Simple Image Test
