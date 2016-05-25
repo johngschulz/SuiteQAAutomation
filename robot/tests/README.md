@@ -10,7 +10,8 @@
 ## Test Environment
 
   For creating and debugging tests on you local machine, use the [Win10](https://boundlessgeo.egnyte.com/SimpleUI/home.do#Files/0/Shared/Software/Virtual%20Machines/Win%2010%20VMs) VM
-  and use pip to install RobotFramework. 
+  and use `pip install -r requirements.txt` to install all the required libraries. **Note:** You may need to do `pip install robotframework` if there are issues with some of the libraries.
+  
   To run the tests locally edit the `environment.robot` file so that it uses `environment_local.robot`. 
   For AWS this should be set to `environment_ansible.robot`.
   
