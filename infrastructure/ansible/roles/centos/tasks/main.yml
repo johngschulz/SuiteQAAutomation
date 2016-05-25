@@ -1,8 +1,23 @@
 - name: set boundless repo
   command: bash -c 'printf "[boundless-third-party]\nname=Boundless Spatial Third Party Repo\nbaseurl=http://yum.boundlessgeo.com/third-party/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-third-party.repo'
 
-- name: insall suite 4.9
-  yum: name=/home/centos/centos_rpms/suite-geoserver-4.9.0rc-60.x86_64.rpm state=present
+- name: add suite test repo
+  command: bash -c 'printf "[boundless-suite-test-centos]\nname=Boundless Spatial Suite Test CentOS\nbaseurl=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-centos/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-suite-test.repo'
+
+- name: insall suite geoserver
+  yum: name=suite-geoserver.x86_64 state=present
+
+- name: install composer
+  yum: name=suite-composer.x86_64 state=present
+
+- name: install dashboard
+  yum: name=suite-dashboard.x86_64 state=present
+
+- name: install wps
+  yum: name=suite-wps.x86_64 state=present
+
+#- name: unzip to jre lib
+#  unarchive: src=http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip dest=/usr/lib/jvm/jre/lib/security/ copy=no
 
 - name: add libjpeg to tomcat conf
   command: echo "JAVA_OPTS=\"-DJjava.library.path=/opt/libjpeg-turbo/lib64\"" >> /etc/tomcat8/tomcat8.conf
@@ -13,14 +28,29 @@
 - name: install postgis
   yum: name=postgis21-postgresql93.x86_64 state=present
 
+#required for postgis, libjpeg-turbo-official not enough
+- name: install libjpeg-turbo
+  yum: name=libjpeg-turbo.x86_64 state=present
+
 - name: init postgis
   command: service postgresql-9.3 initdb
 
-- name: restart postgis
-  service: name=postgresql-9.3 state=started
-
 - name: install pointcloud
   yum: name=pointcloud-postgresql93.x86_64 state=present
+
+- name: update postgresql.conf
+  copy: src=postgresql.conf dest=/var/lib/pgsql/9.3/data/ force=yes mode=777
+
+- name: update pg_hba.conf
+  copy: src=pg_hba.conf dest=/var/lib/pgsql/9.3/data/ force=yes mode=777
+
+# - name: configure postgres
+#   sudo: yes
+#   sudo_user: postgres
+#   postgresql_user: db=postgres user=postgres password=postgres
+
+- name: restart postgis
+  service: name=postgresql-9.3 state=started
 
 - name: turn off iptables
   command: chkconfig iptables off
