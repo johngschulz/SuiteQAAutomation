@@ -14,7 +14,7 @@
   yum: name=suite-dashboard.x86_64 state=present
 
 - name: install wps
-  yum: name=suite-wps.x86_64 state=present
+  yum: name=suite-wpsbuilder.x86_64 state=present
 
 #- name: unzip to jre lib
 #  unarchive: src=http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip dest=/usr/lib/jvm/jre/lib/security/ copy=no
