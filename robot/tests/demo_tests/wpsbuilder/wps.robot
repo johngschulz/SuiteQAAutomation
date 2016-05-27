@@ -29,7 +29,7 @@ Simple Feature Collection Process Test
 Open Browser To WPS Builder
     Set Selenium Timeout     10 seconds
     Set Selenium Implicit Wait     10 seconds
-    Open Browser  ${WPSBUILDER_URL}       ${BROWSER}
+    Open Browser  ${WPSBUILDER_URL}   ${BROWSER}    None    ${REMOTE_URL}
     Set Selenium Speed      .2
     Title Should Be    WPS Process Builder
 
