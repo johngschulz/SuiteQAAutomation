@@ -28,5 +28,38 @@
 - name: copy geoserver data directory
   copy: src=geoserverDataDir.zip dest=/cygdrive/c/geoserverDataDir.zip
 
+#only run this once, if re-run will hang script
 - name: run the script
   command: ./install.sh chdir=~/war
+
+- name: copy suite war
+  copy: src=OpenGeoSuiteEnterprise-latest-war.zip dest=~/
+
+- name: unzip suite war
+  unarchive: src=~/OpenGeoSuiteEnterprise-latest-war.zip dest=~/ copy=no
+
+- name: move wars to tomcat
+  shell: "cp ~/OpenGeoSuiteEnterprise-latest-war/* '/cygdrive/c/Program\ Files/Apache\ Software\ Foundation/Tomcat\ 8.0/webapps/'"
+
+- name: stop tomcat
+  command: net stop Tomcat8 
+  ignore_errors: yes
+
+- name: copy suite exts 
+  copy: src=OpenGeoSuiteEnterprise-latest-ext.zip dest=~/
+
+- name: unzip suite exts 
+  command: unzip -o OpenGeoSuiteEnterprise-latest-ext.zip 
+
+- name: explode geoserver war
+  shell: "unzip -o '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war'"
+
+- name: copy GDAL ext
+  shell: "cp -f ~/OpenGeoSuiteEnterprise-latest-ext/gdal/* '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
+
+- name: copy wps ext
+  shell: "cp -f ~/OpenGeoSuiteEnterprise-latest-ext/wps/* '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
+
+#add some kind of wait here... if not tomcat hasn't stopped yet this fails
+- name: start tomcat
+  command: net start Tomcat8
