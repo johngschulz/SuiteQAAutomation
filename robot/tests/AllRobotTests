@@ -1,4 +1,4 @@
-#usage: AllRobotTests <machine keyword> <machine IP>
+#usage: AllRobotTests <machine keyword> <machine IP> <ngnx ip>
 
 #run_test(directory_name,browser_name)
 function run_test()
@@ -7,15 +7,15 @@ function run_test()
        declare browser_name=$2
 
 
-        ssh ubuntu@$NGINX_IP "mkdir -p /usr/share/nginx/html/$hostkeyword-$test_dir_name/$browser_name/"
+        ssh -i /home/ec2-user/hub ubuntu@$NGINX_IP "mkdir -p /usr/share/nginx/html/$hostkeyword-$test_dir_name/$browser_name/"
 
         python updateJson.py data.json  $hostkeyword-$test_dir_name $browser_name inprogress
-        scp  data.json ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json
+        scp -i /home/ec2-user/hub data.json ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json
         robot  --variable SUT_IP:"$IP" --variable BROWSER:$browser_name   -L debug   -x xunit.xml -d reports/$hostkeyword/$test_dir_name demo_tests/$test_dir_name
         python updateJson.py data.json $hostkeyword-$test_dir_name $browser_name $?
 
-        scp -r reports/$hostkeyword/$test_dir_name/* ubuntu@$NGINX_IP:/usr/share/nginx/html/$hostkeyword-$test_dir_name/$browser_name
-        scp  data.json ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json
+        scp -i /home/ec2-user/hub -r reports/$hostkeyword/$test_dir_name/* ubuntu@$NGINX_IP:/usr/share/nginx/html/$hostkeyword-$test_dir_name/$browser_name
+        scp -i /home/ec2-user/hub data.json ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json
 }
 
 function run_test_nobrowser()
@@ -54,9 +54,10 @@ fi
 rm -r reports/$hostkeyword
 
 #get current test status file
-rm  data.json
-scp ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json     data.json
+rm  -f data.json
+scp -i /home/ec2-user/hub ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json     data.json
 
 #run_test_nobrowser "database"
 #run_test_nobrowser "GDAL"
-run_test_browser "importer"
+#run_test_browser "importer"
+run_test_browser "geoserver"

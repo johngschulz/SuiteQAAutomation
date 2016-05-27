@@ -1,0 +1,14 @@
+## call AllRobotTest script, pass IPs for the various GS instances(centos,win, RHEL?)
+- name: run all centos tests
+  shell: ./AllRobotTests centos '{{ centos_gs_ip }}' '{{ nginx_ip }}' 
+  args:
+    chdir: ~/robot/tests/
+
+- name: run all ubuntu tests
+  shell: ./AllRobotTests ubuntu '{{ ubuntu_gs_ip }}' '{{ nginx_ip }}'
+  args:
+    chdir: ~/robot/tests
+
+- name: run all win2012 tests
+  shell: ./AllRobotTests win2012 '{{ win2012_gs_ip }}' '{{ nginx_ip }}' chdir=~/robot/tests/
+ 
