@@ -1,10 +1,9 @@
 *** Settings ***
-Documentation     A resource file with reusable keywords and variables.
+Documentation     A resource file with reusable keywords and variables,
+...               which form the base of the composer tests. The default
+...               Selenium time is set to 20 seconds to allow for uploads
 ...
-...               The system specific keywords created here form our own
-...               domain specific language. They utilize keywords provided
-...               by the imported Selenium2Library.
-Library           Selenium2Library
+Library           Selenium2Library  timeout=20
 Resource          ../../environment.robot
 
 *** Variables ***
