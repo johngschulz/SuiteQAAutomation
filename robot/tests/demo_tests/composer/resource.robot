@@ -11,7 +11,7 @@ Resource          ../../environment.robot
 ${DELAY}          0
 ${VALID USER}     admin
 ${VALID PASSWORD}    geoserver
-${COMPOSER URL}   http://${SERVER}/geoserver/composer
+${COMPOSER URL}   http://${SERVER}/composer
 
 *** Keywords ***
 Open Browser To Composer
@@ -44,10 +44,12 @@ Create Workspace
 
 Delete Workspace
     [arguments]     ${ws}
+    Login to Composer
     Go To    ${COMPOSER URL}/#/workspaces/list
     Wait Until Element Is Visible  xpath=//div[@class='workspace-info' and contains(.,"${ws}")]//button[contains(.,"Delete")]
     Click Element    xpath=//div[@class='workspace-info' and contains(.,"${ws}")]//button[contains(.,"Delete")]
     Click Element    //button[@class='btn btn-danger btn-sm']
+    Close Browser
 
 Open Workspace
     [arguments]     ${ws}

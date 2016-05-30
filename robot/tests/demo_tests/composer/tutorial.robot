@@ -3,6 +3,7 @@ Documentation     follow the composer tutorial from the suite documentation
 ...
 TestSetup         Login To Composer
 TestTeardown      Close Browser
+Suite Teardown    Delete Workspace  ws=tutorial
 Resource          resource.robot
 
 *** Test Cases ***
@@ -52,6 +53,3 @@ Verify Map
     Import Resource         ${CURDIR}/../geoserver/resource.robot
     ${img}     WMS Get Map  layernames=tutorial:tutmap
     Images Should Be Equal  ${TEST_DATA}tutmap.png  ${img}
-
-Delete Workspace
-    Delete Workspace   ws=tutorial

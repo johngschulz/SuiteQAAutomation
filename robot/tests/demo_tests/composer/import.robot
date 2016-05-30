@@ -3,6 +3,7 @@ Documentation     adding data to a new workspace in composer
 ...
 TestSetup         Login To Composer
 TestTeardown      Close Browser
+Suite Teardown    Delete Workspace      ws=testws
 Resource          resource.robot
 
 *** Test Cases ***
@@ -14,7 +15,6 @@ Create New Workspace
     Click Button    Create Workspace
     Wait Until Page Contains    testws
     Page Should Contain    testws
-    Close Browser
 
 Add Data To New Workspace
     Open Workspace  testws
@@ -31,9 +31,3 @@ Add Data To New Workspace
     Wait Until Page Contains Element    css=div.bg-success
     Element Text Should Be    css=div.bg-success    1 layer imported.
     Click Button    Close
-
-Delete Workspace
-    Go To    ${COMPOSER URL}/#/workspaces/list
-    Input Text    //input[@type='text']    testws
-    Click Button    Delete
-    Click Element    //button[@class='btn btn-danger btn-sm']
