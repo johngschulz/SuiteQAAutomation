@@ -12,6 +12,13 @@ hostconfig = sys.argv[2]
 browsername = sys.argv[3]
 runresult = sys.argv[4]
 
+nfails = 0;
+try:
+    nfails = int(runresult)
+except:
+    pass
+
+
 if (runresult == "0") :
 	runresult = "success" 
 elif (runresult == "success") :
@@ -40,7 +47,7 @@ for testresult in currentResults:
 		
 
 #add in current result
-newresults.append(  {'hostconfig':hostconfig, 'browsername':browsername, 'runresult':runresult,'whenUTC':datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')} )
+newresults.append(  {'hostconfig':hostconfig, 'browsername':browsername, 'runresult':runresult,'whenUTC':datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S'),'nfails':nfails} )
 
 
 date_handler = lambda obj: (
