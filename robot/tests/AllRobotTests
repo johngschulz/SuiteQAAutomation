@@ -31,6 +31,10 @@ function run_test_browser()
         declare test_dir_name=$1
 
         run_test $test_dir_name  "FireFox"
+        run_test $test_dir_name  "Chrome"
+        run_test $test_dir_name  "IE"
+        run_test $test_dir_name  "Edge"
+
 }
 
 
@@ -60,4 +64,7 @@ scp -i /home/ec2-user/hub ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json     d
 #run_test_nobrowser "database"
 #run_test_nobrowser "GDAL"
 #run_test_browser "importer"
-run_test_browser "geoserver"
+#run_test_browser "geoserver"
+run_test_browser "composer"
+#run_test_browser "gwc"
+#run_test_browser "wpsbuilder"
