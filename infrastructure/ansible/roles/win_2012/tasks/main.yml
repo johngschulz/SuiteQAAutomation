@@ -22,9 +22,6 @@
 - name: copy libjpeg
   copy: src=libjpeg-turbo-1.4.2-vc64.exe dest=~/war/libjpeg-turbo-1.4.2-vc64.exe mode=700
 
-- name: copy test data
-  copy: src=test_data dest=/cygdrive/c/
-
 - name: copy geoserver data directory
   copy: src=geoserverDataDir.zip dest=/cygdrive/c/geoserverDataDir.zip
 
@@ -52,7 +49,7 @@
   command: unzip -o OpenGeoSuiteEnterprise-latest-ext.zip 
 
 - name: explode geoserver war
-  shell: "unzip -o '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war'"
+  shell: "unzip -o '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war' -d '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver'"
 
 - name: copy GDAL ext
   shell: "cp -f ~/OpenGeoSuiteEnterprise-latest-ext/gdal/* '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
