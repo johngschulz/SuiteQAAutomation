@@ -76,8 +76,15 @@ Create Postgis Datastore
     Put Text In Labelled Input      user *                      ${DB_USER}
     Put Text In Labelled Input      passwd                      ${DB_PASS}
 
+    Scroll Into View     form .button-group a
+    
     Click Element      //a[text()='Save']
     Wait Until Page Does Not Contain      //a[text()='Save']
+
+
+Scroll Into View
+        [arguments]  ${docSelector}
+        Execute Javascript   document.querySelector("${docSelector}").scrollIntoView(true)
 
 
 Delete Postgis Datastore
