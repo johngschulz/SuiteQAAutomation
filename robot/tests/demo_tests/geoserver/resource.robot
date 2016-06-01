@@ -47,6 +47,7 @@ WMS Get Map
      HttpLibrary.HTTP.Get    ${url}
      Response Status Code Should Equal     200
      Response Header Should Not Equal    content-type    application/vnd.ogc.se_xml; charset=UTF-8
+     Response Header Should Not Equal    content-type    application/vnd.ogc.se_xml;charset=UTF-8
      ${body}    Get Response Body
      [return]     ${body}
 
