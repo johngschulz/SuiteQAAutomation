@@ -112,7 +112,8 @@ Complete Import
          Log     ${resp.content}
         Should Be Equal As Strings  ${resp.status_code}  200
          Log     ${resp.json()}
-         ${DSName}=     Set Variable    ${resp.json()['task']['target']['coverageStore']['name']}
+         #${DSName}=     Set Variable    ${resp.json()['task']['target']['coverageStore']['name']}
+         ${DSName}=     Set Variable    ${resp.json()['task']['layer']['name']}
          [return]  ${DSName}
 
 
