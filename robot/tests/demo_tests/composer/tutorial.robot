@@ -18,6 +18,7 @@ Edit Layers
     Edit Layer  old_name=ne_10m_roads              name=roads      title=Roads
     Edit Layer  old_name=ne_10m_admin_0_countries  name=countries  title=Countries
     Edit Layer  old_name=dem_large                 name=dem        title=DEM
+    Wait For Angular
     Element Should Be Visible  xpath=//div[@class='layer-detail' and contains(.,"Populated places")]
     Element Should Be Visible  xpath=//div[@class='layer-detail' and contains(.,"Roads")]
     Element Should Be Visible  xpath=//div[@class='layer-detail' and contains(.,"Countries")]

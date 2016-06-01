@@ -13,6 +13,17 @@ ${VALID PASSWORD}    geoserver
 ${COMPOSER URL}   http://${SERVER}/composer
 
 *** Keywords ***
+Is Angular Busy
+    ${retval}=  Execute Async Javascript         var callback = arguments[arguments.length - 1]; var el = document.querySelector("[ng-app]"); callback(angular.element(el).injector().get('$http').pendingRequests.length)
+    [return]    ${retval}
+
+Assert Angular Not Busy
+    ${retval}=   Is Angular Busy
+    Run Keyword If  '${retval}' != '0'  Fail
+
+Wait For Angular
+    Wait Until Keyword Succeeds         30 second  1 second     Assert Angular Not Busy
+
 Open Browser To Composer
     Open Browser    ${COMPOSER URL}    ${BROWSER}    None    ${REMOTE_URL}
     Maximize Browser Window
@@ -64,12 +75,14 @@ Open Layers
     [arguments]     ${ws}
     Open Workspace  ws=${ws}
     Wait Until Element Is Visible    xpath=//ul[@class='nav nav-tabs']//a[contains(.,"Layers")]
+    Wait For Angular
     Click Element   xpath=//ul[@class='nav nav-tabs']//a[contains(.,"Layers")]
 
 Open Data
     [arguments]     ${ws}
     Open Workspace  ws=${ws}
     Wait Until Element Is Visible    xpath=//ul[@class='nav nav-tabs']//a[contains(.,"Data")]
+
     Click Element   xpath=//ul[@class='nav nav-tabs']//a[contains(.,"Data")]
 
 Open Map
@@ -88,6 +101,7 @@ Import File to Workspace
     [arguments]     ${ws}  ${file}  ${text}=1 layer imported.
     Open Workspace  ws=${ws}
     Wait Until Element Is Visible    xpath=//a[contains(.,"Add Data")]
+    Wait For Angular
     Click Element   xpath=//a[contains(.,"Add Data")]
     Wait Until Page Contains    Add Files
     Choose File     xpath=//input[@type='file']     ${TEST DATA}${file}
@@ -105,7 +119,7 @@ Import File to Workspace
 #Should already be in the desired workspace, on the layers tab.
 Edit Layer
     [arguments]     ${old_name}  ${name}  ${title}
-    Wait Until Element Is Visible  xpath=//div[@class='layer-detail' and contains(.,"${old_name}")]//button[contains(.,"Settings")]
+    Wait For Angular
     Click Element   xpath=//div[@class='layer-detail' and contains(.,"${old_name}")]//button[contains(.,"Settings")]
     Input Text      name=layerName  ${name}
     Input Text      name=title      ${title}
