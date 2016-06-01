@@ -13,7 +13,16 @@
 - name: install dashboard
   yum: name=suite-dashboard.x86_64 state=present
 
-- name: install wps
+- name: install wps extension
+  yum: name=geoserver-plugin-wps.x86_64 state=present
+
+- name: install gdal extension
+  yum: name=geoserver-plugin-gdal.x86_64 state=present
+
+- name: install gdal extension
+  yum: name=gdal-mrsid.x86_64 state=present
+
+- name: install wps builder
   yum: name=suite-wpsbuilder.x86_64 state=present
 
 #- name: unzip to jre lib
