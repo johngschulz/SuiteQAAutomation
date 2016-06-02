@@ -46,7 +46,7 @@ Connect to Generic Postgresql Database
 
 Check Postgis Lib Version
     @{queryResults}    Query        SELECT postgis_lib_version()
-    Should Be Equal     ${queryResults[0][0]}    2.1.8    Incorrect Postgis version
+    Should Start With      ${queryResults[0][0]}    2.1.    Incorrect Postgis version
 
 
 Check Postgis GEOS Version
