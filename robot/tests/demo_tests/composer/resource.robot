@@ -82,7 +82,6 @@ Open Data
     [arguments]     ${ws}
     Open Workspace  ws=${ws}
     Wait Until Element Is Visible    xpath=//ul[@class='nav nav-tabs']//a[contains(.,"Data")]
-
     Click Element   xpath=//ul[@class='nav nav-tabs']//a[contains(.,"Data")]
 
 Open Map
@@ -94,8 +93,12 @@ Open Map
 Open Layer
     [arguments]     ${ws}  ${name}
     Open Layers  ws=${ws}
+    Wait For Angular
     Input Text      xpath=//input[contains(@class,'grid-filter')]  ${name}
+    Sleep     2 seconds
+    Wait For Angular
     Click Element                  xpath=//div[@class='layer-info-section' and contains(.,"${name}")]//img[@class='layerthumb']
+    Wait For Angular
 
 Import File to Workspace
     [arguments]     ${ws}  ${file}  ${text}=1 layer imported.
@@ -107,7 +110,7 @@ Import File to Workspace
     Choose File     xpath=//input[@type='file']     ${TEST DATA}${file}
     Wait Until Element Is Visible    xpath=//button[text()='Upload']
     Click Element    xpath=//button[text()='Upload']
-    Wait Until Page Contains    Next: Load
+    Wait Until Page Contains    Next: Load      30 seconds
     Click Element    xpath=//button[contains(.,"Next")]
     Wait Until Page Contains    Available Layers
     Click Element    css=input.ngSelectionHeader
