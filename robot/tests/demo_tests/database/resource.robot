@@ -46,12 +46,12 @@ Connect to Generic Postgresql Database
 
 Check Postgis Lib Version
     @{queryResults}    Query        SELECT postgis_lib_version()
-    Should Start With      ${queryResults[0][0]}    2.1.    Incorrect Postgis version
+    Should Be True      "${queryResults[0][0]}".startswith("2.1.8") or "${queryResults[0][0]}".startswith("2.1.7")  incorrect postgis version - ${queryResults[0][0]}
 
 
 Check Postgis GEOS Version
     @{queryResults}    Query        SELECT postgis_GEOS_version()
-    Should Start With     ${queryResults[0][0]}    3.5.0    Incorrect GEOS version    
+    Should Be True      "${queryResults[0][0]}".startswith("3.5.0") or "${queryResults[0][0]}".startswith("3.4.2")  incorrect GEOS version - ${queryResults[0][0]}
 
 Check Postgis PROJ Version
     @{queryResults}    Query        SELECT postgis_PROJ_version()
