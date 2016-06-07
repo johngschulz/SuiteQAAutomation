@@ -1,4 +1,7 @@
 ### get robot tests and test data
+- name: install subversion
+  yum: name=subversion state=latest
+
 - name: Retrieve test files from git
   subversion: repo=https://github.com/boundlessgeo/SuiteQAAutomation/trunk/robot/ dest=/home/ec2-user/robot export=yes force=yes username=boundlessQA password=QA4Good!
 
@@ -24,6 +27,9 @@
 
 - name: install postgres
   yum: name=postgresql-devel state=latest
+
+- name: install RobotFramework
+  pip: name=robotframework state=latest
 
 ### Install RobotFramework and all packages needed for tests
 - name: install RobotFramework and test requirements
