@@ -4,6 +4,12 @@
 - name: open port 8080
   command: netsh firewall add portopening TCP 8080 "Allow port 8080"
 
+- name: copy microsoft redist 
+  copy: src=vcredist_x86.exe dest=~/ mode=777
+
+- name: install microsoft redist
+  command: ./vcredist_x86.exe /quiet
+
 - name: copy install script
   copy: src=install.sh dest=~/war/install.sh force=yes mode=0700
 
@@ -17,45 +23,57 @@
   copy: src=apache-tomcat-8.0.32.exe dest=~/war/apache-tomcat-8.0.32.exe mode=700
 
 - name: copy jre
-  copy: src=jre-8u73-windows-x64.exe dest=~/war/jre-8u73-windows-x64.exe mode=700
+  copy: src=jre-8u91-windows-i586.exe dest=~/war/jre-8u91-windows-i586.exe mode=700
 
 - name: copy libjpeg
-  copy: src=libjpeg-turbo-1.4.2-vc64.exe dest=~/war/libjpeg-turbo-1.4.2-vc64.exe mode=700
+  copy: src=libjpeg-turbo-1.4.2-vc.exe dest=~/war/libjpeg-turbo-1.4.2-vc.exe mode=700
+
+- name: copy gdal bin
+  copy: src=GDAL-suite4.9.zip dest=~/GDAL-suite4.9.zip 
 
 - name: copy geoserver data directory
   copy: src=geoserverDataDir.zip dest=/cygdrive/c/geoserverDataDir.zip
+
+- name: unzip data dir
+  unarchive: src=/cygdrive/c/geoserverDataDir.zip dest=/cygdrive/c/ mode=0777 copy=no
 
 #only run this once, if re-run will hang script
 - name: run the script
   command: ./install.sh chdir=~/war
 
-- name: copy suite war
-  copy: src=OpenGeoSuiteEnterprise-latest-war.zip dest=~/
+- name: copy gdal files into tomcat bin
+  shell: "unzip -o GDAL-suite4.9.zip -d '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/'"
 
-- name: unzip suite war
-  unarchive: src=~/OpenGeoSuiteEnterprise-latest-war.zip dest=~/ copy=no
+- name: make bin dir executable
+  file: path='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/' state=directory recurse=yes mode=777
 
-- name: move wars to tomcat
-  shell: "cp ~/OpenGeoSuiteEnterprise-latest-war/* '/cygdrive/c/Program\ Files/Apache\ Software\ Foundation/Tomcat\ 8.0/webapps/'"
+- name: get suite war
+  unarchive: src=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-war.zip dest=~/ copy=no
+
+- name: get suite-exts
+  get_url: url=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-ext.zip dest=~/ 
+
+- name: unzip suite-exts
+  unarchive: src=~/BoundlessSuite-latest-ext.zip dest=~/ copy=no
+
+- name: copy wars to tomcat webapps
+  shell: "cp -f ~/BoundlessSuite-latest-war/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/'"
 
 - name: stop tomcat
   command: net stop Tomcat8 
   ignore_errors: yes
 
-- name: copy suite exts 
-  copy: src=OpenGeoSuiteEnterprise-latest-ext.zip dest=~/
-
-- name: unzip suite exts 
-  command: unzip -o OpenGeoSuiteEnterprise-latest-ext.zip 
-
 - name: explode geoserver war
-  shell: "unzip -o '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war' -d '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver'"
+  shell: "unzip -o '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war' -d '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver'"
 
 - name: copy GDAL ext
-  shell: "cp -f ~/OpenGeoSuiteEnterprise-latest-ext/gdal/* '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
+  shell: "cp -f ~/BoundlessSuite-latest-ext/gdal/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
+
+- name: copy GDAL jar to webapps
+  copy: src='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/gdal-1.11.2.jar' dest='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/' remote_src=True
 
 - name: copy wps ext
-  shell: "cp -f ~/OpenGeoSuiteEnterprise-latest-ext/wps/* '/cygdrive/c/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
+  shell: "cp -f ~/BoundlessSuite-latest-ext/wps/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
 
 #add some kind of wait here... if not tomcat hasn't stopped yet this fails
 - name: start tomcat
