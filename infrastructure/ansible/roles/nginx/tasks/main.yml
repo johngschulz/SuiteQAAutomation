@@ -26,14 +26,5 @@
 - name: restart nginx
   service: name=nginx state=restarted
 
-- name: retrieve pub key from hub machine
-  synchronize:
-    src: /home/ec2-user/hub2.pub
-    dest: /home/ubuntu/hub2.pub
-    mode: pull
-  delegate_to: "{{ hub_ip }}"
-- name: retrieve hub key
-  copy: src=/tmp/hub2.pub dest=/home/ubuntu/hub.pub
-
 - name: add hub key to authorized keys
-  authorized_key: user=ubuntu key="{{ lookup('file', '/tmp/hub2.pub') }}"
+  authorized_key: user=ubuntu key="{{ lookup('file', '/tmp/hub.pub') }}"
