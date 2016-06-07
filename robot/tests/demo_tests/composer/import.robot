@@ -20,7 +20,9 @@ Add Data To New Workspace
     Open Workspace  testws
     Click Element   xpath=//a[contains(.,"Add Data")]
     Wait Until Page Contains    Add Files
+    ${oldLogLevel}    Set Log Level    WARN
     Choose File     xpath=//input[@type='file']     ${TEST DATA}world.zip
+    Set Log Level   ${oldLogLevel}
     Wait Until Element Is Visible    xpath=//button[text()='Upload']
     Click Element    xpath=//button[text()='Upload']
     Wait Until Page Contains    Next: Load
