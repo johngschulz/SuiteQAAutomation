@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation     A resource file with reusable keywords and variables,
-...               which form the base of the composer tests. The default
+...               which form the base of the composer tests. The defaultc
 ...               Selenium time is set to 20 seconds to allow for uploads
 ...
 Library           Selenium2Library  timeout=20
@@ -107,7 +107,9 @@ Import File to Workspace
     Wait For Angular
     Click Element   xpath=//a[contains(.,"Add Data")]
     Wait Until Page Contains    Add Files
+    ${oldLogLevel}    Set Log Level    WARN
     Choose File     xpath=//input[@type='file']     ${TEST DATA}${file}
+    Set Log Level   ${oldLogLevel}
     Wait Until Element Is Visible    xpath=//button[text()='Upload']
     Click Element    xpath=//button[text()='Upload']
     Wait Until Page Contains    Next: Load      30 seconds
