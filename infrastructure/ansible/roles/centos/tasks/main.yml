@@ -53,11 +53,6 @@
 - name: update pg_hba.conf
   copy: src=pg_hba.conf dest=/var/lib/pgsql/9.3/data/ force=yes mode=777
 
-# - name: configure postgres
-#   sudo: yes
-#   sudo_user: postgres
-#   postgresql_user: db=postgres user=postgres password=postgres
-
 - name: restart postgis
   service: name=postgresql-9.3 state=started
 
