@@ -37,9 +37,3 @@
 
 - name: create start_node shortcut in startup
   command: mkshortcut -n=/cygdrive/c/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/start_node /cygdrive/c/source/start_node.bat
-
-- name: copy auto-logon script
-  copy: src=setAutoLogon.bat dest=~/setAutoLogon.bat mode=777
-
-# - name: run auto-logon script
-#   command: sudo ./setAutoLogon.bat
