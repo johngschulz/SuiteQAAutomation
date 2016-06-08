@@ -16,6 +16,7 @@ ${VALID USER}     admin
 ${VALID PASSWORD}    geoserver
 ${LOGIN URL}      http://${SERVER}/geoserver/web
 ${WELCOME URL}    http://${SERVER}/geoserver/web/
+${REST URL}       http://${SERVER}/geoserver/rest
 
 *** Keywords ***
 Open Browser To GeoServer
