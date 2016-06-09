@@ -34,7 +34,9 @@ Input Password
     Click Element    password
     Input Text    password    ${password}
 
-Submit Credentials
+Submit Geoserver Credentials
+    Input Username  ${VALID USER}
+    Input Password  ${VALID PASSWORD}
     Click Button    Login
 
 Welcome Page Should Be Open
