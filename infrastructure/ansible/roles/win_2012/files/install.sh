@@ -22,7 +22,6 @@ sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes 
 
 #libjpeg turbo
 ./libjpeg-turbo-1.4.2-vc.exe /S
-setx /M PATH "/$PATH;C:\libjpeg-turbo/"
 
 #Enabling spatial reference systems with Imperial units
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotoools.render.lite.scale.unitCompensation=true"

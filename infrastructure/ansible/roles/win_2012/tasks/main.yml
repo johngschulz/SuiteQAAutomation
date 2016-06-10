@@ -11,28 +11,28 @@
   command: ./vcredist_x86.exe /quiet
 
 - name: copy install script
-  copy: src=install.sh dest=~/war/install.sh force=yes mode=0700
+  copy: src=install.sh dest=~/war/install.sh mode=700
 
 - name: copy jce policy
-  copy: src=jce_policy-8.zip dest=~/war/jce_policy-8.zip force=yes
+  copy: src=jce_policy-8.zip dest=~/war/jce_policy-8.zip
 
 - name: copy marlin jar
-  copy: src=marlin-0.7.3-Unsafe.jar dest=~/war/marlin-0.7.3-Unsafe.jar force=yes mode=700
+  copy: src=marlin-0.7.3-Unsafe.jar dest=~/war/  mode=700
 
 - name: copy apache
-  copy: src=apache-tomcat-8.0.32.exe dest=~/war/apache-tomcat-8.0.32.exe mode=700
+  copy: src=apache-tomcat-8.0.32.exe dest=~/war/  mode=700
 
 - name: copy jre
-  copy: src=jre-8u91-windows-i586.exe dest=~/war/jre-8u91-windows-i586.exe mode=700
+  copy: src=jre-8u91-windows-i586.exe dest=~/war/  mode=700
 
 - name: copy libjpeg
-  copy: src=libjpeg-turbo-1.4.2-vc.exe dest=~/war/libjpeg-turbo-1.4.2-vc.exe mode=700
+  copy: src=libjpeg-turbo-1.4.2-vc.exe dest=~/war/  mode=700
 
 - name: copy gdal bin
-  copy: src=GDAL-suite4.9.zip dest=~/GDAL-suite4.9.zip 
+  copy: src=GDAL-suite4.9.zip dest=~/
 
 - name: copy geoserver data directory
-  copy: src=geoserverDataDir.zip dest=/cygdrive/c/geoserverDataDir.zip
+  copy: src=geoserverDataDir.zip dest=/cygdrive/c/
 
 - name: unzip data dir
   unarchive: src=/cygdrive/c/geoserverDataDir.zip dest=/cygdrive/c/ mode=0777 copy=no
@@ -43,6 +43,9 @@
 
 - name: copy gdal files into tomcat bin
   shell: "unzip -o GDAL-suite4.9.zip -d '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/'"
+
+- name: copy libjpeg-turbo
+  shell: "cp /cygdrive/c/libjpeg-turbo/bin/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/'"
 
 - name: make bin dir executable
   file: path='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/' state=directory recurse=yes mode=777
@@ -65,16 +68,23 @@
 
 - name: explode geoserver war
   shell: "unzip -o '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war' -d '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver'"
+  args:
+    executable: /bin/bash
 
 - name: copy GDAL ext
   shell: "cp -f ~/BoundlessSuite-latest-ext/gdal/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
 
 - name: copy GDAL jar to webapps
-  copy: src='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/gdal-1.11.2.jar' dest='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/' remote_src=True
+  shell: cp '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/gdal-1.11.2.jar' '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'
+  args:
+    executable: /bin/bash
 
 - name: copy wps ext
   shell: "cp -f ~/BoundlessSuite-latest-ext/wps/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
 
 #add some kind of wait here... if not tomcat hasn't stopped yet this fails
+- name: ensure tomcat is stopped
+  wait_for: host=0.0.0.0 port=8080 delay=10 state=stopped
+
 - name: start tomcat
   command: net start Tomcat8
