@@ -42,7 +42,6 @@
     nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
     win10_ip: "{{ win10_facts.instances[0].private_ip_address }}"
     ubuntu_gs_ip: "{{ ubuntu_gs_facts.instances[0].private_ip_address }}"
-
   roles:
     - nat
 
@@ -55,7 +54,6 @@
   roles:
     - hub
 
-#provision nginx after hub to pull ssh key from hub
 - name: provision nginx server
   hosts: tag_type_nginx
   remote_user: ubuntu
@@ -78,6 +76,8 @@
   hosts: tag_type_win10
   remote_user: Administrator
   pre_tasks:
+  - name: wait for win10 machine to be up
+    local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=10 timeout=300
   - name: get hub private ip
     sudo: no
     local_action:
@@ -99,11 +99,13 @@
     poll: 0
     ignore_errors: true
 
-
 - name: provision win2012 node
   gather_facts: true
   hosts: tag_type_win2012
   remote_user: Administrator
+  pre_tasks:
+  - name: wait for win2012 machine to be up
+    local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=10 timeout=300
   roles:
     - win_2012
 
