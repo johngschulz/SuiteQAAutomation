@@ -1,20 +1,32 @@
-- name: import boundless gpg key
-  apt_key: url=https://apt.boundlessgeo.com/gpg.key state=present
-
-- name: add Suite repo
-  apt_repository: repo='deb https://boundless:Open4Good!@apt-ee.boundlessgeo.com/suite/latest/ubuntu/ trusty main' state=present filename='opengeo'
+- name: add boundless repos
+  shell: 'echo "deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-debian/amd64 ./ \n deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list' 
 
 - name: update repo
   apt: update_cache=yes
 
-- name: install Suite
-  apt: name=opengeo state=latest
+- name: install suite
+  apt: name=suite-geoserver state=latest allow_unauthenticated=yes
+
+- name: install gwc
+  apt: name=suite-geowebcache state=latest allow_unauthenticated=yes
+
+- name: install composer
+  apt: name=suite-composer state=latest allow_unauthenticated=yes
+
+- name: install dashboard
+  apt: name=suite-dashboard state=latest allow_unauthenticated=yes
+
+- name: install wpsbuilder
+  apt: name=suite-wpsbuilder state=latest allow_unauthenticated=yes
 
 - name: install gdal extension
-  apt: name=geoserver-gdal state=latest
+  apt: name=geoserver-plugin-gdal state=latest allow_unauthenticated=yes
+
+- name: install wps extension
+  apt: name=geoserver-plugin-wps state=latest allow_unauthenticated=yes
 
 - name: restart tomcat
-  service: name=tomcat7 state=restarted
+  service: name=tomcat8 state=restarted
 
 - name: install pip
   apt: name=python-pip state=latest
@@ -28,10 +40,8 @@
 - name: install psycopg2
   pip: name=psycopg2 state=latest
 
-# - name: configure postgres
-#   sudo: yes
-#   sudo_user: postgres
-#   postgresql_user: db=postgres user=postgres password=postgres
+- name: install postgis
+  apt: name=postgresql-9.3-postgis-2.1 state=latest allow_unauthenticated=yes
 
 - name: update postgresql.conf
   copy: src=postgresql.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
@@ -40,11 +50,11 @@
   copy: src=pg_hba.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
 
 - name: restart postgres
-  service: name=postgresql state=restarted
+  service: name=postgresql state=restarted 
 
 - name: install pointcloud
-  apt: name=postgresql-9.3-pointcloud
+  apt: name=postgresql-9.3-pointcloud allow_unauthenticated=yes
 
 - name: install pdal
-  apt: name=pdal state=latest
+  apt: name=pdal state=latest allow_unauthenticated=yes
 
