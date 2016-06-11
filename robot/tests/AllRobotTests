@@ -61,10 +61,10 @@ rm -r reports/$hostkeyword
 rm  -f data.json
 scp -i /home/ec2-user/hub ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json     data.json
 
-#run_test_nobrowser "database"
-#run_test_nobrowser "GDAL"
-#run_test_browser "importer"
-#run_test_browser "geoserver"
+run_test_nobrowser "database"
+run_test_nobrowser "GDAL"
+run_test_browser "importer"
+run_test_browser "geoserver"
 run_test_browser "composer"
-#run_test_browser "gwc"
-#run_test_browser "wpsbuilder"
+run_test_browser "gwc"
+run_test_browser "wpsbuilder"
