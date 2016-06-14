@@ -26,6 +26,9 @@
     dest: /cygdrive/c/source/
     force: yes
 
+- name: add firewall exception for IE webdriver
+  command: 'netsh advfirewall firewall add rule name="IE webdriver" dir=in action=allow program="C:\source\IEDriverServer.exe" enable=yes'
+
 - name: copy sudo script
   copy: src=sudo dest=/bin/sudo mode=777
 
