@@ -10,5 +10,7 @@
     chdir: ~/robot/tests
 
 - name: run all win2012 tests
-  shell: ./AllRobotTests win2012 '{{ win2012_gs_ip }}' '{{ nginx_ip }}' chdir=~/robot/tests/
+  shell: ./AllRobotTests win2012 '{{ win2012_gs_ip }}' '{{ nginx_ip }}'
+  args:
+    chdir: ~/robot/tests/
  
