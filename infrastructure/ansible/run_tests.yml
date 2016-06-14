@@ -1,31 +1,29 @@
-### run deploy.yml to bring up instances
-### run this script to run tests
-# - hosts: tag_type_hub
-#   gather_facts: false
-#   tasks:
-#   - name: wait for hub machine to be up
-#     local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=5 timeout=300
+## run deploy.yml to bring up instances
+## run this script to run tests
+- hosts: tag_type_hub
+  gather_facts: false
+  tasks:
+  - name: wait for hub machine to be up
+    local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=5 timeout=300
 
-# - hosts: tag_type_win10
-#   gather_facts: false
-#   tasks:
-#   - name: wait for node machine to be up
-#     local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=5 timeout=450
+- hosts: tag_type_win10
+  gather_facts: false
+  tasks:
+  - name: wait for node machine to be up
+    local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=5 timeout=450
 
-# - hosts: tag_type_hub
-#   gather_facts: false
-#   remote_user: ec2-user
-#   sudo: yes
-#   tasks:
-#   - name: start selenium hub
-#     docker: 
-#       docker_api_version: 1.21
-#       name: selenium-hub
-#       image: selenium/hub:2.52.0
-#       ports: 4444:4444
-#       state: started
-
-###may need to setup fresh ssh key for hub->nginx, ansible script doesn't pass the suite-robot key
+- hosts: tag_type_hub
+  gather_facts: false
+  remote_user: ec2-user
+  sudo: yes
+  tasks:
+  - name: start selenium hub
+    docker: 
+      docker_api_version: 1.21
+      name: selenium-hub
+      image: selenium/hub:2.52.0
+      ports: 4444:4444
+      state: started
 
 - hosts: tag_type_hub
   gather_facts: false
