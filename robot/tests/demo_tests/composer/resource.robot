@@ -37,7 +37,7 @@ Submit Composer Credentials
 
 Login to Composer
     Open Browser To Composer
-    Wait Until Page Contains    Composer
+    Wait Until Page Contains Element    //form
     Submit Composer Credentials
     Wait Until Page Contains    admin
     Page Should Contain    admin

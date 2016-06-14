@@ -47,8 +47,6 @@ Login To Geoserver
     Set Selenium Speed      .2
     Set Selenium Implicit Wait   1 seconds
     Open Browser To GeoServer
-    Input Username    admin
-    Input Password    geoserver
-    Submit Credentials
+    Submit Geoserver Credentials
     Welcome Page Should Be Open
     Sleep    1 seconds
