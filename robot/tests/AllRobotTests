@@ -68,3 +68,4 @@ run_test_browser "geoserver"
 run_test_browser "composer"
 run_test_browser "gwc"
 run_test_browser "wpsbuilder"
+echo $?
