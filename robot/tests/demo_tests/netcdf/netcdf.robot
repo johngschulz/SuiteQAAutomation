@@ -15,11 +15,28 @@ Test MultiDim NetCDF
     [Setup]      Run Keywords      Login To Geoserver     Create NetCDF Datastore
     Publish Layer
     Verify WMS MultiDim Requests
+    Check NetCDF Output
     [Teardown]   Run Keywords    Delete NetCDF Datastore    Close Browser
 
 
 
+
 ***Keywords***
+Check NetCDF Output
+        ${cov}=   Get Coverage   opengeo__O3   elevation    450
+        ${len}    Get Length    ${cov}
+           #verified by   java -jar toolsUI-4.6.6.jar   (netcdf tools)
+        Should be equal as numbers  ${len}   32428    grid is different than expected (test by size)
+
+Get Coverage 
+      [arguments]   ${covid}   ${axis}     ${axis_val}
+      ${auth}=     Create List   admin    geoserver
+      Create Session     RESTAPI    http://${SERVER}   auth=${auth}
+     &{params}=   Create Dictionary   request=GetCoverage   service=WCS   version=2.0.1   coverageId=${covid}   Format=application/x-netcdf  subset=http://www.opengis.net/def/axis/OGC/0/${axis}(${axis_val})
+     ${resp}=   GET Request    RESTAPI    /geoserver/wcs   params=${params}
+     [Return]  ${resp.content}
+     [Teardown]   Delete All Sessions
+     
 
 Verify WMS MultiDim Requests
          ${resp}=   Get Feature Info     10.0    2012-04-01T00:00:00.000Z   14.855920835037232,44.95845599601746,14.925272031326294,45.027807192306526
