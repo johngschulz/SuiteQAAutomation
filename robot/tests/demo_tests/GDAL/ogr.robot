@@ -6,8 +6,8 @@ Library           RequestsLibrary
 
 *** Variables ***
 
-${OGR_PATH_UNIX}            /usr/share/tomcat8/cdfadmin13_1.gdb
-${OGR_PATH_WIN}             C:\test_data\cdfadmin13_1.gdb
+${OGR_PATH_UNIX}            /usr/share/boundless/geoserver/data-dir/cdfadmin13_1.gdb
+${OGR_PATH_WIN}             C:\geoserverDataDir\cdfadmin13_1.gdb
 ${OGR_LAYER_NAME}     cdfadmin13_1_region
 ${OGR_DS_NAME}        ogr_test_ds
 
