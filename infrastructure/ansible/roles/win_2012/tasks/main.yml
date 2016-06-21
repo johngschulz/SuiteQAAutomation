@@ -37,6 +37,12 @@
 - name: unzip data dir
   unarchive: src=/cygdrive/c/geoserverDataDir.zip dest=/cygdrive/c/ mode=0777 copy=no
 
+- name: copy test data - ogr
+  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/cygdrive/c/geoserverDataDir/ mode=777
+
+- name: copy test data - netcdf
+  unarchive: src=../../test_data/netcdf.zip dest=/cygdrive/c/geoserverDataDir/ mode=777
+
 #only run this once, if re-run will hang script
 - name: run the script
   command: ./install.sh chdir=~/war

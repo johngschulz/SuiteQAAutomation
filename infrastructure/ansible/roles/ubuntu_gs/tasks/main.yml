@@ -20,10 +20,13 @@
   apt: name=suite-wpsbuilder state=latest allow_unauthenticated=yes
 
 - name: install gdal extension
-  apt: name=geoserver-plugin-gdal state=latest allow_unauthenticated=yes
+  apt: name=suite-gs-gdal state=latest allow_unauthenticated=yes
+
+- name: install netcdf extension
+  apt: name=suite-gs-netcdf state=latest allow_unauthenticated=yes
 
 - name: install wps extension
-  apt: name=geoserver-plugin-wps state=latest allow_unauthenticated=yes
+  apt: name=suite-gs-wps state=latest allow_unauthenticated=yes
 
 - name: restart tomcat
   service: name=tomcat8 state=restarted
@@ -58,3 +61,8 @@
 - name: install pdal
   apt: name=pdal state=latest allow_unauthenticated=yes
 
+- name: copy test data - ogr
+  unarchive: src=../../test_data/cdfadmin13_1.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777
+
+- name: copy test data - netcdf
+  unarchive: src=../../test_data/netcdf.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777

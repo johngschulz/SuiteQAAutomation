@@ -5,28 +5,31 @@
   command: bash -c 'printf "[boundless-suite-test-centos]\nname=Boundless Spatial Suite Test CentOS\nbaseurl=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-centos/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-suite-test.repo'
 
 - name: insall suite geoserver
-  yum: name=suite-geoserver.x86_64 state=present
+  yum: name=suite-geoserver state=present
 
 - name: install composer
-  yum: name=suite-composer.x86_64 state=present
+  yum: name=suite-composer state=present
 
 - name: install dashboard
-  yum: name=suite-dashboard.x86_64 state=present
+  yum: name=suite-dashboard state=present
 
 - name: install wps extension
-  yum: name=geoserver-plugin-wps.x86_64 state=present
+  yum: name=suite-gs-wps state=present
 
 - name: install gdal extension
-  yum: name=geoserver-plugin-gdal.x86_64 state=present
+  yum: name=suite-gs-gdal state=present
 
-- name: install gdal extension
-  yum: name=gdal-mrsid.x86_64 state=present
+- name: install netcdf extension
+  yum: name=suite-gs-netcdf state=present
+
+- name: install gdal mrsid 
+  yum: name=gdal-mrsid state=present
 
 - name: install wps builder
-  yum: name=suite-wpsbuilder.x86_64 state=present
+  yum: name=suite-wpsbuilder state=present
 
-#- name: unzip to jre lib
-#  unarchive: src=http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip dest=/usr/lib/jvm/jre/lib/security/ copy=no
+- name: unzip to jre lib
+ unarchive: src=http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip dest=/usr/lib/jvm/jre/lib/security/ copy=no
 
 - name: add libjpeg to tomcat conf
   command: echo "JAVA_OPTS=\"-DJjava.library.path=/opt/libjpeg-turbo/lib64\"" >> /etc/tomcat8/tomcat8.conf
@@ -67,3 +70,9 @@
 
 - name: set sysconfig permissive
   command: sed -i "s/SELINUX-enforcing/SELINUX=permissive/" /etc/sysconfig/selinux
+
+- name: copy test data - ogr
+  unarchive: src=../../test_data/cdfadmin13_1.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777
+
+- name: copy test data - netcdf
+  unarchive: src=../../test_data/netcdf.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777
