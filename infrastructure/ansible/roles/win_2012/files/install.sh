@@ -12,6 +12,9 @@ sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes 
 ./libjpeg-turbo-1.4.2-vc.exe /S
 sleep 5
 
+#set path for netcdf native lib
+setx /M PATH "/$PATH;C:/Program Files (x86)/netCDF 4.4.0/bin"
+
 #set memory options
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --JvmMs=256  --JvmMx=756
 
@@ -22,7 +25,8 @@ sleep 5
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Xbootclasspath/a:C:\Program Files (x86)\Apache Software Foundation\Tomcat 8.0\webapps\geoserver\WEB-INF\lib\marlin-0.7.3-Unsafe.jar"
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dsun.java2d.renderer=org.marlin.pisces.PiscesRenderingEngine"
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dsun.java2d.renderer.useThreadLocal=false"
-"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Djava.library.path=C:\Program Files (x86)\Apache Software Foundation\Tomcat 8.0\bin"
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Djava.library.path=C:\Program Files (x86)\Apache Software Foundation\Tomcat 8.0\bin;C:\Program Files (x86)\netCDF 4.4.0\bin"
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Djna.library.path=C:\Program Files (x86)\netCDF 4.4.0\bin"
 
 
 #set referencing defaults
