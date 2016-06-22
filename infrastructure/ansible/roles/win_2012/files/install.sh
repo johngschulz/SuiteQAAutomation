@@ -1,8 +1,16 @@
 #!/bin/bash
 ./jre-8u91-windows-i586.exe /s
 sleep 10 # I think tbe above doesn't wait for it to be completed (but it takes <1sec so not sure)
+
 ./apache-tomcat-8.0.32.exe /S
 sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes <1sec so not sure)
+
+./netCDF4.4.0-NC4-32.exe  /S
+sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes <1sec so not sure)
+
+#libjpeg turbo
+./libjpeg-turbo-1.4.2-vc.exe /S
+sleep 5
 
 #set memory options
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --JvmMs=256  --JvmMx=756
@@ -20,8 +28,7 @@ sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes 
 #set referencing defaults
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotools.referencing.forceXY=true"
 
-#libjpeg turbo
-./libjpeg-turbo-1.4.2-vc.exe /S
+
 
 #Enabling spatial reference systems with Imperial units
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotoools.render.lite.scale.unitCompensation=true"
