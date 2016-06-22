@@ -13,8 +13,8 @@
 - name: install dashboard
   yum: name=suite-dashboard state=present
 
-- name: install wps extension
-  yum: name=suite-gs-wps state=present
+- name: install wps builder
+  yum: name=suite-wpsbuilder state=present
 
 - name: install gdal extension
   yum: name=suite-gs-gdal state=present
@@ -22,11 +22,11 @@
 - name: install netcdf extension
   yum: name=suite-gs-netcdf state=present
 
+- name: install netcdf native libs
+  yum: name=netcdf-bin state=present
+
 - name: install gdal mrsid 
   yum: name=gdal-mrsid state=present
-
-- name: install wps builder
-  yum: name=suite-wpsbuilder state=present
 
 - name: unzip to jre lib
  unarchive: src=http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip dest=/usr/lib/jvm/jre/lib/security/ copy=no
@@ -71,8 +71,11 @@
 - name: set sysconfig permissive
   command: sed -i "s/SELINUX-enforcing/SELINUX=permissive/" /etc/sysconfig/selinux
 
+- name: make data directory for tests
+  file: path=/usr/share/boundless/geoserver/data-dir/data state=directory mode=777
+
 - name: copy test data - ogr
-  unarchive: src=../../test_data/cdfadmin13_1.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777
+  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/usr/share/boundless/geoserver/data-dir/ mode=777
 
 - name: copy test data - netcdf
-  unarchive: src=../../test_data/netcdf.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777
+  unarchive: src=../../test_data/netcdf.zip dest=/usr/share/boundless/geoserver/data-dir/data/ mode=777

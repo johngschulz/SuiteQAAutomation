@@ -28,6 +28,9 @@
 - name: install wps extension
   apt: name=suite-gs-wps state=latest allow_unauthenticated=yes
 
+- name: install netcdf native libs
+  apt: name=netcdf-bin state=latest allow_unauthenticated=yes
+
 - name: restart tomcat
   service: name=tomcat8 state=restarted
 
@@ -61,8 +64,11 @@
 - name: install pdal
   apt: name=pdal state=latest allow_unauthenticated=yes
 
+- name: make data directory for tests
+  file: path=/usr/share/boundless/geoserver/data-dir/data state=directory mode=777
+
 - name: copy test data - ogr
-  unarchive: src=../../test_data/cdfadmin13_1.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777
+  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/usr/share/boundless/geoserver/data-dir/ mode=777
 
 - name: copy test data - netcdf
-  unarchive: src=../../test_data/netcdf.zip dest=~/usr/share/boundless/geoserver/data-dir/ mode=777
+  unarchive: src=../../test_data/netcdf.zip dest=/usr/share/boundless/geoserver/data-dir/data/ mode=777
