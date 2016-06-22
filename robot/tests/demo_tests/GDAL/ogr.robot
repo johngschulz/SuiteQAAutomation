@@ -7,7 +7,7 @@ Library           RequestsLibrary
 *** Variables ***
 
 ${OGR_PATH_UNIX}            /usr/share/boundless/geoserver/data-dir/cdfadmin13_1.gdb
-${OGR_PATH_WIN}             C:\geoserverDataDir\cdfadmin13_1.gdb
+${OGR_PATH_WIN}             C:\\geoserverDataDir\\cdfadmin13_1.gdb
 ${OGR_LAYER_NAME}     cdfadmin13_1_region
 ${OGR_DS_NAME}        ogr_test_ds
 
@@ -88,8 +88,8 @@ Check Host
 
 Get OGR URL
     ${status}=   Run Keyword And Return Status  Check Host
-    Run Keyword If  '${status}'=='PASS'   Set Win Path
-    Run Keyword Unless  '${status}'=='PASS'   Set Unix Path
+    Run Keyword If  '${status}'=='True'   Set Win Path
+    Run Keyword Unless  '${status}'=='True'   Set Unix Path
 
 Login To Geoserver
     Set Selenium Timeout     20 seconds
