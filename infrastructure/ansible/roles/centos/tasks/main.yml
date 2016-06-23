@@ -16,20 +16,32 @@
 - name: install wps builder
   yum: name=suite-wpsbuilder state=present
 
-- name: install gdal extension
-  yum: name=suite-gs-gdal state=present
+- name: install extensions
+  yum: name=suite-gs-{{ item }} state=latest
+  with_items: 
+      - appschema
+      - jdbcconfig
+      - cluster
+      - geopkg
+      - inspire
+      - arcsde
+      - csw
+      - db2
+      - gdal
+      - mongodb
+      - netcdf-in
+      - netcdf-out
+      - oracle
+      - python
+      - vectortiles
+      - sqlserver
 
-- name: install netcdf extension
-  yum: name=suite-gs-netcdf state=present
-
-- name: install netcdf native libs
-  yum: name=netcdf-bin state=present
+# don't exist yet (jun22)
+# - name: install netcdf native libs
+#   yum: name=netcdf-bin state=present
 
 - name: install gdal mrsid 
   yum: name=gdal-mrsid state=present
-
-- name: unzip to jre lib
- unarchive: src=http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip dest=/usr/lib/jvm/jre/lib/security/ copy=no
 
 - name: add libjpeg to tomcat conf
   command: echo "JAVA_OPTS=\"-DJjava.library.path=/opt/libjpeg-turbo/lib64\"" >> /etc/tomcat8/tomcat8.conf

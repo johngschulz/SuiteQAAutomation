@@ -22,6 +22,28 @@
 - name: install gdal extension
   apt: name=suite-gs-gdal state=latest allow_unauthenticated=yes
 
+- name: install gdal-mrsid
+  apt: name=gdal-mrsid state=latest allow_unauthenticated=yes
+
+- name: install extensions
+  apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes
+  with_items: 
+      - appschema
+      - jdbcconfig
+      - cluster
+      - geopkg
+      - inspire
+      - arcsde
+      - csw
+      - db2
+      - gdal
+      - mongodb
+      - netcdf
+      - oracle
+      - python
+      - vectortiles
+      - sqlserver
+
 - name: install netcdf extension
   apt: name=suite-gs-netcdf state=latest allow_unauthenticated=yes
 

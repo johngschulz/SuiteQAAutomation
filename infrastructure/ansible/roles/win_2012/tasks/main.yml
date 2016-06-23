@@ -28,6 +28,9 @@
 - name: copy libjpeg
   copy: src=libjpeg-turbo-1.4.2-vc.exe dest=~/war/  mode=700
 
+- name: copy netcdf
+  copy: src=netCDF4.4.0-NC4-32.exe dest=~/war/ mode=700
+
 - name: copy gdal bin
   copy: src=GDAL-suite4.9.zip dest=~/
 
@@ -77,16 +80,31 @@
   args:
     executable: /bin/bash
 
-- name: copy GDAL ext
-  shell: "cp -f ~/BoundlessSuite-latest-ext/gdal/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
+- name: copy extensions
+  shell: "cp -f -r ~/BoundlessSuite-latest-ext/{{ item }}/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
+  with_items: 
+      - app-schema
+      - jdbcconfig
+      - cluster
+      - geopkg
+      - inspire
+      - arcsde
+      - csw
+      - db2
+      - gdal
+      - mongodb
+      - netcdf
+      - netcdf-out
+      - oracle
+      - scripting
+      - vectortiles
+      - sqlserver
+      - wps
 
 - name: copy GDAL jar to webapps
   shell: cp '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/gdal-1.11.2.jar' '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'
   args:
     executable: /bin/bash
-
-- name: copy wps ext
-  shell: "cp -f ~/BoundlessSuite-latest-ext/wps/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
 
 #add some kind of wait here... if not tomcat hasn't stopped yet this fails
 - name: ensure tomcat is stopped
