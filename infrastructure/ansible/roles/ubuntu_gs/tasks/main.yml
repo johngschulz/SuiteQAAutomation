@@ -19,12 +19,6 @@
 - name: install wpsbuilder
   apt: name=suite-wpsbuilder state=latest allow_unauthenticated=yes
 
-- name: install gdal extension
-  apt: name=suite-gs-gdal state=latest allow_unauthenticated=yes
-
-- name: install gdal-mrsid
-  apt: name=gdal-mrsid state=latest allow_unauthenticated=yes
-
 - name: install extensions
   apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes
   with_items: 
@@ -39,16 +33,14 @@
       - gdal
       - mongodb
       - netcdf
+      - netcdf-out
       - oracle
       - python
       - vectortiles
       - sqlserver
 
-- name: install netcdf extension
-  apt: name=suite-gs-netcdf state=latest allow_unauthenticated=yes
-
-- name: install wps extension
-  apt: name=suite-gs-wps state=latest allow_unauthenticated=yes
+- name: install gdal-mrsid
+  apt: name=gdal-mrsid state=latest allow_unauthenticated=yes
 
 - name: install netcdf native libs
   apt: name=netcdf-bin state=latest allow_unauthenticated=yes
@@ -87,10 +79,10 @@
   apt: name=pdal state=latest allow_unauthenticated=yes
 
 - name: make data directory for tests
-  file: path=/usr/share/boundless/geoserver/data-dir/data state=directory mode=777
+  file: path=/opt/boundless/suite/geoserver-data/data state=directory mode=777
 
 - name: copy test data - ogr
-  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/usr/share/boundless/geoserver/data-dir/ mode=777
+  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/opt/boundless/suite/geoserver-data/ mode=777
 
 - name: copy test data - netcdf
-  unarchive: src=../../test_data/netcdf.zip dest=/usr/share/boundless/geoserver/data-dir/data/ mode=777
+  unarchive: src=../../test_data/netcdf.zip dest=/opt/boundless/suite/geoserver-data/data/ mode=777
