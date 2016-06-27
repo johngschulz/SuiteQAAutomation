@@ -1,23 +1,17 @@
 - name: set boundless repo
-  command: bash -c 'printf "[boundless-third-party]\nname=Boundless Spatial Third Party Repo\nbaseurl=http://yum.boundlessgeo.com/third-party/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-third-party.repo'
+  command: bash -c 'printf "[boundless-third-party]\nname=Boundless Spatial Third Party Repo\nbaseurl=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-centos\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-third-party.repo'
 
 - name: add suite test repo
   command: bash -c 'printf "[boundless-suite-test-centos]\nname=Boundless Spatial Suite Test CentOS\nbaseurl=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-centos/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-suite-test.repo'
 
 - name: insall suite geoserver
-  yum: name=suite-geoserver state=present
-
-- name: insall suite geoserver
-  yum: name=suite-geowebcache state=present
-
-- name: install composer
-  yum: name=suite-composer state=present
-
-- name: install dashboard
-  yum: name=suite-dashboard state=present
-
-- name: install wps builder
-  yum: name=suite-wpsbuilder state=present
+  yum: name=suite-{{ item }} state=latest
+  with_items: 
+      - geoserver
+      - composer
+      - geowebcache
+      - dashboard
+      - wpsbuilder
 
 - name: install extensions
   yum: name=suite-gs-{{ item }} state=latest
@@ -39,11 +33,15 @@
       - vectortiles
       - sqlserver
 
-- name: install netcdf native libs
-  yum: name=netcdf-bin state=present
+- name: install native libs
+  yum: name=suite-netcdf state=latest
+  with_items: 
+      - netcdf
+      - gdal-mrsid
+      - libjpeg-turbo
 
 - name: install gdal mrsid 
-  yum: name=gdal-mrsid state=present
+  yum: name=suite-gdal-mrsid state=present
 
 - name: add libjpeg to tomcat conf
   command: echo "JAVA_OPTS=\"-DJjava.library.path=/opt/libjpeg-turbo/lib64\"" >> /etc/tomcat8/tomcat8.conf
@@ -53,10 +51,6 @@
 
 - name: install postgis
   yum: name=postgis21-postgresql93.x86_64 state=present
-
-#required for postgis, libjpeg-turbo-official not enough
-- name: install libjpeg-turbo
-  yum: name=libjpeg-turbo.x86_64 state=present
 
 - name: init postgis
   command: service postgresql-9.3 initdb

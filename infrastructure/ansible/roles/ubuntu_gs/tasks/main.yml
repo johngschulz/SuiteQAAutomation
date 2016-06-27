@@ -1,23 +1,17 @@
 - name: add boundless repos
-  shell: 'echo "deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-debian/amd64 ./ \n deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list' 
+  shell: 'echo "deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-centos/ ./ \n deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list' 
 
 - name: update repo
   apt: update_cache=yes
 
 - name: install suite
-  apt: name=suite-geoserver state=latest allow_unauthenticated=yes
-
-- name: install gwc
-  apt: name=suite-geowebcache state=latest allow_unauthenticated=yes
-
-- name: install composer
-  apt: name=suite-composer state=latest allow_unauthenticated=yes
-
-- name: install dashboard
-  apt: name=suite-dashboard state=latest allow_unauthenticated=yes
-
-- name: install wpsbuilder
-  apt: name=suite-wpsbuilder state=latest allow_unauthenticated=yes
+  apt: name=suite-{{ item }} state=latest allow_unauthenticated=yes
+  with_items:
+      - geoserver 
+      - geowebcache
+      - composer
+      - dashboard
+      - wpsbuilder
 
 - name: install extensions
   apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes
@@ -39,11 +33,11 @@
       - vectortiles
       - sqlserver
 
-- name: install gdal-mrsid
-  apt: name=gdal-mrsid state=latest allow_unauthenticated=yes
-
-- name: install netcdf native libs
-  apt: name=netcdf-bin state=latest allow_unauthenticated=yes
+- name: install native libs
+  apt: name=suite-{{ item }} state=latest allow_unauthenticated=yes
+  with_items:
+      - gdal-mrsid
+      - netcdf-bin
 
 - name: restart tomcat
   service: name=tomcat8 state=restarted
