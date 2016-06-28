@@ -13,7 +13,7 @@ sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes 
 sleep 5
 
 #set path for netcdf native lib
-setx /M PATH "/$PATH;C:/Program Files (x86)/netCDF 4.4.0/bin;C:/GDAL"
+./setPath.bat
 
 #set memory options
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --JvmMs=256  --JvmMx=756

@@ -1,0 +1,1 @@
+setx /M PATH "C:/Program Files (x86)/netCDF 4.4.0/bin;C:/GDAL;C:/libjepg-turbo/bin;%PATH%"
