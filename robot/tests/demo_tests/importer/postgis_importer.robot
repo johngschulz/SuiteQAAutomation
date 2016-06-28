@@ -73,7 +73,7 @@ Create Postgis Datastore
     Put Text In Labelled Input      Data Source Name *          ${TEST_POSTGIS_DATASTORE_NAME}
     Put Text In Labelled Input      host *                      ${DB_SERVER_IP}
     Put Text In Labelled Input      database                    ${DB_POSTGIS_TMP_DB_NAME}
-    Put Text In Labelled Input      user *                      ${DB_USER}
+    Put Text In Labelled Input      User *                      ${DB_USER}
     Put Text In Labelled Input      passwd                      ${DB_PASS}
 
     Scroll Into View     form .button-group a
