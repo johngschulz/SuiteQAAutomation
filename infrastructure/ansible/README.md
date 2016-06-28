@@ -21,8 +21,12 @@
 
   * Install ansible and boto with pip
   * Set local environment variables for AWS access/secret keys
+  * Add the suite-qa key to your ssh agent
 
 ## Runnning scripts:
+
+**Deploy, Provision, & Run Full Test Suite**
+  `./start_tests.sh`
 
 **Deploy AWS Instances :**  
   `ansible-playbook -i hosts deploy.yml`  
@@ -32,13 +36,19 @@
   `ansible-playbook -i hosts/ install.yml`
   
 **Provision specific instances/roles :**  
- `ansible-playbook -i hosts/ install.yml --limit win_node`
+ `ansible-playbook -i hosts/ install.yml --limit tag_type_win2012`
+
+**Terminate Instances**
+  `ansible-playbook -i hosts/ terminate.yml`
+  `ansible-playbook -i hosts/ terminate.yml --limit tag_type_centos_gs`
 
 ### Notes:
   * You can limit a playbook to a specific role (as above) or group (see hosts/hosts.yml file for groups, ie. test_runners)
-  * Currently teardown of instances is manual. To do a fresh provisioning you must terminate all QA instances, release the EIP, and delete the subnet route tables. All instances should be tagged with QA.
+  * Currently a complete teardown of instances requires some manual steps. This includes terminating all QA instances (can use the terminate.yml script), release the EIP, and delete the subnet route tables. 
+  * All instances should be tagged with QA.
 
 ## To Do:
 * Automate shutdown and termination of aws instances
   * Shutdown all instances, except NAT and NGINX
-  * If terminating, ensure NAT is the last instance to be terminated
+  * Figure out where Ansible will be run from
+  * Hook up to build system
