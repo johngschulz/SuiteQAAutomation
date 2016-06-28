@@ -28,6 +28,7 @@
       - mongodb
       - netcdf
       - netcdf-out
+      - grib
       - oracle
       - python
       - vectortiles
@@ -50,13 +51,13 @@
   service: name=tomcat8 state=restarted
 
 - name: install postgis
-  yum: name=postgis21-postgresql93.x86_64 state=present
+  yum: name=suite-postgis21-postgresql93 state=present
 
 - name: init postgis
   command: service postgresql-9.3 initdb
 
 - name: install pointcloud
-  yum: name=pointcloud-postgresql93.x86_64 state=present
+  yum: name=suite-pointcloud-postgresql93.x86_64 state=present
 
 - name: update postgresql.conf
   copy: src=postgresql.conf dest=/var/lib/pgsql/9.3/data/ force=yes mode=777
@@ -79,11 +80,4 @@
 - name: set sysconfig permissive
   command: sed -i "s/SELINUX-enforcing/SELINUX=permissive/" /etc/sysconfig/selinux
 
-- name: make data directory for tests
-  file: path=/opt/boundless/suite/geoserver-data/data state=directory mode=777
-
-- name: copy test data - ogr
-  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/opt/boundless/suite/geoserver-data/ mode=777
-
-- name: copy test data - netcdf
-  unarchive: src=../../test_data/netcdf.zip dest=/opt/boundless/suite/geoserver-data/data/ mode=777
+- include: ../../test_data/linux_data.yml

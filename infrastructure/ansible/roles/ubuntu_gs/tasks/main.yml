@@ -1,5 +1,5 @@
 - name: add boundless repos
-  shell: 'echo "deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-centos/ ./ \n deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list' 
+  shell: 'echo "deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-debian/amd64 ./ \ndeb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list'
 
 - name: update repo
   apt: update_cache=yes
@@ -25,6 +25,7 @@
       - csw
       - db2
       - gdal
+      - grib
       - mongodb
       - netcdf
       - netcdf-out
@@ -34,7 +35,7 @@
       - sqlserver
 
 - name: install native libs
-  apt: name=suite-{{ item }} state=latest allow_unauthenticated=yes
+  apt: name={{ item }} state=latest allow_unauthenticated=yes
   with_items:
       - gdal-mrsid
       - netcdf-bin
@@ -72,11 +73,4 @@
 - name: install pdal
   apt: name=pdal state=latest allow_unauthenticated=yes
 
-- name: make data directory for tests
-  file: path=/opt/boundless/suite/geoserver-data/data state=directory mode=777
-
-- name: copy test data - ogr
-  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/opt/boundless/suite/geoserver-data/ mode=777
-
-- name: copy test data - netcdf
-  unarchive: src=../../test_data/netcdf.zip dest=/opt/boundless/suite/geoserver-data/data/ mode=777
+- include: ../../test_data/linux_data.yml

@@ -1,0 +1,13 @@
+- name: make data directory for tests
+  file: path=/opt/boundless/suite/geoserver-data/data state=directory mode=777
+
+- name: copy test data - ogr
+  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/opt/boundless/suite/geoserver-data/data/ mode=777
+  ignore_errors: yes
+
+- name: copy test data - netcdf
+  unarchive: src=../../test_data/netcdf.zip dest=/opt/boundless/suite/geoserver-data/data/ mode=777
+  ignore_errors: yes
+
+- name: copy test data - grib
+  copy: src=../../test_data/sampleGrib.grb2 dest=/opt/boundless/suite/geoserver-data/data/ mode=777

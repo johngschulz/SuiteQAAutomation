@@ -31,6 +31,9 @@
 - name: copy netcdf
   copy: src=netCDF4.4.0-NC4-32.exe dest=~/war/ mode=700
 
+- name: copy setPath
+  copy: src=setPath.bat dest=~/war/ mode=777
+
 - name: copy gdal bin
   copy: src=GDAL-suite4.9.zip dest=~/
 
@@ -40,15 +43,6 @@
 - name: unzip data dir
   unarchive: src=/cygdrive/c/geoserverDataDir.zip dest=/cygdrive/c/ mode=777 copy=no
 
-- name: copy test data - ogr
-  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/cygdrive/c/geoserverDataDir/ mode=777
-
-- name: make data directory for tests
-  file: path=/cygdrive/c/geoserverDataDir/data state=directory mode=777
-
-- name: copy test data - netcdf
-  unarchive: src=../../test_data/netcdf.zip dest=/cygdrive/c/geoserverDataDir/data/ mode=777
-
 #only run this once, if re-run will hang script
 - name: run the script
   command: ./install.sh chdir=~/war
@@ -56,11 +50,8 @@
 - name: copy gdal files
   shell: "unzip -o GDAL-suite4.9.zip -d '/cygdrive/c/GDAL/'"
 
-- name: copy libjpeg-turbo
-  shell: "cp /cygdrive/c/libjpeg-turbo/bin/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/'"
-
-- name: make bin dir executable
-  file: path='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/' state=directory recurse=yes mode=777
+- name: open up permissions for GDAL
+  command: "chmod -R 777 /cygdrive/c/GDAL/"
 
 - name: get suite war
   unarchive: src=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-war.zip dest=~/ copy=no
@@ -98,6 +89,7 @@
       - mongodb
       - netcdf
       - netcdf-out
+      - grib
       - oracle
       - scripting
       - vectortiles
@@ -107,9 +99,10 @@
 - name: copy GDAL jar to webapps
   copy: src="/cygdrive/c/GDAL/gdal-1.11.2.jar" dest="/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/" remote_src=true
 
-#add some kind of wait here... if not tomcat hasn't stopped yet this fails
 - name: ensure tomcat is stopped
   wait_for: host=0.0.0.0 port=8080 delay=10 state=stopped
 
 - name: start tomcat
   command: net start Tomcat8
+
+- include: ../../test_data/win_data.yml
