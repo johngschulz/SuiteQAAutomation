@@ -2,8 +2,14 @@
   file: path=/cygdrive/c/geoserverDataDir/data state=directory mode=777
 
 - name: copy test data - ogr
-  unarchive: src=../../test_data/cdfadmin13_1.zip dest=/cygdrive/c/geoserverDataDir/data/ mode=777
+  copy: src=../../test_data/cdfadmin13_1.zip dest=~/ mode=777
   ignore_errors: yes
+
+- name: unzip ogr data
+  shell: "unzip -o cdfadmin13_1.zip -d '/cygdrive/c/geoserverDataDir/data/'"
+
+- name: open permissions for ogr
+  shell: "chmod -R 777 /cygdrive/c/geoserverDataDir/data/cdfadmin13_1.gdb"
 
 - name: copy test data - netcdf
   unarchive: src=../../test_data/netcdf.zip dest=/cygdrive/c/geoserverDataDir/data/ mode=777
