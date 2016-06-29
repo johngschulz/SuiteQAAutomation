@@ -1,3 +1,9 @@
+- name: flush old iptables
+  command: "iptables -F"
+
+- name: clean known_hosts
+  file: path=~/.ssh/known_hosts state=absent
+
 - name: Setup iptables for port forwarding to nginx
   command: "iptables -t nat -A PREROUTING -p tcp -d {{ nat_ip }} --dport 80 -j DNAT --to {{ nginx_ip }}:80"
 
@@ -6,10 +12,6 @@
 
 - name: port forward geoserver
   command: "iptables -t nat -A PREROUTING -p tcp -d {{ nat_ip }} --dport 8080 -j DNAT --to {{ ubuntu_gs_ip }}:8080"
-
-#what is this supposed to do? works without this
-#- name: save conf
-#  command: "iptables-save > fw_conf_'date +%F'"
 
 - name: save iptable
   command: /etc/init.d/iptables save
