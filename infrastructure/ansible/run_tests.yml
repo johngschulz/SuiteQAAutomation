@@ -37,6 +37,7 @@
       region: us-east-1
       filters:
         "tag:Name": QA nginx
+        instance-state-name: running
     register: nginx_facts
   - name: get Win10 private ip
     sudo: no
@@ -45,6 +46,7 @@
       region: us-east-1
       filters:
         "tag:Name": QA Win10 Node
+        instance-state-name: running
     register: win10_facts
   - name: get ubuntu_gs private ip
     sudo: no
@@ -53,6 +55,7 @@
       region: us-east-1
       filters:
         "tag:Name":  QA Ubuntu gs
+        instance-state-name: running
     register: ubuntu_gs_facts
   - name: get centos_gs private ip
     sudo: no
@@ -61,6 +64,7 @@
       region: us-east-1
       filters:
         "tag:Name":  QA centos gs
+        instance-state-name: running
     register: centos_gs_facts
   - name: get win2012_gs private ip
     sudo: no
@@ -69,6 +73,7 @@
       region: us-east-1
       filters:
         "tag:Name":  QA Win2012
+        instance-state-name: running
     register: win2012_gs_facts
   vars:
     nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
