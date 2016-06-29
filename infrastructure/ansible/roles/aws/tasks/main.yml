@@ -93,7 +93,7 @@
           - proto: tcp
             from_port: 3389
             to_port: 3389
-            cidr_ip: 10.0.5.0/24
+            cidr_ip: 24.69.132.34/32
           - proto: tcp
             from_port: 4444
             to_port: 4444
@@ -169,7 +169,7 @@
   ec2:
     vpc_subnet_id: "{{ nat_subnet.subnet.id }}"
     region: "{{ aws_region }}"
-    keypair: suite-robot
+    keypair: suite-qa
     group_id: "{{ natsecuritygroup.group_id }}"
     image: "{{ nat_aws_image }}"
     instance_type: "{{ nat_aws_instance_type }}"
@@ -223,10 +223,10 @@
 
 ### Create QA Hub Instance ###
 - name: Launch QA Grid Hub Instance
-  ec2:
+  ec2: 
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
-    keypair: suite-robot
+    keypair: suite-qa
     assign_public_ip: false
     group_id: "{{ internal_securitygroup.group_id }}"
     image: "{{ hub_aws_image }}"
@@ -248,7 +248,7 @@
   ec2:
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
-    keypair: suite-robot
+    keypair: suite-qa
     assign_public_ip: false
     group_id: "{{ internal_securitygroup.group_id }}"
     image: "{{ win10_aws_image }}"
@@ -265,12 +265,11 @@
   tags:
     - vpcsetup
 
-
 - name: Launch Win2012 instance
   ec2:
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
-    keypair: suite-robot
+    keypair: suite-qa
     assign_public_ip: false
     group_id: "{{ internal_securitygroup.group_id }}"
     image: "{{ win2012_image }}"
@@ -293,7 +292,7 @@
   ec2:
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
-    keypair: suite-robot
+    keypair: suite-qa
     assign_public_ip: false
     group_id: "{{ internal_securitygroup.group_id }}"
     image: "{{ nginx_aws_image }}"
@@ -314,7 +313,7 @@
   ec2:
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
-    keypair: suite-robot
+    keypair: suite-qa
     assign_public_ip: false
     group_id: "{{ internal_securitygroup.group_id }}"
     image: "{{ ubuntu_gs_aws_image }}"
@@ -335,7 +334,7 @@
   ec2:
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
-    keypair: suite-robot
+    keypair: suite-qa
     assign_public_ip: false
     group_id: "{{ internal_securitygroup.group_id }}"
     image: "{{ centos_aws_image }}"
