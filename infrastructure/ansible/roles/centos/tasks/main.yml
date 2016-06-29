@@ -35,7 +35,7 @@
       - sqlserver
 
 - name: install native libs
-  yum: name=suite-netcdf state=latest
+  yum: name=suite-{{ item }} state=latest
   with_items: 
       - netcdf
       - gdal-mrsid
