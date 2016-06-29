@@ -1,5 +1,5 @@
 - name: flush old iptables
-  command: "iptables -F"
+  command: "iptables -t nat -F"
 
 - name: clean known_hosts
   file: path=~/.ssh/known_hosts state=absent
