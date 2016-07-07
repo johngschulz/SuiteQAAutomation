@@ -16,9 +16,6 @@
 - name: copy jce policy
   copy: src=jce_policy-8.zip dest=~/war/jce_policy-8.zip
 
-- name: copy marlin jar
-  copy: src=marlin-0.7.3-Unsafe.jar dest=~/war/  mode=700
-
 - name: copy apache
   copy: src=apache-tomcat-8.0.32.exe dest=~/war/  mode=700
 
@@ -31,9 +28,6 @@
 - name: copy netcdf
   copy: src=netCDF4.4.0-NC4-32.exe dest=~/war/ mode=700
 
-- name: copy setPath
-  copy: src=setPath.bat dest=~/war/ mode=777
-
 - name: copy gdal bin
   copy: src=GDAL-suite4.9.zip dest=~/
 
@@ -42,6 +36,7 @@
 
 - name: unzip data dir
   unarchive: src=/cygdrive/c/geoserverDataDir.zip dest=/cygdrive/c/ mode=777 copy=no
+  ignore_errors: yes
 
 #only run this once, if re-run will hang script
 - name: run the script
