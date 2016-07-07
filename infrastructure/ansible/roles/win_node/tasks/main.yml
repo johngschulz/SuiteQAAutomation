@@ -42,7 +42,7 @@
   command: mkshortcut -n=/cygdrive/c/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/start_node /cygdrive/c/source/start_node.bat
 
 - name: copy reg script
-  copy: src=disableWelcome.bat dest=~/ mode=777
+  copy: src=disableWelcome.reg dest=~/ mode=777
 
 - name: disable IE startup dialog
-  command: ./disableWelcome.bat
+  command: regedit /s disableWelcome.reg
