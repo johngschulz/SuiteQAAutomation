@@ -13,14 +13,16 @@ sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes 
 sleep 5
 
 #set path for netcdf native lib
-"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --Environment="PATH='C:\SuiteQGDAL-suite4.9;C:\libjpeg-turbo\bin;C:/Program Files (x86)/netCDF 4.4.0/bin'"
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --Environment="PATH='C:\GDAL;C:\libjpeg-turbo\bin;C:/Program Files (x86)/netCDF 4.4.0/bin'"
 
 
 #set memory options
-"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --JvmMs=256  --JvmMx=756
+#"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --JvmMs=256  --JvmMx=756
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8 ++JvmOptions="-XX:+UseConcMarkSweepGC"
 
 #Setup datadir
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-DGEOSERVER_DATA_DIR=c:\geoserverDataDir"
+# "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-DGEOSERVER_DATA_DIR=c:\ProgramData\Boundless\OpenGeo\geoserver\geoserverDataDir"
 
 #setup marlin, put somewhere other than web-inf and update classpath
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Xbootclasspath/a:C:\Program Files (x86)\Apache Software Foundation\Tomcat 8.0\webapps\geoserver\WEB-INF\lib\marlin-0.7.3-Unsafe.jar"
@@ -31,7 +33,7 @@ sleep 5
 
 
 #set referencing defaults
-"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotools.referencing.forceXY=true"
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotools.referencing.forceXY=true -XX:SoftRefLRUPolicyMSPerMB=36000"
 
 
 
