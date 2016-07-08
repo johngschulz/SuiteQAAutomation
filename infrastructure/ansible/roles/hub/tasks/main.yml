@@ -77,9 +77,3 @@
 
 - name: copy test data
   copy: src=test_data dest=/home/ec2-user/
-
-- name: generate ssh key for hub->nginx script
-  user: name=ec2-user generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=hub
-
-- name: fetch key
-  fetch: src=hub.pub dest=/tmp/hub.pub flat=yes
