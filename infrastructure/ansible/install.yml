@@ -52,8 +52,49 @@
   hosts: tag_type_hub
   remote_user: ec2-user
   sudo: yes
-  vars: 
+  pre_tasks:
+  - name: get nginx private ip
+    sudo: no
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name": QA nginx
+        instance-state-name: running
+    register: nginx_facts
+  - name: get ubuntu_gs private ip
+    sudo: no
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name": QA Ubuntu gs
+        instance-state-name: running
+    register: ubuntu_gs_facts
+  - name: get centos_gs private ip
+    sudo: no
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name": QA centos gs
+        instance-state-name: running
+    register: centos_gs_facts
+  - name: get win2012 private ip
+    sudo: no
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name": QA Win2012
+        instance-state-name: running
+    register: win2012_facts
+  vars:
+    ubuntu_gs_ip: "{{ ubuntu_gs_facts.instances[0].private_ip_address }}"
+    centos_gs_ip: "{{ centos_gs_facts.instances[0].private_ip_address }}"
+    win2012_ip: "{{ win2012_facts.instances[0].private_ip_address }}" 
     hub_ip: "{{ hostvars[inventory_hostname]['ec2_private_ip_address'] }}"
+    nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
   roles:
     - hub
 
@@ -93,7 +134,6 @@
     register: hub_facts
   vars:
     hub_ip: "{{ hub_facts.instances[0].private_ip_address }}"
-    node_id: "{{ hostvars[inventory_hostname]['ec2_id'] }}"
   roles:
     - win_node
   post_tasks:
@@ -109,8 +149,8 @@
   hosts: tag_type_win2012
   remote_user: Administrator
   pre_tasks:
-  - name: wait for win2012 machine to be up
-    local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=10 timeout=300
+  # - name: wait for win2012 machine to be up
+  #   local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=10 timeout=300
   roles:
     - win_2012
 

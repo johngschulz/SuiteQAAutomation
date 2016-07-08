@@ -5,6 +5,12 @@
 - name: install apache2-utils
   apt: name=apache2-utils state=present
 
+- name: copy qa_hosts
+  copy: src=qa_hosts dest=/etc/ mode=666
+
+- name: update nginx IP
+  lineinfile: "dest=/etc/qa_hosts regexp=(hub:) state=present line=hub:{{ hub_ip }}"
+
 - name: create password file
   command: htpasswd -cb /etc/nginx/.htpasswd boundless Open4Test!
 
