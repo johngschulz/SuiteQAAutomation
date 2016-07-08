@@ -11,6 +11,24 @@
 - name: create default site config
   copy: src=nginx.conf dest=/etc/nginx/sites-available/default
 
+- name: install fcgiwrap
+  apt: name=fcgiwrap state=present
+
+- name: restart fcgiwrap
+  service: name=fcgiwrap state=started
+
+- name: run fcgiwrap update
+  command: update-rc.d fcgiwrap enable
+
+- name: make cgi dir
+  file: path=/usr/share/nginx/cgi state=directory mode=777
+
+- name: make www .ssh dir
+  file: path=/var/www/.ssh state=directory mode=777 owner=www-data
+
+- name: move python1.cgi into nginx/cgi folder
+  copy: src=Python1.cgi dest=/usr/share/nginx/cgi/ mode=777
+
 - name: install svn
   apt: name=subversion state=latest
 
@@ -25,6 +43,3 @@
 
 - name: restart nginx
   service: name=nginx state=restarted
-
-- name: add hub key to authorized keys
-  authorized_key: user=ubuntu key="{{ lookup('file', '/tmp/hub.pub') }}"
