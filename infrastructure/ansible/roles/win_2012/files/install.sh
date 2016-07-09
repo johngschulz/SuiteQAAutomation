@@ -17,8 +17,8 @@ sleep 5
 
 
 #set memory options
-#"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --JvmMs=256  --JvmMx=756
-"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8 ++JvmOptions="-XX:+UseConcMarkSweepGC"
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --JvmMs=256  --JvmMx=756
+# "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8 ++JvmOptions="-XX:+UseConcMarkSweepGC"
 
 #Setup datadir
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-DGEOSERVER_DATA_DIR=c:\geoserverDataDir"
@@ -33,9 +33,9 @@ sleep 5
 
 
 #set referencing defaults
-"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotools.referencing.forceXY=true -XX:SoftRefLRUPolicyMSPerMB=36000"
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotools.referencing.forceXY=true"
 
-
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-XX:SoftRefLRUPolicyMSPerMB=36000"
 
 #Enabling spatial reference systems with Imperial units
 "/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  ++JvmOptions="-Dorg.geotoools.render.lite.scale.unitCompensation=true"
