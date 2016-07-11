@@ -51,7 +51,7 @@ print "browser: "+ browser + "<br>"
 
 print "<br><br>"
 
-cmd =  "ssh  -i ~ubuntu/nginx ec2-user@10.0.20.167 'run_testdir %s %s %s'" % (server,testdir, browser)
+cmd =  "ssh -i ~ubuntu/nginx ec2-user@10.0.20.167 'cd /home/ec2-user/robot/tests; python RunSingleTest.py %s %s %s'" % (server,testdir, browser)
 
 print "user:"+ commands.getoutput("whoami")+"<br>"
 
