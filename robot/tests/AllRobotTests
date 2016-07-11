@@ -62,8 +62,8 @@ rm  -f data.json
 scp -i /home/ec2-user/hub ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json     data.json
 
 run_test_nobrowser "database"
-run_test "GDAL" "firefox"
-run_test "netcdf" "firefox"
+run_test "GDAL" "FireFox"
+run_test "netcdf" "FireFox"
 run_test_browser "importer"
 run_test_browser "geoserver"
 run_test_browser "composer"
