@@ -11,6 +11,9 @@
 - name: update nginx IP
   lineinfile: "dest=/etc/qa_hosts regexp=(hub:) state=present line=hub:{{ hub_ip }}"
 
+- name: add key to www-data known hosts
+  shell: "ssh-keyscan -H -t rsa {{ hub_ip }} >> ~www-data/.ssh/known_hosts"
+
 - name: create password file
   command: htpasswd -cb /etc/nginx/.htpasswd boundless Open4Test!
 
