@@ -13,6 +13,11 @@ import commands
 
 def letters(input):
     return re.sub(r"[^A-Za-z_]+", '', input)
+    
+def GetIP(tag) :
+     lines = [line.rstrip('\n') for line in open('/etc/qa_hosts') if line.startswith(tag) ]
+     return lines[0].split(':')[1]
+
 
 ok_server = ['centos','win2012','ubuntu']
 ok_browser = ['OTHER','IE','Edge','Chrome','FireFox']
@@ -36,6 +41,7 @@ if not('browser' in query):
 server = query['server'][0]
 testdir = letters(query['testdir'][0])
 browser = query['browser'][0]
+hubip = GetIP("hub")
 
 if not (server in ok_server) :
        print "server is not in the list of ok servers:"+(','.join(ok_server));
@@ -48,10 +54,11 @@ if not (browser in ['OTHER','IE','Edge','Chrome','FireFox']) :
 print "server: " + server + "<br>"
 print "testdir: " + testdir + "<br>"
 print "browser: "+ browser + "<br>"
+print "hub ip" + hubip + "<br>"
 
 print "<br><br>"
 
-cmd =  "ssh -i ~ubuntu/nginx ec2-user@10.0.20.167 'cd /home/ec2-user/robot/tests; python RunSingleTest.py %s %s %s'" % (server,testdir, browser)
+cmd =  "ssh -i ~ubuntu/nginx ec2-user@"+hubip+" 'cd /home/ec2-user/robot/tests; python RunSingleTest.py %s %s %s'" % (server,testdir, browser)
 
 print "user:"+ commands.getoutput("whoami")+"<br>"
 
