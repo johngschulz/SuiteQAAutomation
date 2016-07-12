@@ -8,8 +8,7 @@ function run_test()
 
         python updateJson.py data.json  $hostkeyword-$test_dir_name $browser_name inprogress
         scp -i /home/ec2-user/hub data.json ubuntu@$NGINX_IP:/usr/share/nginx/html/data.json
-        robot  --variable SUT_IP:"$IP" --variable BROWSER:$browser_name --variable HOST:$hostkeyword  -L debug   -x xunit.xml -d reports/$hostkeyword/$test_dir_name demo_tests/$test_d
-ir_name
+        robot  --variable SUT_IP:"$IP" --variable BROWSER:$browser_name --variable HOST:$hostkeyword  -L debug   -x xunit.xml -d reports/$hostkeyword/$test_dir_name demo_tests/$test_dir_name
         python updateJson.py data.json $hostkeyword-$test_dir_name $browser_name $?
 
         scp -i /home/ec2-user/hub -r reports/$hostkeyword/$test_dir_name/* ubuntu@$NGINX_IP:/usr/share/nginx/html/$hostkeyword-$test_dir_name/$browser_name
