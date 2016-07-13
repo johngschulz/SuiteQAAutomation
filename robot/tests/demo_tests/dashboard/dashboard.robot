@@ -7,7 +7,7 @@ Resource          resource.robot
 
 *** Test Cases ***
 Doc Link
-    Verify Doc Link  xpath=//div[@id="_documentationlink"]  Boundless Suite User Manual
+    Verify Doc Link  xpath=//*[@id="_documentationlink"]  Boundless Suite User Manual
     Go To Dashboard
 
 Composer Links
