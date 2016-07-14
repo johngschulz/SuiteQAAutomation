@@ -22,4 +22,5 @@ Go To Dashboard
 Verify Doc Link
     [arguments]     ${link}  ${title}
     Click Element    ${link}
+    Wait Until Page Contains    ${title}
     Page Should Contain     ${title}
