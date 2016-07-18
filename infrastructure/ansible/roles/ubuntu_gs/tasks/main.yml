@@ -12,6 +12,8 @@
       - composer
       - dashboard
       - wpsbuilder
+      - docs
+      - quickview
 
 - name: install extensions
   apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes

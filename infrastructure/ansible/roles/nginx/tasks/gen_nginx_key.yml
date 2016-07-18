@@ -1,5 +1,5 @@
 - name: generate ssh key for nginx->hub 
-  user: name=ubuntu generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=nginx
+  user: name=www-data generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=nginx
 
 - name: fetch key
   fetch: src=nginx.pub dest=/tmp/nginx.pub flat=yes

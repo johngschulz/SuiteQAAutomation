@@ -4,7 +4,7 @@
 - name: add suite test repo
   command: bash -c 'printf "[boundless-suite-test-centos]\nname=Boundless Spatial Suite Test CentOS\nbaseurl=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-centos/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-suite-test.repo'
 
-- name: insall suite geoserver
+- name: insall suite 
   yum: name=suite-{{ item }} state=latest
   with_items: 
       - geoserver
@@ -12,6 +12,8 @@
       - geowebcache
       - dashboard
       - wpsbuilder
+      - docs
+      - quickview
 
 - name: install extensions
   yum: name=suite-gs-{{ item }} state=latest
