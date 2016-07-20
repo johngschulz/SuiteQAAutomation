@@ -9,7 +9,7 @@
       register: windows_facts
     - debug: msg="{{ hostvars[inventory_hostname]['ec2_id'] }}"
 
-    - name: terminate windows_boxes
+    - name: terminate windows win2012
       local_action:
         module: ec2
         state: 'absent'
@@ -26,7 +26,7 @@
       register: windows_facts
     - debug: msg="{{ hostvars[inventory_hostname]['ec2_id'] }}"
 
-    - name: terminate windows_boxes
+    - name: terminate windows_10
       local_action:
         module: ec2
         state: 'absent'
@@ -44,7 +44,7 @@
       register: linux_facts
     - debug: msg="{{ hostvars[inventory_hostname]['ec2_id'] }}"
 
-    - name: terminate linux_boxes
+    - name: terminate hub
       local_action:
         module: ec2
         state: 'absent'
@@ -62,7 +62,7 @@
       register: linux_facts
     - debug: msg="{{ hostvars[inventory_hostname]['ec2_id'] }}"
 
-    - name: terminate linux_boxes
+    - name: terminate ubuntu_gs
       local_action:
         module: ec2
         state: 'absent'
@@ -80,26 +80,25 @@
       register: linux_facts
     - debug: msg="{{ hostvars[inventory_hostname]['ec2_id'] }}"
 
-    - name: terminate linux_boxes
+    - name: terminate centos_gs
       local_action:
         module: ec2
         state: 'absent'
         region: us-east-1
         instance_ids: "{{ ansible_ec2_instance_id }}"
 
-#remove linux_boxes except NAT 
-- hosts: tag_type_hub
+- hosts: tag_type_nginx
   gather_facts: True
-  remote_user: ec2-user
+  remote_user: ubuntu
   vars:
     - region: 'us-east-1'
   tasks:
     - name: gather ec2-facts
       action: ec2_facts
-      register: linux_facts
+      register: nginx_facts
     - debug: msg="{{ hostvars[inventory_hostname]['ec2_id'] }}"
 
-    - name: terminate linux_boxes
+    - name: terminate nginx machine
       local_action:
         module: ec2
         state: 'absent'
