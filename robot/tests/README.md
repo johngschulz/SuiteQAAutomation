@@ -38,10 +38,10 @@
   There are two scripts that are called to run tests on the AWS infrastructure, **AllRobotTests** and **RunSingleTest**. 
   
   The **AllRobotTests** script is called by the Ansible play [run\_tests.yml] (https://github.com/boundlessgeo/SuiteQAAutomation/blob/master/infrastructure/ansible/run_tests.yml) but can be called manually as well. The script will run the full test suite against all browsers (Chrome, FireFox, IE, and Edge) and against all GeoServer instances (Centos, Ubuntu, Win2012). 
-    Usage - _AllRobotTests <machine keyword> <machine IP> <ngnx ip>_
+    Usage - _AllRobotTests machineKeyword machineIP ngnxIP_
   
   The **RunSingleTest** script is only used by the NGINX test results server to rerun particular tests (the purple button on the results grid). It can be used manually as well using:
-    Usage - _RunSingleTest  <machine keyword> <machine IP> <test dir name> <browser> <ngnx ip>_
+    Usage - _RunSingleTest  machineKeyword machineIP testDirName browser ngnxIP_
 
 ## Adding tests to AWS machines
 
