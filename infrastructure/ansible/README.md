@@ -40,11 +40,13 @@
 
 **Terminate Instances**
 
-  Terminate GeoServer instances and hub:
-  `ansible-playbook -i hosts/ terminate.yml --limit tag_type_test_runners`
+  - Terminate GeoServer instances and hub:
+
+    `ansible-playbook -i hosts/ terminate.yml --limit tag_type_test_runners`
   
-  Terminate a particular instance:
-  `ansible-playbook -i hosts/ terminate.yml --limit tag_type_centos_gs`
+  - Terminate a particular instance:
+  
+    `ansible-playbook -i hosts/ terminate.yml --limit tag_type_centos_gs`
 
 ### Notes:
   * You can limit a playbook to a specific role (as above) or group (see hosts/hosts.yml file for groups, ie. test_runners)
