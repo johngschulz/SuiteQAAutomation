@@ -32,7 +32,7 @@
       - netcdf
       - netcdf-out
       - oracle
-      - python
+      - script
       - vectortiles
       - sqlserver
 

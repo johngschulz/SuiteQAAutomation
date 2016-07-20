@@ -32,19 +32,16 @@
       - netcdf-out
       - grib
       - oracle
-      - python
+      - script
       - vectortiles
       - sqlserver
 
 - name: install native libs
-  yum: name=suite-{{ item }} state=latest
+  yum: name={{ item }} state=latest
   with_items: 
       - netcdf
       - gdal-mrsid
       - libjpeg-turbo
-
-- name: install gdal mrsid 
-  yum: name=suite-gdal-mrsid state=present
 
 - name: add libjpeg to tomcat conf
   command: echo "JAVA_OPTS=\"-DJjava.library.path=/opt/libjpeg-turbo/lib64\"" >> /etc/tomcat8/tomcat8.conf
@@ -53,13 +50,13 @@
   service: name=tomcat8 state=restarted
 
 - name: install postgis
-  yum: name=suite-postgis21-postgresql93 state=present
+  yum: name=postgis21-postgresql93 state=present
 
 - name: init postgis
   command: service postgresql-9.3 initdb
 
 - name: install pointcloud
-  yum: name=suite-pointcloud-postgresql93.x86_64 state=present
+  yum: name=pointcloud-postgresql93.x86_64 state=present
 
 - name: update postgresql.conf
   copy: src=postgresql.conf dest=/var/lib/pgsql/9.3/data/ force=yes mode=777
