@@ -39,7 +39,11 @@
  `ansible-playbook -i hosts/ install.yml --limit tag_type_win2012`
 
 **Terminate Instances**
-  `ansible-playbook -i hosts/ terminate.yml`
+
+  Terminate GeoServer instances and hub:
+  `ansible-playbook -i hosts/ terminate.yml --limit tag_type_test_runners`
+  
+  Terminate a particular instance:
   `ansible-playbook -i hosts/ terminate.yml --limit tag_type_centos_gs`
 
 ### Notes:
