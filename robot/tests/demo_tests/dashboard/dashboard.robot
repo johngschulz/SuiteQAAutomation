@@ -7,7 +7,10 @@ Resource          resource.robot
 
 *** Test Cases ***
 Doc Link
-    Verify Doc Link  xpath=//*[@id="_documentationlink"]  Boundless Suite User Manual
+    Click Element    xpath=//*[@id="_documentationlink"]
+    Select Window    Boundless Suite User Manual — Boundless Suite 4.9.x User Manual
+    Wait Until Page Contains    Boundless Suite User Manual
+    Page Should Contain     Boundless Suite User Manual
     Go To Dashboard
 
 Composer Links
@@ -39,19 +42,11 @@ GeoServer Links
     Go To Dashboard
 
 GeoWebCache Links
-    Click Element    xpath=//div[@id="home"]/div[3]/div[2]/div[3]/div/div[1]
+    Click Element    xpath=//div[@id="home"]/div[3]/div[3]/div[2]/div/div[1]
     Wait Until Page Contains    GeoWebCache
     Title Should Be  GWC Home
     Go To Dashboard
-    Verify Doc Link  xpath=//div[@id="home"]/div[3]/div[2]/div[3]/div/div[2]  GeoWebCache
-    Go To Dashboard
-
-QGIS Links
-    Verify Doc Link  xpath=//div[@id="home"]/div[3]/div[3]/div[2]/div/div  QGIS Desktop GIS and Suite Plugin
-    Go To Dashboard
-
-OpenLayers Links
-    Verify Doc Link  xpath=//div[@id="home"]/div[4]/div[1]/div[2]/div/div  OpenLayers
+    Verify Doc Link  xpath=//div[@id="home"]/div[3]/div[3]/div[2]/div/div[2]  GeoWebCache
     Go To Dashboard
 
 Web SDK Links
