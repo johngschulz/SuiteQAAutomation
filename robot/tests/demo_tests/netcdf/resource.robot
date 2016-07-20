@@ -4,6 +4,19 @@ Library           Collections
 
 *** Keywords ***
 
+Scroll Into View
+        [arguments]  ${docSelector}
+        Execute Javascript   document.querySelector("${docSelector}").scrollIntoView(true)
+
+
+Put Text In Labelled Input
+      [arguments]    ${label}     ${text}
+      ${passed}    ${elem}       Run Keyword and Ignore Error    Get WebElement      //*[(self::span or self::label) and text()='${label}']/..//input
+      ${passed2}    ${elem2}     Run Keyword and Ignore Error    Get WebElement      //*[(self::span or self::label) and text()='${label}']/../..//input
+      ${elemFinal}=    Set Variable If       '${passed}'=='PASS'      ${elem}    ${elem2}
+      Input Text         ${elemFinal}      ${text}
+
+
 Get Coverage
       [arguments]   ${covid}   ${mime}=application/x-netcdf  ${axis}=na      ${axis_val}=na
       ${auth}=     Create List   admin    geoserver

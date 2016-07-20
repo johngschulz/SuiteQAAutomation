@@ -129,21 +129,6 @@ Create NetCDF Datastore
     Wait Until Page Does Not Contain      //a[text()='Save']
 
 
-Scroll Into View
-        [arguments]  ${docSelector}
-        Execute Javascript   document.querySelector("${docSelector}").scrollIntoView(true)
-
-
-
-Put Text In Labelled Input
-      [arguments]    ${label}     ${text}
-      ${passed}    ${elem}       Run Keyword and Ignore Error    Get WebElement      //*[(self::span or self::label) and text()='${label}']/..//input
-      ${passed2}    ${elem2}     Run Keyword and Ignore Error    Get WebElement      //*[(self::span or self::label) and text()='${label}']/../..//input
-      ${elemFinal}=    Set Variable If       '${passed}'=='PASS'      ${elem}    ${elem2}
-      Input Text         ${elemFinal}      ${text}
-
-
-
 Login To Geoserver
     Set Selenium Timeout     20 seconds
     Set Selenium Speed      .2
