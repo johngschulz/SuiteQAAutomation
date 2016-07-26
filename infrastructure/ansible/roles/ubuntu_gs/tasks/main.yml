@@ -19,22 +19,26 @@
   apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes
   with_items: 
       - appschema
-      - jdbcconfig
-      - cluster
-      - geopkg
-      - inspire
       - arcsde
+      - cloudwatch
+      - cluster
       - csw
       - db2
       - gdal
+      - geopkg
       - grib
+      - inspire
+      - jdbcconfig
+      - jdbcstore
+      - mbtiles
       - mongodb
       - netcdf
       - netcdf-out
       - oracle
       - script
-      - vectortiles
       - sqlserver
+      - vectortiles
+      - wps
 
 - name: install native libs
   apt: name={{ item }} state=latest allow_unauthenticated=yes
