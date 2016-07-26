@@ -144,16 +144,6 @@
     poll: 0
     ignore_errors: true
 
-- name: provision win2012 node
-  gather_facts: true
-  hosts: tag_type_win2012
-  remote_user: Administrator
-  pre_tasks:
-  # - name: wait for win2012 machine to be up
-  #   local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=10 timeout=300
-  roles:
-    - win_2012
-
 - name: provision ubuntu GS machine
   hosts: tag_type_ubuntu_gs
   remote_user: ubuntu
@@ -167,3 +157,13 @@
   sudo: yes
   roles:
     - centos
+
+- name: provision win2012 node
+  gather_facts: true
+  hosts: tag_type_win2012
+  remote_user: Administrator
+  pre_tasks:
+  # - name: wait for win2012 machine to be up
+  #   local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=10 timeout=300
+  roles:
+    - win_2012
