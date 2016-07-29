@@ -101,10 +101,10 @@ Publish Layer Dims
 
       Click Element    //span[text()='Dimensions']/..
       Select Checkbox    //legend/span[text()="Time"]/../..//input[@type="checkbox"]
-      Select From List By Label      //legend/span[text()="Time"]/../..//select[@id="presentation"]    List
+      Select From List By Label      //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select    List
 
       Select Checkbox  //legend/span[text()="Elevation"]/../..//input[@type="checkbox"]
-      Select From List By Label   //legend/span[text()="Elevation"]/../..//select[@id="presentation"]   List
+      Select From List By Label   //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select   List
 
       Click Element    //span[text()='NetCDF Output Settings']/..
       Wait Until Page Contains    Enable Chunk Shuffling
