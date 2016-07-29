@@ -100,17 +100,21 @@ Publish Layer Dims
       Wait Until Page Contains     Edit Layer
 
       Click Element    //span[text()='Dimensions']/..
+      Wait Until Page Contains      Time
       Select Checkbox    //legend/span[text()="Time"]/../..//input[@type="checkbox"]
+      Wait Until Page Contains Element    //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select 
       Select From List By Label      //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select    List
 
       Select Checkbox  //legend/span[text()="Elevation"]/../..//input[@type="checkbox"]
-      Select From List By Label   //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select   List
+      Wait Until Page Contains Element    //legend/span[text()="Elevation"]/../..//*[ text()='Presentation']/../select
+      Select From List By Label   //legend/span[text()="Elevation"]/../..//*[ text()='Presentation']/../select   List
 
       Click Element    //span[text()='NetCDF Output Settings']/..
       Wait Until Page Contains    Enable Chunk Shuffling
       Input Text    //*[@id="compressionLevel"]    9
 
       Click Element   //a[text()="Save"]
+
 
 
 Create NetCDF Datastore
