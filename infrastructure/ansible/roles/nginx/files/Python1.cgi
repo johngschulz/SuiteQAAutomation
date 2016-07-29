@@ -58,7 +58,7 @@ print "hub ip" + hubip + "<br>"
 
 print "<br><br>"
 
-cmd =  "ssh -i ~ubuntu/nginx ec2-user@"+hubip+" 'cd /home/ec2-user/robot/tests; python RunSingleTest.py %s %s %s'" % (server,testdir, browser)
+cmd =  "ssh -i ~ubuntu/nginx ec2-user@"+hubip+" -o 'StrictHostKeyChecking no' 'cd /home/ec2-user/robot/tests; python RunSingleTest.py %s %s %s'" % (server,testdir, browser)
 
 print "user:"+ commands.getoutput("whoami")+"<br>"
 
