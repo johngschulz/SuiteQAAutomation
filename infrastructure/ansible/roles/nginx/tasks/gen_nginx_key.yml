@@ -1,5 +1,8 @@
 - name: generate ssh key for nginx->hub 
   user: name=ubuntu generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=nginx ssh_key_comment="nginx" 
 
+- name: set key permissions
+  file: path=/home/ubuntu/nginx state=touch mode=777
+
 - name: fetch key
   fetch: src=nginx.pub dest=/tmp/nginx.pub flat=yes
