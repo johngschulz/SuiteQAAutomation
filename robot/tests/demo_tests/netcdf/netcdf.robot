@@ -16,11 +16,9 @@ ${NETCDF_DS_NAME_VIS}        netcdf_ds_name_VIS
 
 
 ***Testcases***
-
 # we use two netcdf files - both from the geoserver/geotools test cases
 # Visibility - this is in a non-standard projects, however, its big enough to be compressable
 # O3-NO2.nc  - 2 variables (O3 and NO2) in X, Y, Z, T
-
 Test MultiDim NetCDF
     [Setup]      Run Keywords      Login To Geoserver     Create NetCDF Datastores
     Publish Layers
@@ -28,7 +26,6 @@ Test MultiDim NetCDF
     Check NetCDF Output
     Check NetCDF4 Compressed Output
     [Teardown]   Run Keywords    Delete NetCDF Datastores    Close Browser
-
 
 
 ***Keywords***
@@ -102,7 +99,7 @@ Publish Layer Dims
       Click Element    //span[text()='Dimensions']/..
       Wait Until Page Contains      Time
       Select Checkbox    //legend/span[text()="Time"]/../..//input[@type="checkbox"]
-      Wait Until Page Contains Element    //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select 
+      Wait Until Page Contains Element    //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select
       Select From List By Label      //legend/span[text()="Time"]/../..//*[ text()='Presentation']/../select    List
 
       Select Checkbox  //legend/span[text()="Elevation"]/../..//input[@type="checkbox"]

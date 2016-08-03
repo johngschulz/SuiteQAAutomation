@@ -2,21 +2,8 @@ Library           Selenium2Library
 Library           RequestsLibrary
 Library           Collections
 
+
 *** Keywords ***
-
-Scroll Into View
-        [arguments]  ${docSelector}
-        Execute Javascript   document.querySelector("${docSelector}").scrollIntoView(true)
-
-
-Put Text In Labelled Input
-      [arguments]    ${label}     ${text}
-      ${passed}    ${elem}       Run Keyword and Ignore Error    Get WebElement      //*[(self::span or self::label) and text()='${label}']/..//input
-      ${passed2}    ${elem2}     Run Keyword and Ignore Error    Get WebElement      //*[(self::span or self::label) and text()='${label}']/../..//input
-      ${elemFinal}=    Set Variable If       '${passed}'=='PASS'      ${elem}    ${elem2}
-      Input Text         ${elemFinal}      ${text}
-
-
 Get Coverage
       [arguments]   ${covid}   ${mime}=application/x-netcdf  ${axis}=na      ${axis_val}=na
       ${auth}=     Create List   admin    geoserver
@@ -47,13 +34,3 @@ Get Feature Info
      ${resp}=   GET Request    RESTAPI    /geoserver/wms   params=${params}
      [Return]  ${resp.content}
      [Teardown]   Delete All Sessions
-
-Delete Datastore
-    [arguments]        ${dsname}
-    Go To                ${LOGIN URL}
-    Click Element     //span[text()='Stores']/..
-    Select Checkbox    //span[text()='${dsname}']/ancestor::tr/th/input
-    Wait Until Page Contains Element     //a[text()='Remove selected Stores']
-    Click Element        //a[text()='Remove selected Stores']
-    Click Element    //a[text()='OK']
-    Sleep    1 seconds   #wait for DB connection to drop
