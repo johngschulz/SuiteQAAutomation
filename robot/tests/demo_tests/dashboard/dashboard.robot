@@ -15,7 +15,6 @@ Doc Link
 
 Composer Links
     Click Element    xpath=//div[@id="home"]/div[2]/div[1]/div/div/div[1]
-    Wait Until Page Contains    Composer
     Title Should Be  Composer
     Go To Dashboard
     Verify Doc Link  xpath=//div[@id="home"]/div[2]/div[1]/div/div/div[2]  Making maps with Composer
