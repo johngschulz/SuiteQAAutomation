@@ -1,6 +1,21 @@
 - name: create directory
   file: path=~/war state=directory
 
+- name: create boundless dir
+  file: path="/cygdrive/c/Program Files (x86)/Boundless" state=directory
+
+- name: create suite dir
+  file: path="/cygdrive/c/Program Files (x86)/Boundless/suite" state=directory
+
+- name: create geoserver dir
+  file: path="/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver" state=directory
+
+- name: create gdal dir
+  file: path="/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal" state=directory
+
+- name: create marlin dir
+  file: path="/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/marlin" state=directory
+
 - name: open port 8080
   command: netsh firewall add portopening TCP 8080 "Allow port 8080"
 
@@ -43,7 +58,7 @@
   command: ./install.sh chdir=~/war
 
 - name: copy gdal files
-  shell: "unzip -o GDAL-suite4.9.zip -d '/cygdrive/c/GDAL/'"
+  shell: "unzip -o GDAL-suite4.9.zip -d '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/'"
 
 - name: open up permissions for GDAL
   command: "chmod -R 777 /cygdrive/c/GDAL/"
@@ -94,8 +109,11 @@
       - vectortiles
       - wps
 
+- name: copy marlin jar
+  copy: src="~/BoundlessSuite-latest-ext/marlin/" dest="/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/marlin/" remote_src=true
+
 - name: copy GDAL jar to webapps
-  copy: src="/cygdrive/c/GDAL/gdal-1.11.2.jar" dest="/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/" remote_src=true
+  copy: src="/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/gdal-1.11.2.jar" dest="/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/" remote_src=true
 
 - name: ensure tomcat is stopped
   wait_for: host=0.0.0.0 port=8080 delay=10 state=stopped
