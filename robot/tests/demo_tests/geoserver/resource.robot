@@ -20,8 +20,7 @@ ${REST URL}       http://${SERVER}/geoserver/rest
 
 *** Keywords ***
 Open Browser To GeoServer
-    #Open Browser    ${LOGIN URL}    ${BROWSER}  None    ${REMOTE_URL}
-    Open Browser    ${LOGIN URL}    ${BROWSER}
+    Open Browser    ${LOGIN URL}    ${BROWSER}  None    ${REMOTE_URL}
     Maximize Browser Window
     Set Selenium Speed      0.2
     Title Should Be    GeoServer: Welcome
