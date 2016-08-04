@@ -85,6 +85,21 @@ Put Text In Labelled Input
       ${elemFinal}=    Set Variable If       '${passed}'=='PASS'      ${elem}    ${elem2}
       Input Text         ${elemFinal}      ${text}
 
+Create Datastore
+    [arguments]    ${DStype}   ${DSname}   ${url}
+    Click Element     //span[text()='Stores']/..
+    Click Element     //a[text()="Add new Store"]
+    Click Element     //span[text()=${DStype}]/..
+
+    Put Text In Labelled Input      Data Source Name *         ${DSName}
+    Put Text In Labelled Input      Description                ${DSNAME}_netcdf_test
+    Put Text In Labelled Input      URL *                      ${url}
+
+    Scroll Into View     form .button-group a
+
+    Click Element      //a[text()='Save']
+    Wait Until Page Does Not Contain      //a[text()='Save']
+
 #wait for DB connection to drop
 Delete Datastore
     [arguments]        ${dsname}
