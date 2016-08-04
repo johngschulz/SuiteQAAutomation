@@ -61,6 +61,16 @@ Verify Get Map Request
      Log    ${root}
      XML.Element Text Should Match     ${root}     * Could not find layer *
 
+Get Feature Info
+    [arguments]   ${bbox}   ${qlayer}   ${layers}
+    ${auth}=     Create List   admin    geoserver
+    Create Session     RESTAPI    http://${SERVER}   auth=${auth}
+    &{params}=   Create Dictionary   SERVICE=WMS    VERSION=1.1.1   REQUEST=GetFeatureInfo   QUERY_LAYERS=${qlayer}  LAYERS=${layers}   INFO_FORMAT=text/html   FEATURE_COUNT=50   X=50  Y=50   SRS=EPSG:4326   WIDTH=101   HEIGHT=101  BBOX=${bbox}
+    ${resp}=   GET Request    RESTAPI    /geoserver/wms   params=${params}
+    Log   ${resp.content}
+    [Return]  ${resp.content}
+    [Teardown]   Delete All Sessions
+
 Publish Layer
     [arguments]   ${dsname}   ${varname}    ${srs}=EPSG:4326
       Click Element     //span[text()='Layers']/..

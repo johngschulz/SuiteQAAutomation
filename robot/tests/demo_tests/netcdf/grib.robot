@@ -36,9 +36,9 @@ Publish Layers
 
 
 Verify WMS MultiDim Requests
-         ${resp}=   Get Feature Info Simple   -56.6290283203125,5.4327392578125,-55.5194091796875,6.5423583984375   opengeo:u-component_of_current_surface  opengeo:u-component_of_current_surface
+         ${resp}=   Get Feature Info   -56.6290283203125,5.4327392578125,-55.5194091796875,6.5423583984375   opengeo:u-component_of_current_surface  opengeo:u-component_of_current_surface
          Should Contain  ${resp}    -0.06814
-         ${resp}=   Get Feature Info Simple   -56.6180419921875,5.2569580078125,-55.5084228515625,6.3665771484375  opengeo:u-component_of_current_surface  opengeo:u-component_of_current_surface
+         ${resp}=   Get Feature Info   -56.6180419921875,5.2569580078125,-55.5084228515625,6.3665771484375  opengeo:u-component_of_current_surface  opengeo:u-component_of_current_surface
          Should Contain  ${resp}   NaN
 
 Publish Layer NoDims

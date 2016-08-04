@@ -15,18 +15,7 @@ Get Coverage
      [Return]  ${resp.content}
      [Teardown]   Delete All Sessions
 
-
-Get Feature Info Simple
-      [arguments]   ${bbox}   ${qlayer}=opengeo:O3   ${layers}=opengeo:O3
-      ${auth}=     Create List   admin    geoserver
-      Create Session     RESTAPI    http://${SERVER}   auth=${auth}
-     &{params}=   Create Dictionary   SERVICE=WMS    VERSION=1.1.1   REQUEST=GetFeatureInfo   QUERY_LAYERS=${qlayer}  LAYERS=${layers}   INFO_FORMAT=text/html   FEATURE_COUNT=50   X=50  Y=50   SRS=EPSG:4326   WIDTH=101   HEIGHT=101  BBOX=${bbox}
-     ${resp}=   GET Request    RESTAPI    /geoserver/wms   params=${params}
-     Log   ${resp.content}
-     [Return]  ${resp.content}
-     [Teardown]   Delete All Sessions
-
-Get Feature Info
+Get Feature Info Dims
       [arguments]   ${elev}     ${time}   ${bbox}   ${qlayer}=opengeo:O3   ${layers}=opengeo:O3
       ${auth}=     Create List   admin    geoserver
       Create Session     RESTAPI    http://${SERVER}   auth=${auth}
