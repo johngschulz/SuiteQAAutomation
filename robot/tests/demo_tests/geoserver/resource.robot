@@ -81,6 +81,7 @@ Publish Layer
       Wait Until Page Contains     Edit Layer
 
       Put Text In Labelled Input     Declared SRS     ${srs}
+      Click Element    //a[text()="Compute from native bounds"]
       Click Element   //a[text()="Save"]
 
 Scroll Into View
