@@ -13,7 +13,7 @@ ${MBTiles_URL}            file:data/world_lakes.mbtiles
 *** Test Cases ***
 MBTiles Extension
   Submit Geoserver Credentials
-  Create Datastore  'MBTiles'   ${MBTiles_DS_NAME}   ${MBTiles_URL}
+  Create Datastore  URL *   'MBTiles'   ${MBTiles_DS_NAME}   ${MBTiles_URL}
   Publish Layer   ${MBTiles_DS_NAME}   geotools_coverage   srs=EPSG:3857
   #check the image
   ${img}    WMS Get Map   layernames=geotools_coverage   srs=EPSG:3857    bbox=0.0,-1.9971868880408555E7,2.0037508342789248E7,-7.081155E-10   height=765  width=768

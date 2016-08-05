@@ -95,14 +95,14 @@ Put Text In Labelled Input
       Input Text         ${elemFinal}      ${text}
 
 Create Datastore
-    [arguments]    ${DStype}   ${DSname}   ${url}
+    [arguments]    ${connection}    ${DStype}   ${DSname}   ${url}
     Click Element     //span[text()='Stores']/..
     Click Element     //a[text()="Add new Store"]
     Click Element     //span[text()=${DStype}]/..
 
     Put Text In Labelled Input      Data Source Name *         ${DSName}
     Put Text In Labelled Input      Description                ${DSNAME}_test
-    Put Text In Labelled Input      URL *                      ${url}
+    Put Text In Labelled Input      ${connection}              ${url}
 
     Scroll Into View     form .button-group a
 
