@@ -62,10 +62,10 @@ Verify Get Map Request
      XML.Element Text Should Match     ${root}     * Could not find layer *
 
 Get Feature Info
-    [arguments]   ${bbox}   ${qlayer}   ${layers}
+    [arguments]   ${bbox}   ${qlayer}   ${layers}   ${srs}=EPSG:4326
     ${auth}=     Create List   admin    geoserver
     Create Session     RESTAPI    http://${SERVER}   auth=${auth}
-    &{params}=   Create Dictionary   SERVICE=WMS    VERSION=1.1.1   REQUEST=GetFeatureInfo   QUERY_LAYERS=${qlayer}  LAYERS=${layers}   INFO_FORMAT=text/html   FEATURE_COUNT=50   X=50  Y=50   SRS=EPSG:4326   WIDTH=101   HEIGHT=101  BBOX=${bbox}
+    &{params}=   Create Dictionary   SERVICE=WMS    VERSION=1.1.1   REQUEST=GetFeatureInfo   QUERY_LAYERS=${qlayer}  LAYERS=${layers}   INFO_FORMAT=text/html   FEATURE_COUNT=50   X=50  Y=50   SRS=${srs}   WIDTH=101   HEIGHT=101  BBOX=${bbox}
     ${resp}=   GET Request    RESTAPI    /geoserver/wms   params=${params}
     Log   ${resp.content}
     [Return]  ${resp.content}
@@ -101,7 +101,7 @@ Create Datastore
     Click Element     //span[text()=${DStype}]/..
 
     Put Text In Labelled Input      Data Source Name *         ${DSName}
-    Put Text In Labelled Input      Description                ${DSNAME}_netcdf_test
+    Put Text In Labelled Input      Description                ${DSNAME}_test
     Put Text In Labelled Input      URL *                      ${url}
 
     Scroll Into View     form .button-group a
