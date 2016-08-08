@@ -61,7 +61,7 @@
   shell: "unzip -o GDAL-suite4.9.zip -d '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/'"
 
 - name: open up permissions for GDAL
-  command: "chmod -R 777 /cygdrive/c/GDAL/"
+  command: "chmod -R 777 /cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/"
 
 - name: get suite war
   unarchive: src=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-war.zip dest=~/ copy=no
