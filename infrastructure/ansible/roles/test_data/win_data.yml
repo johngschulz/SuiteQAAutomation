@@ -12,12 +12,16 @@
   shell: "chmod -R 777 /cygdrive/c/geoserverDataDir/data/cdfadmin13_1.gdb"
 
 - name: copy test data - netcdf
-  unarchive: src=../../test_data/netcdf.zip dest=/cygdrive/c/geoserverDataDir/data/ mode=777
-  ignore_errors: yes
+  copy: src=../../test_data/netcdf.zip dest=~/
+
+- name: unzip netcdf
+  shell: "unzip -o netcdf.zip -d '/cygdrive/c/geoserverDataDir/data/'"
 
 - name: copy test data - grib
   copy: src=../../test_data/sampleGrib.grb2 dest=/cygdrive/c/geoserverDataDir/data/ mode=777
 
 - name: copy test data - jp2k
-  unarchive: src=../../test_data/bogota.zip dest=/cygdrive/c/geoserverDataDir/data/ mode=777
-  ignore_errors: yes
+  copy: src=../../test_data/bogota.zip dest=~/ 
+
+- name: unzip jp2k
+  shell: "unzip -o bogota.zip -d '/cygdrive/c/geoserverDataDir/data/'"

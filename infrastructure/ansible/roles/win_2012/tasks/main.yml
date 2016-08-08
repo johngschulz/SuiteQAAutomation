@@ -61,7 +61,7 @@
   shell: "unzip -o GDAL-suite4.9.zip -d '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/'"
 
 - name: open up permissions for GDAL
-  command: "chmod -R 777 /cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/"
+  command: "chmod -R 777 '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/'"
 
 - name: get suite war
   unarchive: src=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-war.zip dest=~/ copy=no
@@ -110,10 +110,12 @@
       - wps
 
 - name: copy marlin jar
-  copy: src="~/BoundlessSuite-latest-ext/marlin/" dest="/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/marlin/" remote_src=true
+  shell: "cp -f -r ~/BoundlessSuite-latest-ext/marlin/ '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/marlin/'"
 
 - name: copy GDAL jar to webapps
-  copy: src="/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/gdal-1.11.2.jar" dest="/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/" remote_src=true
+  shell: "cp -f -r '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/gdal-1.11.2.jar' '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
+  args: 
+    executable: /bin/bash
 
 - name: ensure tomcat is stopped
   wait_for: host=0.0.0.0 port=8080 delay=10 state=stopped
