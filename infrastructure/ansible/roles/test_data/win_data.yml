@@ -25,3 +25,6 @@
 
 - name: unzip jp2k
   shell: "unzip -o bogota.zip -d '/cygdrive/c/geoserverDataDir/data/'"
+
+- name: copy test data - mbtiles
+  copy: src=../../test_data/world_lakes.mbtiles dest=/cygdrive/c/geoserverDataDir/data/ mode=777

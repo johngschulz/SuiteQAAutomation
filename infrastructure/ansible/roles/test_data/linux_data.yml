@@ -12,6 +12,9 @@
 - name: copy test data - grib
   copy: src=../../test_data/sampleGrib.grb2 dest=/var/opt/boundless/suite/geoserver/data/data/ mode=777
 
-- name: copy test data - grib
+- name: copy test data - mbtiles
+  copy: src=../../test_data/world_lakes.mbtiles dest=/var/opt/boundless/suite/geoserver/data/data/ mode=777
+
+- name: copy test data - jp2k
   unarchive: src=../../test_data/bogota.zip dest=/var/opt/boundless/suite/geoserver/data/data/ mode=777
   ignore_errors: yes
