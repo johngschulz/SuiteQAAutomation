@@ -30,6 +30,7 @@
       - inspire
       - jdbcconfig
       - jdbcstore
+      - jp2k
       - mbtiles
       - mongodb
       - netcdf
