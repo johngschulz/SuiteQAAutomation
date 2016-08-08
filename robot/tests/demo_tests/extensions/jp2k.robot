@@ -17,3 +17,8 @@ JP2K Direct Extension
 
   ${img}    WMS Get Map   layernames=opengeo:bogota   srs=EPSG:21892    bbox=440720.0,69280.0,471440.0,100000.0   height=768  width=768
   Images Should Be Equal    ${TEST_DATA}opengeo-bogota.png    ${img}
+  [teardown]    Run Keywords    Delete JP2 Datastore    Close Browser
+
+*** Keywords ***
+Delete JP2 Datastore
+    Delete Datastore    ${JP2K_DS_NAME}
