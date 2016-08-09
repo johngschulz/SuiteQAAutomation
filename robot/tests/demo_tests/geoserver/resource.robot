@@ -8,6 +8,7 @@ Library           Selenium2Library
 Library           ImageLibrary.py
 Library           XML
 Library           HttpLibrary.HTTP
+Library           RequestsLibrary
 Resource          ../../environment.robot
 
 *** Variables ***
@@ -63,6 +64,22 @@ WFS Get Feature By Property
     Response Status Code Should Equal     200
     ${body}    Get Response Body
     [return]     ${body}
+
+WPS Request
+    [arguments]   ${filedir}    ${filename}
+    ${auth}=     Create List   admin    geoserver
+    Create Session     RESTAPI    http://${SERVER}   auth=${auth}
+    ${header}=   Create Dictionary   Content-type=xml
+
+    ${fullFname}=  evaluate   r"${filedir}" +os.sep + r"${filename}"     os
+    ${doubleEscapedFname}=  evaluate   r"${fullFname}".replace("\\\\","\\\\\\\\")
+    &{files}=     evaluate  {"${filename}" : open("${doubleEscapedFname}","rb").read()}
+
+    ${resp}=   Post Request    RESTAPI    /geoserver/wps/    files=${files}
+    Log   ${resp}
+    Log   ${resp.content}
+    [Return]  ${resp.content}
+    [Teardown]   Delete All Sessions
 
 WMS Get Map
      [arguments]   ${host}=${SERVER}   ${layernames}=    ${srs}=EPSG:4326     ${workspace}=    ${mimeType}=image/png     ${bbox}=-180.0,-90,180,90    ${width}=768    ${height}=370    ${styles}=
