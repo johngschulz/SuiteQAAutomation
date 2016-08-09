@@ -43,6 +43,27 @@ Welcome Page Should Be Open
     Wait Until Page Contains    Logged in as admin
     Page Should Contain     Logged in as admin
 
+WFS Get Feature By BBOX
+    [arguments]    ${workspace}=    ${layername}=    ${bbox}=-180.0,-90,180,90    ${srs}=EPSG:4326    ${host}=${SERVER}
+    ${url}=    Catenate    SEPARATOR=    /geoserver/wfs?request=GetFeature&version=1.1.0&typeNames=    ${workspace}:  ${layername}    &bbox=    ${bbox}    ,   ${srs}
+    Log    ${url}
+    Create Http Context    ${host}    http
+    HttpLibrary.HTTP.Get    ${url}
+    Response Status Code Should Equal     200
+    ${body}    Get Response Body
+    [return]     ${body}
+
+
+WFS Get Feature By Property
+    [arguments]    ${workspace}=    ${layername}=    ${property}=    ${host}=${SERVER}
+    ${url}=    Catenate    SEPARATOR=    /geoserver/wfs?request=GetPropertyValue&typeNames=    ${workspace}:  ${layername}    &valueReference=   ${property}
+    Log    ${url}
+    Create Http Context    ${host}    http
+    HttpLibrary.HTTP.Get    ${url}
+    Response Status Code Should Equal     200
+    ${body}    Get Response Body
+    [return]     ${body}
+
 WMS Get Map
      [arguments]   ${host}=${SERVER}   ${layernames}=    ${srs}=EPSG:4326     ${workspace}=    ${mimeType}=image/png     ${bbox}=-180.0,-90,180,90    ${width}=768    ${height}=370    ${styles}=
      ${url}=    Catenate    SEPARATOR=    /geoserver/  ${workspace}    /wms?service=WMS&version=1.1.0&request=GetMap&layers=    ${layernames}    &styles=    ${styles}    &bbox=    ${bbox}    &width=${width}&height=${height}&srs=   ${srs}    &format=    ${mimeType}
