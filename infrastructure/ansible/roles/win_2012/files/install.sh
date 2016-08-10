@@ -13,7 +13,7 @@ sleep 10  # I think tbe above doesn't wait for it to be completed (but it takes 
 sleep 5
 
 #set path for netcdf native lib
-"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --Environment="PATH='C:\GDAL;C:\libjpeg-turbo\bin;C:/Program Files (x86)/netCDF 4.4.0/bin'"
+"/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/bin/Tomcat8.exe" //US//Tomcat8  --Environment="PATH='C:\Program Files (x86)\Boundless\suite\geoserver\gdal\;C:\libjpeg-turbo\bin;C:/Program Files (x86)/netCDF 4.4.0/bin'"
 
 
 #set memory options
