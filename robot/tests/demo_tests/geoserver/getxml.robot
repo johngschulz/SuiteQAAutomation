@@ -33,7 +33,7 @@ WMTS                 ${WMTSurl}        ${WMTS}
 Validate Service Capabilities
     [arguments]    ${uri}    ${title}
     Create Http Context    ${SERVER}    http
-    Get   /geoserver/${uri}
+    HttpLibrary.HTTP.Get   /geoserver/${uri}
     Response Status Code Should Equal     200
     ${body}    Get Response Body
     Response Body Should Contain    <?xml version="1.0" encoding="UTF-8"?>
