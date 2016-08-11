@@ -28,3 +28,9 @@
 
 - name: copy test data - mbtiles
   copy: src=../../test_data/world_lakes.mbtiles dest=/cygdrive/c/geoserverDataDir/data/ mode=777
+
+- name: copy test data - vector gpkg
+  copy: src=../../test_data/gdal_sample.gpkg dest=/cygdrive/c/geoserverDataDir/ mode=777
+
+- name: copy test data - raster gpkg
+  copy: src=../../test_data/world_lakes.gpkg dest=/cygdrive/c/geoserverDataDir/data/ mode=777

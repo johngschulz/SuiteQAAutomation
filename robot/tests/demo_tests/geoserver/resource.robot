@@ -45,8 +45,8 @@ Welcome Page Should Be Open
     Page Should Contain     Logged in as admin
 
 WFS Get Feature By BBOX
-    [arguments]    ${workspace}=    ${layername}=    ${bbox}=-180.0,-90,180,90    ${srs}=EPSG:4326    ${host}=${SERVER}
-    ${url}=    Catenate    SEPARATOR=    /geoserver/wfs?request=GetFeature&version=1.1.0&typeNames=    ${workspace}:  ${layername}    &bbox=    ${bbox}    ,   ${srs}
+    [arguments]    ${workspace}=    ${layername}=    ${bbox}=-180.0,-90,180,90    ${srs}=EPSG:4326    ${output}=GML3    ${host}=${SERVER}
+    ${url}=    Catenate    SEPARATOR=    /geoserver/wfs?request=GetFeature&version=1.1.0&typeNames=    ${workspace}:  ${layername}    &bbox=    ${bbox}    ,   ${srs}   &outputFormat=${output}
     Log    ${url}
     Create Http Context    ${host}    http
     HttpLibrary.HTTP.Get    ${url}
@@ -115,7 +115,7 @@ Publish Layer
       Click Element     //a[text()='Add a new layer']
       Select From List By Label   //select    opengeo:${dsname}
       Wait Until Page Contains      Publish
-      Click Element      //span[text()='${varname}']/../..//a
+      Click Element      //span[text()='${varname}']/../..//a/span  [text()='Publish']
       Wait Until Page Contains     Edit Layer
 
       Put Text In Labelled Input     Declared SRS     ${srs}
@@ -137,8 +137,9 @@ Create Datastore
     [arguments]    ${connection}    ${DStype}   ${DSname}   ${url}
     Click Element     //span[text()='Stores']/..
     Click Element     //a[text()="Add new Store"]
-    Click Element     //span[text()=${DStype}]/..
+    Click Element     //a/span[text()=${DStype}]/..
 
+    Wait Until Page Contains    Basic Store Info
     Put Text In Labelled Input      Data Source Name *         ${DSName}
     Put Text In Labelled Input      Description                ${DSNAME}_test
     Put Text In Labelled Input      ${connection}              ${url}
