@@ -115,7 +115,7 @@ Publish Layer
       Click Element     //a[text()='Add a new layer']
       Select From List By Label   //select    opengeo:${dsname}
       Wait Until Page Contains      Publish
-      Click Element      //span[text()='${varname}']/../..//a/span  [text()='Publish']
+      Click Element      //span[text()='${varname}']/../..//a/span[text()='Publish']
       Wait Until Page Contains     Edit Layer
 
       Put Text In Labelled Input     Declared SRS     ${srs}
