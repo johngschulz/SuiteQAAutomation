@@ -20,9 +20,10 @@ ${SERVER}                   ${SUT_IP}:8080
 ${REST_USER}                admin
 ${REST_PASSWD}              geoserver
 ${NAMESPACE}                opengeo
+${JP2K_DS_NAME}             bogota_gdal
+${JP2K_URL}                 file:data/bogota.jp2
 
 ***Testcases***
-
 Test GDAL NITF import
     Upload And Check   ${CURDIR}     i_3001a.ntf    NITF  ${CURDIR}/i_3001a.png   85.00000733882189,32.98301378265023,85.00026483088732,32.983270939439535    EPSG:4326
 
@@ -30,11 +31,18 @@ Test GDAL MrSID import
     Upload And Check   ${CURDIR}     w_11160994_12_07200_col_2002.zip    MrSID  ${CURDIR}/w_11160994_12_07200_col_2002.png   1116953.4375,994468.359375,1118033.4375,995546.953125   EPSG:2262
     #Upload And Check   ${CURDIR}     sample.ecw    ECW  ${CURDIR}/sample.ecw.png   -23.5546875,-73.212890625,111.4453125,61.611328125   EPSG:404000
 
-Test GDAL jpeg2000 import
-    Upload And Check   ${CURDIR}     bogota.jp2    JP2MrSID   ${CURDIR}/bogota.jp2.png    455532.1875,84107.8125,456612.1875,85187.8125   EPSG:21892
-
 Test GDAL dted import
     Upload And Check   ${CURDIR}     n43.dt0    DTED  ${CURDIR}/n43.png  -79.78683471679688,43.39221954345703,-79.25949096679688,43.91887664794922    EPSG:4326
+
+JP2K Direct Extension
+  [setup]   Open Browser To GeoServer
+  Submit Geoserver Credentials
+  Create Datastore  URL *   'JP2MrSID'   ${JP2K_DS_NAME}   ${JP2K_URL}
+  Publish Layer   ${JP2K_DS_NAME}   bogota    srs=EPSG:21892
+
+  ${img}    WMS Get Map   layernames=opengeo:bogota   srs=EPSG:21892    bbox=440720.0,69280.0,471440.0,100000.0   height=768  width=768
+  Images Should Be Equal    ${TEST_DATA}opengeo-bogota.png    ${img}
+  [teardown]    Run Keywords    Delete JP2 Datastore    Close Browser
 
 ***Keywords***
 Upload And Check
@@ -42,7 +50,7 @@ Upload And Check
         ${DSName}=   Upload Image To Geoserver    ${filedir}    ${filename}     ${formatType}     namespace=${NAMESPACE}
        # pause execution
         Check Against Reference Image    ${DSName}    ${requestBBOX}  ${NAMESPACE}  ${checkImage}    ${proj}
-        [Teardown]  Delete Datastore    ${DSName}    namespace=${NAMESPACE}
+        [Teardown]  Delete Rest Datastore    ${DSName}    namespace=${NAMESPACE}
 
 
 
@@ -117,7 +125,7 @@ Complete Import
          [return]  ${DSName}
 
 
-Delete Datastore
+Delete Rest Datastore
          [arguments]   ${DSName}   ${namespace}=cite
          &{params}=   Create Dictionary   recurse=true
          ${resp}=   Delete Request    RESTAPI    /geoserver/rest/workspaces/${namespace}/coveragestores/${DSName}   params=${params}
@@ -128,6 +136,6 @@ Create Rest Session
         ${auth}=     Create List   admin    geoserver
         Create Session     RESTAPI    http://${SERVER}   auth=${auth}
 
-
-
+Delete JP2 Datastore
+    Delete Datastore    ${JP2K_DS_NAME}
 
