@@ -20,7 +20,7 @@
   ignore_errors: yes
 
 - name: copy test data - vector gpkg
-  copy: src=../../test_data/gdal_sample.gpkg dest=/var/opt/boundless/suite/geoserver/data/ mode=777
+  copy: src=../../test_data/pop_places.gpkg dest=/var/opt/boundless/suite/geoserver/data/ mode=777
 
 - name: copy test data - raster gpkg
   copy: src=../../test_data/world_lakes.gpkg dest=/var/opt/boundless/suite/geoserver/data/data/ mode=777
