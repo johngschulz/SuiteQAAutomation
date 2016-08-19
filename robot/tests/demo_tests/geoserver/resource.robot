@@ -24,6 +24,7 @@ Open Browser To GeoServer
     Open Browser    ${LOGIN URL}    ${BROWSER}  None    ${REMOTE_URL}
     Maximize Browser Window
     Set Selenium Speed      0.2
+    Set Selenium Implicit Wait   2 seconds
     Title Should Be    GeoServer: Welcome
 
 Input Username
