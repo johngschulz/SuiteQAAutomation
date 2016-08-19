@@ -111,7 +111,7 @@
       - wps
 
 - name: copy marlin jar
-  shell: "cp -f -r ~/BoundlessSuite-latest-ext/marlin/ '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/marlin/'"
+  shell: "cp -f -r ~/BoundlessSuite-latest-ext/marlin/* '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/marlin/'"
 
 - name: copy GDAL jar to webapps
   shell: "cp -f -r '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/gdal-1.11.2.jar' '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
