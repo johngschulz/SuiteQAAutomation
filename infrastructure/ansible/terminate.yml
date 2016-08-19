@@ -105,10 +105,20 @@
         region: us-east-1
         instance_ids: "{{ ansible_ec2_instance_id }}"
 
-- hosts: test_runners
+- hosts: geoservers
   gather_facts: false
   tasks:
-  - name: stop all instances except NAT and nginx
+  - name: stop all instances running geoserver
+    local_action:
+      module: ec2
+      state: 'absent'
+      region: us-east-1
+      instance_ids: "{{ hostvars[inventory_hostname]['ec2_id'] }}"
+
+- hosts: selenium hosts
+  gather_facts: false
+  tasks:
+  - name: terminate the selenium grid hub (ec2-linux) and node (win10) instances
     local_action:
       module: ec2
       state: 'absent'
