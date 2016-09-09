@@ -21,7 +21,7 @@ ${REST URL}       http://${SERVER}/geoserver/rest
 
 *** Keywords ***
 Open Browser To GeoServer
-    Open Browser    ${LOGIN URL}    ${BROWSER}  None    ${REMOTE_URL}
+    Open Browser    ${LOGIN URL}    ${BROWSER}   None    ${REMOTE_URL}
     Maximize Browser Window
     Set Selenium Speed      0.2
     Set Selenium Implicit Wait   2 seconds
@@ -150,6 +150,31 @@ Create Datastore
     Click Element      //a[text()='Save']
     Wait Until Page Does Not Contain      //a[text()='Save']
 
+Create style
+    [arguments]     ${styleName}
+    Click Element     //span[text()='Styles']/..
+    Click Element     //a[text()="Add a new style"]
+    
+    Wait Until Page Contains    Style file
+    Put Text In Labelled Input      Name         ${styleName}
+    ${oldLogLevel}    Set Log Level    WARN
+    Choose File     xpath=//input[@type='file']     ${TEST DATA}${styleName}
+    Set Log Level   ${oldLogLevel}
+    Click Element     //a[text()='Upload ...']
+    Scroll Into View     form .button-group a
+    Click Element     id=mainFormSubmit
+
+Style Layer
+    [arguments]   ${lyrName}   ${styleName}
+    Click Element     //span[text()='Layers']/..
+    Click Element     //a/span[text()='${lyrName}']/..
+    Click Element     //span[text()='Publishing']/..
+    Wait Until Page Contains    WMS Settings
+    Select From List By Label   defaultStyle    ${styleName}
+    Scroll Into View     form .button-group a
+    Click Element      //a[text()='Save']
+    Wait Until Page Does Not Contain      //a[text()='Save']
+    
 #wait for DB connection to drop
 Delete Datastore
     [arguments]        ${dsname}
@@ -160,3 +185,13 @@ Delete Datastore
     Click Element        //a[text()='Remove selected Stores']
     Click Element    //a[text()='OK']
     Sleep    1 seconds
+    
+Delete Style
+  [arguments]        ${styleName}
+  Go To                ${LOGIN URL}
+  Click Element     //span[text()='Styles']/..
+  Select Checkbox    //span[text()='${styleName}']/ancestor::tr/th/input
+  Wait Until Page Contains Element     //a[text()='Removed selected style(s)']
+  Click Element        //a[text()='Removed selected style(s)']
+  Click Element    //a[text()='OK']
+  Sleep    1 seconds
