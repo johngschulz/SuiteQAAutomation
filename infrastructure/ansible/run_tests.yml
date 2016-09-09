@@ -18,7 +18,7 @@
   sudo: yes
   tasks:
   - name: start selenium hub
-    docker: 
+    docker:
       docker_api_version: 1.21
       name: selenium-hub
       image: selenium/hub:2.52.0
@@ -75,11 +75,21 @@
         "tag:Name":  QA Win2012
         instance-state-name: running
     register: win2012_gs_facts
+  - name: get rhel_gs private ip
+    sudo: no
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name":  QA RHEL gs
+        instance-state-name: running
+    register: rhel_gs_facts
   vars:
     nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
     win10_ip: "{{ hostvars[inventory_hostname]['ec2_private_ip_address'] }}"
     ubuntu_gs_ip: "{{ ubuntu_gs_facts.instances[0].private_ip_address }}"
     centos_gs_ip: "{{ centos_gs_facts.instances[0].private_ip_address }}"
+    rhel_gs_ip: "{{ rhel_gs_facts.instances[0].private_ip_address }}"
     win2012_gs_ip: "{{ win2012_gs_facts.instances[0].private_ip_address }}"
   roles:
     - run_tests

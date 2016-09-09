@@ -92,7 +92,7 @@
   vars:
     ubuntu_gs_ip: "{{ ubuntu_gs_facts.instances[0].private_ip_address }}"
     centos_gs_ip: "{{ centos_gs_facts.instances[0].private_ip_address }}"
-    win2012_ip: "{{ win2012_facts.instances[0].private_ip_address }}" 
+    win2012_ip: "{{ win2012_facts.instances[0].private_ip_address }}"
     hub_ip: "{{ hostvars[inventory_hostname]['ec2_private_ip_address'] }}"
     nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
   roles:
@@ -153,6 +153,13 @@
 
 - name: provision centos GS machine
   hosts: tag_type_centos_gs
+  remote_user: centos
+  sudo: yes
+  roles:
+    - centos
+    
+- name: provision rhel GS machine
+  hosts: tag_type_rhel_gs
   remote_user: centos
   sudo: yes
   roles:

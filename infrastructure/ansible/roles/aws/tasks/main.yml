@@ -227,7 +227,7 @@
 
 ### Create QA Hub Instance ###
 - name: Launch QA Grid Hub Instance
-  ec2: 
+  ec2:
     vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
     region: "{{ aws_region }}"
     keypair: suite-qa
@@ -352,5 +352,26 @@
       Name: "QA centos gs"
     wait: yes
   register: qa_centos_gs
+  tags:
+    -vpcsetup
+    
+- name: Launch RHEL 6 GS instance
+  ec2:
+    vpc_subnet_id: "{{ internal_subnet.subnet.id }}"
+    region: "{{ aws_region }}"
+    keypair: suite-qa
+    assign_public_ip: false
+    group_id: "{{ internal_securitygroup.group_id }}"
+    image: "{{ centos_aws_image }}"
+    instance_type: "{{ centos_aws_instance_type }}"
+    instance_tags:
+      type: "rhel_gs"
+      Name: "QA rhel gs"
+    exact_count: 1
+    count_tag:
+      type: "rhel_gs"
+      Name: "QA rhel gs"
+    wait: yes
+  register: qa_rhel_gs
   tags:
     -vpcsetup

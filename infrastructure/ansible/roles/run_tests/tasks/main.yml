@@ -1,10 +1,18 @@
 - name: run all centos tests
-  shell: ./AllRobotTests centos '{{ centos_gs_ip }}' '{{ nginx_ip }}' 
+  shell: ./AllRobotTests centos '{{ centos_gs_ip }}' '{{ nginx_ip }}'
   args:
     chdir: ~/robot/tests/
   register: centos_result
 
 - debug: var=centos_result verbosity=2
+
+- name: run all RHEL tests
+  shell: ./AllRobotTests RHEL '{{ rhel_gs_ip }}' '{{ nginx_ip }}'
+  args:
+    chdir: ~/robot/tests/
+  register: rhel_result
+
+- debug: var=rhel_result verbosity=2
 
 - name: run all ubuntu tests
   shell: ./AllRobotTests ubuntu '{{ ubuntu_gs_ip }}' '{{ nginx_ip }}'

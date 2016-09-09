@@ -16,3 +16,5 @@ ubuntu_gs_aws_image: ami-fce3c696
 ubuntu_gs_aws_instance_type: m4.large
 centos_aws_image: ami-1c221e76
 centos_aws_instance_type: m4.large
+rhel_aws_image: ami-f37b4b99
+rhel_aws_instance_type: m4.large
