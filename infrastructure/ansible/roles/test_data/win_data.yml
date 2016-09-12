@@ -21,7 +21,7 @@
   copy: src=../../test_data/sampleGrib.grb2 dest=/cygdrive/c/geoserverDataDir/data/ mode=777
 
 - name: copy test data - jp2k
-  copy: src=../../test_data/bogota.zip dest=~/ 
+  copy: src=../../test_data/bogota.zip dest=~/
 
 - name: unzip jp2k
   shell: "unzip -o bogota.zip -d '/cygdrive/c/geoserverDataDir/data/'"
@@ -34,3 +34,15 @@
 
 - name: copy test data - raster gpkg
   copy: src=../../test_data/world_lakes.gpkg dest=/cygdrive/c/geoserverDataDir/data/ mode=777
+  
+- name: populated_places shp
+  copy: src=../../test_data/populated_places.zip dest=~/
+  
+- name: unzip populated_places
+  shell: "unzip -o populated_places.zip -d '/cygdrive/c/geoserverDataDir/data/'"
+  
+- name: test dem
+  copy: src=../../test_data/test_raster.tif.zip dest=~/
+
+- name: unzip test_raster
+  shell: "unzip -o test_raster.tif.zip -d '/cygdrive/c/geoserverDataDir/data/'"
