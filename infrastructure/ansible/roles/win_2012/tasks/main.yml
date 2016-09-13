@@ -19,7 +19,7 @@
 - name: open port 8080
   command: netsh firewall add portopening TCP 8080 "Allow port 8080"
 
-- name: copy microsoft redist 
+- name: copy microsoft redist
   copy: src=vcredist_x86.exe dest=~/ mode=777
 
 - name: install microsoft redist
@@ -64,10 +64,10 @@
   command: "chmod -R 777 '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/'"
 
 - name: get suite war
-  unarchive: src=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-war.zip dest=~/ copy=no
+  unarchive: src=http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-war.zip dest=~/ copy=no
 
 - name: get suite-exts
-  get_url: url=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-ext.zip dest=~/ 
+  get_url: url=http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/war-archive/BoundlessSuite-latest-ext.zip dest=~/ 
 
 - name: unzip suite-exts
   unarchive: src=~/BoundlessSuite-latest-ext.zip dest=~/ copy=no
@@ -76,7 +76,7 @@
   shell: "cp -f ~/BoundlessSuite-latest-war/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/'"
 
 - name: stop tomcat
-  command: net stop Tomcat8 
+  command: net stop Tomcat8
   ignore_errors: yes
 
 - name: explode geoserver war
@@ -86,7 +86,7 @@
 
 - name: copy extensions
   shell: "cp -f -r ~/BoundlessSuite-latest-ext/{{ item }}/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
-  with_items: 
+  with_items:
       - appschema
       - arcsde
       - cloudwatch
@@ -115,7 +115,7 @@
 
 - name: copy GDAL jar to webapps
   shell: "cp -f -r '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/gdal/gdal-1.11.2.jar' '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib/'"
-  args: 
+  args:
     executable: /bin/bash
 
 - name: ensure tomcat is stopped

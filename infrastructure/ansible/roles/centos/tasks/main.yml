@@ -1,12 +1,12 @@
 - name: set boundless repo
-  command: bash -c 'printf "[boundless-third-party]\nname=Boundless Spatial Third Party Repo\nbaseurl=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-centos\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-third-party.repo'
+  command: bash -c 'printf "[boundless-third-party]\nname=Boundless Spatial Third Party Repo\nbaseurl=http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/third-party-centos\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-third-party.repo'
 
 - name: add suite test repo
-  command: bash -c 'printf "[boundless-suite-test-centos]\nname=Boundless Spatial Suite Test CentOS\nbaseurl=http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-centos/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-suite-test.repo'
+  command: bash -c 'printf "[boundless-suite-test-centos]\nname=Boundless Spatial Suite Test CentOS\nbaseurl=http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/suite-test-centos/\nenabled=1\ngpgcheck=0" | sudo tee /etc/yum.repos.d/boundless-suite-test.repo'
 
-- name: insall suite 
+- name: insall suite
   yum: name=suite-{{ item }} state=latest
-  with_items: 
+  with_items:
       - geoserver
       - composer
       - geowebcache
@@ -17,7 +17,7 @@
 
 - name: install extensions
   yum: name=suite-gs-{{ item }} state=latest
-  with_items: 
+  with_items:
       - appschema
       - arcsde
       - cloudwatch
@@ -43,7 +43,7 @@
 
 - name: install native libs
   yum: name={{ item }} state=latest
-  with_items: 
+  with_items:
       - netcdf
       - gdal-mrsid
       - libjpeg-turbo

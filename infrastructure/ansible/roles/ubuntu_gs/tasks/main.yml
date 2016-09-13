@@ -1,5 +1,5 @@
 - name: add boundless repos
-  shell: 'echo "deb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/third-party-debian/amd64 ./ \ndeb http://jenkins:Thae9suv@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list'
+  shell: 'echo "deb http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/third-party-debian/amd64 ./ \ndeb http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list'
 
 - name: update repo
   apt: update_cache=yes
@@ -7,7 +7,7 @@
 - name: install suite
   apt: name=suite-{{ item }} state=latest allow_unauthenticated=yes
   with_items:
-      - geoserver 
+      - geoserver
       - geowebcache
       - composer
       - dashboard
@@ -17,7 +17,7 @@
 
 - name: install extensions
   apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes
-  with_items: 
+  with_items:
       - appschema
       - arcsde
       - cloudwatch
@@ -53,7 +53,7 @@
 - name: install pip
   apt: name=python-pip state=latest
 
-- name: install python dev 
+- name: install python dev
   apt: name=python-dev state=latest
 
 - name: install psycopg2 dependency
@@ -72,7 +72,7 @@
   copy: src=pg_hba.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
 
 - name: restart postgres
-  service: name=postgresql state=restarted 
+  service: name=postgresql state=restarted
 
 - name: install pointcloud
   apt: name=postgresql-9.3-pointcloud allow_unauthenticated=yes
