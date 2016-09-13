@@ -89,12 +89,22 @@
         "tag:Name": QA Win2012
         instance-state-name: running
     register: win2012_facts
+  - name: get rhel_gs private ip
+    sudo: no
+    local_action:
+      module: ec2_remote_facts
+      region: us-east-1
+      filters:
+        "tag:Name": QA rhel gs
+        instance-state-name: running
+    register: rhel_gs_facts
   vars:
     ubuntu_gs_ip: "{{ ubuntu_gs_facts.instances[0].private_ip_address }}"
     centos_gs_ip: "{{ centos_gs_facts.instances[0].private_ip_address }}"
     win2012_ip: "{{ win2012_facts.instances[0].private_ip_address }}"
     hub_ip: "{{ hostvars[inventory_hostname]['ec2_private_ip_address'] }}"
     nginx_ip: "{{ nginx_facts.instances[0].private_ip_address }}"
+    rhel_gs_ip: "{{ rhel_gs_facts.instances[0].private_ip_address }}"
   roles:
     - hub
 
