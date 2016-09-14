@@ -29,7 +29,7 @@
               <ogc:PropertyName>NAME</ogc:PropertyName>
             </sld:Label>
             <sld:Font>
-              <sld:CssParameter name="font-family">Bodonitown</sld:CssParameter>
+              <sld:CssParameter name="font-family">Akshar Normal</sld:CssParameter>
               <sld:CssParameter name="font-size">14</sld:CssParameter>
               <sld:CssParameter name="font-style">normal</sld:CssParameter>
               <sld:CssParameter name="font-weight">normal</sld:CssParameter>
