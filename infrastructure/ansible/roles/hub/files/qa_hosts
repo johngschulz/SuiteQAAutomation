@@ -1,5 +1,5 @@
 ubuntu_gs:
-rhel_gs:
+RHEL_gs:
 centos_gs:
 win2012_gs:
 nginx:

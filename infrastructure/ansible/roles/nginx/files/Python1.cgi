@@ -19,7 +19,7 @@ def GetIP(tag) :
      return lines[0].split(':')[1]
 
 
-ok_server = ['centos','win2012','ubuntu', 'rhel']
+ok_server = ['centos','win2012','ubuntu', 'RHEL']
 ok_browser = ['OTHER','IE','Edge','Chrome','FireFox']
 
 print "Content-Type: text/html\n"
