@@ -45,7 +45,7 @@
               <ogc:PropertyName>value</ogc:PropertyName>
             </Label>
             <Font>
-              <CssParameter name="font-family">Arial</CssParameter>
+              <CssParameter name="font-family">DejaVu Sans Bold</CssParameter>
               <CssParameter name="font-style">Normal</CssParameter>
               <CssParameter name="font-size">10</CssParameter>
             </Font>
