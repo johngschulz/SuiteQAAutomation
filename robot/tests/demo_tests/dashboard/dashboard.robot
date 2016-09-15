@@ -4,6 +4,7 @@ Documentation     Dashboard smoke test
 TestSetup         Open Browser To Dashboard
 TestTeardown      Close Browser
 Resource          resource.robot
+Resource          ${CURDIR}/../geoserver/resource.robot
 
 *** Test Cases ***
 Doc Link
@@ -49,6 +50,7 @@ GeoWebCache Links
     Go To Dashboard
 
 Web SDK Links
+    Scroll Into View    div.dash-component.wabsdk
     Click Element    xpath=//div[@id="home"]/div[4]/div[2]/div[2]/div/div[1]
     Wait Until Page Contains    Layer
     Title Should Be  WebSDK QuickView
