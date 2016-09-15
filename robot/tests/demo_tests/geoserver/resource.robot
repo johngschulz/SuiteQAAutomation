@@ -190,6 +190,8 @@ Delete Style
   [arguments]        ${styleName}
   Go To                ${LOGIN URL}
   Click Element     //span[text()='Styles']/..
+  Input Text        id=filter   ${styleName}
+  Press Key         id=filter   \\13
   Select Checkbox    //span[text()='${styleName}']/ancestor::tr/th/input
   Wait Until Page Contains Element     //a[text()='Removed selected style(s)']
   Click Element        //a[text()='Removed selected style(s)']
