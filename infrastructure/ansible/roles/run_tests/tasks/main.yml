@@ -1,31 +1,16 @@
-- name: run all centos tests
-  shell: ./AllRobotTests centos '{{ centos_gs_ip }}' '{{ nginx_ip }}'
-  args:
-    chdir: ~/robot/tests/
-  register: centos_result
+- name: update centos_gs IP
+  lineinfile: "dest=~/robot/tests/run_tests.sh regexp=(centos) line='./AllRobotTests centos {{ centos_gs_ip }} {{ nginx_ip }}'"
 
-- debug: var=centos_result verbosity=2
+- name: update ubuntu_gs IP
+  lineinfile: "dest=~/robot/tests/run_tests.sh regexp=(ubuntu) line='./AllRobotTests ubuntu {{ ubuntu_gs_ip }} {{ nginx_ip }}'"
 
-- name: run all RHEL tests
-  shell: ./AllRobotTests RHEL '{{ rhel_gs_ip }}' '{{ nginx_ip }}'
-  args:
-    chdir: ~/robot/tests/
-  register: rhel_result
+- name: update rhel IP
+  lineinfile: "dest=~/robot/tests/run_tests.sh regexp=(RHEL) line='./AllRobotTests RHEL {{ rhel_gs_ip }} {{ nginx_ip }}'"
 
-- debug: var=rhel_result verbosity=2
-
-- name: run all ubuntu tests
-  shell: ./AllRobotTests ubuntu '{{ ubuntu_gs_ip }}' '{{ nginx_ip }}'
-  args:
-    chdir: ~/robot/tests
-  register: ubuntu_result
-
-- debug: var=ubuntu_result verbosity=2
-
-- name: run all win2012 tests
-  shell: ./AllRobotTests win2012 '{{ win2012_gs_ip }}' '{{ nginx_ip }}'
-  args:
-    chdir: ~/robot/tests/
-  register: win2012_result
-
-- debug: var=win2012_result verbosity=2
+- name: update win2012 IP
+  lineinfile: "dest=~/robot/tests/run_tests.sh regexp=(win2012) line='./AllRobotTests win2012 {{ win2012_gs_ip }} {{ nginx_ip }}'"
+  
+- name: run the full test suite
+  shell: ./run_tests.sh chdir=~/robot/tests
+  async: 14400
+  poll: 0
