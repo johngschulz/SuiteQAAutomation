@@ -82,7 +82,14 @@ Create Rest Session
     ${auth}=     Create List   admin    geoserver
     Create Session     RESTAPI    http://${SERVER}   auth=${auth}
     
+Delete Style Resource
+    [arguments]   ${resource_name}
+    ${resp}   Delete Request   RESTAPI   /geoserver/rest/resource/styles/${resource_name}
+    Should Not Be Equal As Strings  ${resp.status_code}   405
+
 Clean Up
     Delete Datastore    ${PLACES_DS_NAME}
     Delete Style        ${STYLE_NAME}
+    Delete Style Resource   smileyface.png 
+    Delete Style Resource   AksharNormal.ttf
     Delete All Sessions
