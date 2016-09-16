@@ -1,5 +1,8 @@
-- name: add boundless repos
-  shell: 'echo "deb http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/third-party-debian/amd64 ./ \ndeb http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" >> /etc/apt/sources.list'
+- name: add boundless third party repo
+  apt_repository: repo="deb http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/third-party-debian/amd64 ./" state=present
+  
+- name: add boundless test repo
+  apt_repository: repo="deb http://suite:B0und1e55!23@priv-repo.boundlessgeo.com/suite-test-debian/amd64 ./" state=present
 
 - name: update repo
   apt: update_cache=yes
