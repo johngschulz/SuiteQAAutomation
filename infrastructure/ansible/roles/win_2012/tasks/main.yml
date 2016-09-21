@@ -1,5 +1,5 @@
 - name: create directory
-  file: path=~/war state=directory
+  file: path=/home/Administrator/war state=directory mode=0700
 
 - name: create boundless dir
   file: path="/cygdrive/c/Program Files (x86)/Boundless" state=directory
@@ -27,6 +27,9 @@
 
 - name: copy install script
   copy: src=install.sh dest=~/war/install.sh mode=700
+
+- name: copy extensions script
+  copy: src=cp_extensions.sh dest=~/ mode=700
 
 - name: copy jce policy
   copy: src=jce_policy-8.zip dest=~/war/jce_policy-8.zip
@@ -78,37 +81,14 @@
 - name: stop tomcat
   command: net stop Tomcat8
   ignore_errors: yes
-
-- name: explode geoserver war
-  shell: "unzip -o '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war' -d '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver'"
-  args:
-    executable: /bin/bash
+# - name: explode geoserver war
+#   unarchive: src='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war' dest='/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver' copy=no
+  # shell: "unzip -o '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver.war' -d '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver'"
+  # args:
+  #   executable: /bin/bash
 
 - name: copy extensions
-  shell: "cp -f -r ~/BoundlessSuite-latest-ext/{{ item }}/* '/cygdrive/c/Program Files (x86)/Apache Software Foundation/Tomcat 8.0/webapps/geoserver/WEB-INF/lib'"
-  with_items:
-      - appschema
-      - arcsde
-      - cloudwatch
-      - cluster
-      - csw
-      - db2
-      - gdal
-      - geopkg
-      - grib
-      - inspire
-      - jdbcconfig
-      - jdbcstore
-      - jp2k
-      - mbtiles
-      - mongodb
-      - netcdf
-      - netcdf-out
-      - oracle
-      - script
-      - sqlserver
-      - vectortiles
-      - wps
+  shell: ./cp_extensions.sh
 
 - name: copy marlin jar
   shell: "cp -f -r ~/BoundlessSuite-latest-ext/marlin/* '/cygdrive/c/Program Files (x86)/Boundless/suite/geoserver/marlin/'"

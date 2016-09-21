@@ -5,8 +5,12 @@
     eip: "{{ hostvars[inventory_hostname]['ec2_ip_address'] }}"
   tasks:
   - name: update IP for gateway post-deploy
-    local_action:
-      module: lineinfile dest=~/SuiteQAAutomation/infrastructure/ansible/ssh.cfg regexp="ec2-user@" insertafter="ec2-user@" line="  ProxyCommand  ssh -W %h:%p ec2-user@{{ eip }}"
+    lineinfile: 
+      dest:   "/Users/mthompson/SuiteQAAutomation/infrastructure/ansible/ssh.cfg"
+      regexp: ec2-user@ 
+      insertafter: ec2-user@ 
+      line: "  ProxyCommand  ssh -W %h:%p ec2-user@{{ eip }}"
+    delegate_to: 127.0.0.1
 
 - name: Setup ip forwarding on NAT
   hosts: tag_type_nat

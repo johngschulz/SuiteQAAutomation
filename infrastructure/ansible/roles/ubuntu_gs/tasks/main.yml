@@ -8,7 +8,8 @@
   apt: update_cache=yes
 
 - name: install suite
-  apt: name=suite-{{ item }} state=latest allow_unauthenticated=yes
+  # apt: name=suite-{{ item }} state=latest allow_unauthenticated=yes
+  command: apt-get install -y --allow-unauthenticated suite-{{item}}
   with_items:
       - geoserver
       - geowebcache
@@ -19,7 +20,8 @@
       - quickview
 
 - name: install extensions
-  apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes
+  command: apt-get install -y --allow-unauthenticated suite-gs-{{item}}
+  # apt: name=suite-gs-{{ item }} state=latest allow_unauthenticated=yes
   with_items:
       - appschema
       - arcsde
@@ -45,7 +47,8 @@
       - wps
 
 - name: install native libs
-  apt: name={{ item }} state=latest allow_unauthenticated=yes
+  # apt: name={{ item }} state=latest allow_unauthenticated=yes (requires ansible 2.1+)
+  command: apt-get install -y --allow-unauthenticated {{item}}
   with_items:
       - gdal-mrsid
       - netcdf-bin
@@ -66,7 +69,8 @@
   pip: name=psycopg2 state=latest
 
 - name: install postgis
-  apt: name=postgresql-9.3-postgis-2.1 state=latest allow_unauthenticated=yes
+  command: apt-get install -y --allow-unauthenticated postgresql-9.3-postgis-2.1
+  # apt: name=postgresql-9.3-postgis-2.1 state=latest allow_unauthenticated=yes (requires ansible 2.1+)
 
 - name: update postgresql.conf
   copy: src=postgresql.conf dest=/etc/postgresql/9.3/main/ force=yes mode=777
@@ -78,9 +82,11 @@
   service: name=postgresql state=restarted
 
 - name: install pointcloud
-  apt: name=postgresql-9.3-pointcloud allow_unauthenticated=yes
+  command: apt-get install -y --allow-unauthenticated postgresql-9.3-pointcloud
+  # apt: name=postgresql-9.3-pointcloud allow_unauthenticated=yes (requires ansible 2.1+)
 
 - name: install pdal
-  apt: name=pdal state=latest allow_unauthenticated=yes
+  command: apt-get install -y --allow-unauthenticated pdal
+  # apt: name=pdal state=latest allow_unauthenticated=yes (requires ansible 2.1+)
 
 - include: ../../test_data/linux_data.yml
