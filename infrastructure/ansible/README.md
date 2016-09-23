@@ -15,15 +15,21 @@
     * *files/test_data* - put all test data files that will be uploaded to GeoServer as part of testing
     * *files/* - files required to setup the Tomcat WAR install of Suite, including data directory, (`install.sh` is called by ansible to do the setup)
 * **Ubuntu Suite Install (Ubuntu 14.04)** - Runs the Suite install that the node will run browser tests against  
+* **CentOS Suite Install** - Runs the Suite install that the node will run browser tests against  
+* **RHEL Suite Install (RHEL 6.5)** - Runs the Suite install that the node will run browser tests against, uses the CentOS packages. 
 * **NGINX (Ubuntu 14.04)** - Serves up the test results, authentication required 
   
 ## Requirements:
 
-  * Install ansible and boto with pip
+  * Install Ansible 2.0.0 and boto with pip
   * Set local environment variables for AWS access/secret keys
   * Add the suite-qa key to your ssh agent
 
-## Runnning scripts:
+## Using the automated system:
+
+**Fresh Test Run**
+  1. `ansible-playbook -i hosts/ terminate.yml --limit geoservers`
+  2. `./start_tests.sh`
 
 **Deploy, Provision, & Run Full Test Suite**
   `./start_tests.sh`
@@ -40,9 +46,9 @@
 
 **Terminate Instances**
 
-  - Terminate GeoServer instances and hub:
+  - Terminate GeoServer instances:
 
-    `ansible-playbook -i hosts/ terminate.yml --limit tag_type_test_runners`
+    `ansible-playbook -i hosts/ terminate.yml --limit geoservers`
   
   - Terminate a particular instance:
   
@@ -50,11 +56,8 @@
 
 ### Notes:
   * You can limit a playbook to a specific role (as above) or group (see hosts/hosts.yml file for groups, ie. test_runners)
-  * Currently a complete teardown of instances requires some manual steps. This includes terminating all QA instances (can use the terminate.yml script), release the EIP, and delete the subnet route tables. 
-  * All instances should be tagged with QA.
+  * Currently a complete teardown of all instances requires some manual steps. This includes terminating all QA instances (can use the terminate.yml script), release the EIP, and delete the subnet route tables. 
+  * All instances should be tagged with QA as part of the name.
 
 ## To Do:
-* Automate shutdown and termination of aws instances
-  * Shutdown all instances, except NAT and NGINX
-  * Figure out where Ansible will be run from
   * Hook up to build system
