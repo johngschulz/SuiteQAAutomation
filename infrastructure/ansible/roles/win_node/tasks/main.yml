@@ -4,6 +4,12 @@
 
 - name: copy script
   copy: src=start_node.bat dest=/cygdrive/c/source/start_node.bat mode=777 force=yes
+  
+- name: copy script
+  copy: src=setIE11_epm.bat dest=~/setIE11_epm.bat mode=777 force=yes
+  
+- name: run IE11 script
+  command: ./setIE11_epm.bat
 
 - name: copy node config
   copy: src=nodeConfig.json dest=~/nodeConfig.json force=yes
