@@ -9,7 +9,7 @@ Resource          ${CURDIR}/../geoserver/resource.robot
 *** Test Cases ***
 Doc Link
     Click Element    xpath=//*[@id="_documentationlink"]
-    Select Window    Boundless Suite User Manual — Boundless Suite 4.9.x User Manual
+    Select Window    Boundless Suite User Manual — Boundless Suite 4.9.0 User Manual
     Wait Until Page Contains    Boundless Suite User Manual
     Page Should Contain     Boundless Suite User Manual
     Go To Dashboard
