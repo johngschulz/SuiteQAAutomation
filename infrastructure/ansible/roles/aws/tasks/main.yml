@@ -149,7 +149,7 @@
           - proto: tcp
             from_port: 22
             to_port: 22
-            cidr_ip: 73.245.144.219/32
+            cidr_ip: 24.68.152.8/32
           - proto: tcp
             from_port: 3389
             to_port: 3389
