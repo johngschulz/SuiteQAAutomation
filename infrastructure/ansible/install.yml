@@ -6,7 +6,7 @@
   tasks:
   - name: update IP for gateway post-deploy
     lineinfile: 
-      dest:   "/Users/mthompson/SuiteQAAutomation/infrastructure/ansible/ssh.cfg"
+      dest:   "ssh.cfg"
       regexp: ec2-user@ 
       insertafter: ec2-user@ 
       line: "  ProxyCommand  ssh -W %h:%p ec2-user@{{ eip }}"
