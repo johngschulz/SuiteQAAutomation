@@ -22,13 +22,13 @@
 
 - name: copy ie drivers to source folder
   copy: 
-    src: ~/SuiteQAAutomation/selenium/webdriver/IEDriverServer.exe
+    src: "../../selenium/webdriver/IEDriverServer.exe"
     dest: /cygdrive/c/source/
     force: yes
 
 - name: copy Microsoft webdrivers to source folder
   copy: 
-    src: ~/SuiteQAAutomation/selenium/webdriver/MicrosoftWebDriver.exe
+    src: "../../selenium/webdriver/MicrosoftWebDriver.exe"
     dest: /cygdrive/c/source/
     force: yes
 
