@@ -22,8 +22,22 @@
 ## Requirements:
 
   * Install Ansible 2.0.0 and boto with pip
-  * Set local environment variables for AWS access/secret keys
+    * `pip install ansible=2.0.0`
+    * `pip install boto`
+  * Create a file to hold AWS access/secret keys
+    * `mkdir ~/.aws`
+    * `touch ~/.aws/credentials`
+      * Enter the following lines in the file to set the keys for AWS
+        > [default]
+        > aws_access_key_id = #############
+        > aws_secret_access_key = #############
   * Add the suite-qa key to your ssh agent
+    * `ssh-add /path/to/suite-qa.pem`
+  * Create a hosts file to define localhost for ansible, it must be in the home directory
+    * `mkdir ~/Ansible`
+    * `touch ~/Ansible/hosts`
+    * put the following line in the ~/Ansible/hosts file: 
+        * `localhost ansible_connection=local ansible_python_interpreter="/usr/local/bin/pip"`
 
 ## Using the automated system:
 

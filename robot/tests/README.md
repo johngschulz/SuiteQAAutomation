@@ -46,6 +46,20 @@
   To run a particular test for a application  
   `robot demo_tests/geoserver/login.robot`
   
+## Running Tests Against a VM
+
+  1. Setup VM as per Suite docs.
+  2. Add the *test_data* folder to the VM as a shared folder. (https://github.com/boundlessgeo/SuiteQAAutomation/tree/master/infrastructure/ansible/roles/test_data)
+  3. Inside the Geoserver data directory create a folder named *data* with full read/write permissions.
+  4. Copy all the test data to the *data* folder and ensure all test files have full read/write permissions.
+  5. Install the following extensions: netcdf, grib, mbtiles, vectortiles, gdal, mrsid, jp2k, and geopkg
+  6. Restart GeoServer
+  7. If testing a VM on a different computer you will need the private IP of the target computer.
+  6. Several IP's will need to be updated in the tests:
+      - GDALImport.robot :: change SERVER to 0.0.0.0:8080 (or the private IP)
+      - database/resource.robot :: change DB_SERVER_IP to 0.0.0.0 (or the private IP)
+      - environment_local.robot :: change SERVER to 0.0.0.0:8080 (or the private IP)
+
 ## AWS Scripts
 
   See the infrastructure [README](https://github.com/boundlessgeo/SuiteQAAutomation/blob/master/infrastructure/ansible/README.md) for complete instructions on deploying, provision, and running the tests on AWs.
