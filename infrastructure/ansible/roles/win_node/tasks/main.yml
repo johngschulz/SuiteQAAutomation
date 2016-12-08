@@ -1,6 +1,6 @@
 # main tasks for node role
 - name: copy selenium server
-  copy: src=selenium-server-standalone-2.52.0.jar dest=~/selenium-server-standalone-2.52.0.jar mode=777
+  copy: src=selenium-server-standalone-2.53.1.jar dest=~/selenium-server-standalone-2.53.1.jar mode=777
 
 - name: copy script
   copy: src=start_node.bat dest=/cygdrive/c/source/start_node.bat mode=777 force=yes

@@ -54,7 +54,7 @@
   docker:
     docker_api_version: 1.21
     name: selenium-hub
-    image: selenium/hub:2.52.0
+    image: selenium/hub:2.53.1
     ports: 4444:4444
     state: reloaded
     pull: missing
