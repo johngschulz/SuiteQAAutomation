@@ -39,7 +39,7 @@ Input Password
 Submit Geoserver Credentials
     Input Username  ${VALID USER}
     Input Password  ${VALID PASSWORD}
-    Click Button    Login
+    Click Element   //button/div/span[text()='Login']
 
 Welcome Page Should Be Open
     Wait Until Page Contains    Logged in as admin
@@ -153,16 +153,16 @@ Create Datastore
 Create style
     [arguments]     ${styleName}
     Click Element     //span[text()='Styles']/..
-    Click Element     //a[text()="Add a new style"]
+    Click Element     //a[contains(text(),'Add a new style')]
     
-    Wait Until Page Contains    Style file
+    Wait Until Page Contains    Style Editor
     Put Text In Labelled Input      Name         ${styleName}
     ${oldLogLevel}    Set Log Level    WARN
     Choose File     xpath=//input[@type='file']     ${TEST DATA}${styleName}
     Set Log Level   ${oldLogLevel}
     Click Element     //a[text()='Upload ...']
-    Scroll Into View     form .button-group a
-    Click Element     id=mainFormSubmit
+    Scroll Into View     div.button-group a
+    Click Element     //a[contains(text(),'Submit')]
 
 Style Layer
     [arguments]   ${lyrName}   ${styleName}
@@ -193,7 +193,7 @@ Delete Style
   Input Text        id=filter   ${styleName}
   Press Key         id=filter   \\13
   Select Checkbox    //span[text()='${styleName}']/ancestor::tr/th/input
-  Wait Until Page Contains Element     //a[text()='Removed selected style(s)']
-  Click Element        //a[text()='Removed selected style(s)']
+  Wait Until Page Contains Element     //a[contains(text(),'Removed selected style(s)')]
+  Click Element     //a[contains(text(),'Removed selected style(s)')]
   Click Element    //a[text()='OK']
   Sleep    1 seconds
