@@ -3,6 +3,10 @@
   
   All the AWS instances need for automated testing of Suite are deployed and provisioned using [Ansible](http://docs.ansible.com/ansible/playbooks.html)  
   The the AWS instances as provisioned based on the `main.yml` file in the tasks folder of each ansible role. The AWS role is only used to do the initial deployment of the AWS instances. All the other roles provision those instances as described below. Each role can have subfolders for `files` and `vars` specific to that role.  
+
+## Passwords
+* Win10 RDP - User: Administrator Pass: Open4Rob0ts!
+* Results Server - User: boundless Pass: Open4Test!
   
 ## AWS Instances  
   
