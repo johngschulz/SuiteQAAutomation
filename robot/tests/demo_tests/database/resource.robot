@@ -1,6 +1,7 @@
 ***Settings***
 Library  DatabaseLibrary
 Library  ${CURDIR}/PostgresqlDDL.py
+Resource          ../../environment.robot
 
 
 *** Variables ***
@@ -46,7 +47,7 @@ Connect to Generic Postgresql Database
 
 Check Postgis Lib Version
     @{queryResults}    Query        SELECT postgis_lib_version()
-    Should Be True      "${queryResults[0][0]}".startswith("2.1.8") or "${queryResults[0][0]}".startswith("2.1.7")  incorrect postgis version - ${queryResults[0][0]}
+    Should Be True      "${queryResults[0][0]}".startswith("2.3.2")  incorrect postgis version - ${queryResults[0][0]}
 
 
 Check Postgis GEOS Version
@@ -75,7 +76,7 @@ Verify PostGIS Working
 
 Validate Postgresql Version
     @{queryResults}    Query        SELECT version()
-    Should Start With     ${queryResults[0][0]}    PostgreSQL 9.3    Incorrect PostgreSQL version 
+    Should Start With     ${queryResults[0][0]}    PostgreSQL 9.6    Incorrect PostgreSQL version 
 
 Validate PCloud Version Number
      @{queryResults}    Query        SELECT pc_version()

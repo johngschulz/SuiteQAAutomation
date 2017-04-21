@@ -22,11 +22,3 @@ Validate PostGIS
     Validate PostGIS Version Numbers
     Verify PostGIS Working
     [Teardown]  Run Keywords     Disconnect From Database   Drop Temp Postgis Database
-
-Validate PointCloud 
-    [Documentation]    Verfies Pointcloud reported version
-    [Setup]    Run Keywords    Create Temp PCloud Database    Connect to Temp PCloud Database
-    Validate PCloud Version Number
-    Verify PointCloud Working
-    [Teardown]  Run Keywords     Disconnect From Database   Drop Temp PCloud Database
- 
