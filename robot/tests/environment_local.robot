@@ -3,6 +3,7 @@ Documentation     Environment settings for local testing
 
 *** Variables ***
 ${BROWSER}        firefox
+${SUT_IP}         localhost
 ${SERVER}         localhost:8080
 ${HOST}           Unix
 ${REMOTE_URL}
