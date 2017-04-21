@@ -16,6 +16,7 @@ class ImageLibrary:
          print '*DEBUG* number of different pixels = %i' % badPixels
          if badPixels > maxBad :
             otherImage.save("_badimage.png","PNG")
+            ImageChops.difference(refImage, otherImage).save("_diffimage.png", "PNG")
             raise AssertionError('reference image and test image are different! %i pixels are different.' % badPixels)
 
     def read_file_bytes(self, fname) :
@@ -28,7 +29,7 @@ class ImageLibrary:
     def _loadImageFromBytes(self,imageBytes) :
         return (Image.open( BytesIO(imageBytes))).convert("RGB")
 
-    def _nPixelsDifferent(self,image1,image2,threshhold=3) :
+    def _nPixelsDifferent(self,image1,image2,threshhold=4) :
          diffImage = ImageChops.difference(image1, image2)
          badPixels = 0
          for w in range(0,diffImage.width):
