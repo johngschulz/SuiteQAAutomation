@@ -7,7 +7,7 @@ Resource          ${CURDIR}/../geoserver/resource.robot
 
 *** Variables ***
 ${VECTOR_DS_NAME}        pop_places
-${VECTOR_URL}            pop_places.gpkg
+${VECTOR_URL}            file:data/pop_places.gpkg
 ${RASTER_DS_NAME}        world_lakes
 ${RASTER_URL}            file:data/world_lakes.gpkg
 
