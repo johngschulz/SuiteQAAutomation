@@ -81,7 +81,7 @@
   lineinfile: "dest=/etc/qa_hosts regexp=(nginx:) line=nginx:{{ nginx_ip }}"
   
 - name: update rhel IP
-  lineinfile: "dest=/etc/qa_hosts regexp=(rhel_gs:) line=rhel_gs:{{ rhel_gs_ip }}"
+  lineinfile: "dest=/etc/qa_hosts regexp=(RHEL_gs:) line=RHEL_gs:{{ rhel_gs_ip }}"
 
 # patch selenium library
 - name: Patch Selenium2 Library for Edge
