@@ -1,1 +1,0 @@
-name: raster\nfeature-styles:\n- name: name\n  rules:\n  - symbolizers:\n    - raster:\n        opacity: 1\n        color-map:\n          type: ramp\n          entries:\n          - ['#0043C8', 1, 8080, ocean]\n          - ['#3A3519', 1, 8100, shore]\n          - ['#4B4422', 1, 10000, low]\n          - ['#857B54', 1, 20000, mid]\n          - ['#D9D1A8', 1, 60000, high]\n

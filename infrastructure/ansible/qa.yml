@@ -1,3 +1,0 @@
----
-# qa.yml : Playbook for all qa
-- include: www.yml

@@ -1,2 +1,0 @@
-- name: add nginx key to hub authorized keys
-  authorized_key: user=ec2-user key="{{ lookup('file', '/tmp/nginx.pub') }}"

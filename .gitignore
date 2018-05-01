@@ -1,0 +1,12 @@
+.DS_Store
+*.pyc
+local.properties
+.project
+.classpath
+.settings/
+
+katalon/.gitignore
+katalon/Libs/
+katalon/console.properties
+katalon/settings/
+katalon/Reports/

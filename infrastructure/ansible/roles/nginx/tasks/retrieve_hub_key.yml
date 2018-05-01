@@ -1,2 +1,0 @@
-- name: add hub key to authorized keys
-  authorized_key: user=ubuntu key="{{ lookup('file', '/tmp/hub.pub') }}"
