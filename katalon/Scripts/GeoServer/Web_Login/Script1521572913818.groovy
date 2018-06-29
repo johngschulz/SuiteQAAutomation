@@ -24,6 +24,8 @@ WebUI.openBrowser('')
 
 WebUI.navigateToUrl('http://localhost:8080/geoserver/web/')
 
+WebUI.waitForElementPresent(findTestObject('Web/GeoServer/Page_Welcome/input_username'), 60)
+
 WebUI.setText(findTestObject('Web/GeoServer/Page_Welcome/input_username'), 'admin')
 
 WebUI.setText(findTestObject('Web/GeoServer/Page_Welcome/input_password'), 'geoserver')

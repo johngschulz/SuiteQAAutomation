@@ -24,6 +24,8 @@ WebUI.openBrowser('')
 
 WebUI.navigateToUrl('http://localhost:8080/geoserver/web/')
 
+WebUI.waitForElementPresent(findTestObject('Web/GeoServer/Page_Welcome/input_username'), 60)
+
 WebUI.setText(findTestObject('Web/GeoServer/Page_Welcome/input_username'), 'admin')
 
 WebUI.setText(findTestObject('Web/GeoServer/Page_Welcome/input_password'), 'geoserver')
@@ -49,6 +51,8 @@ WebUI.click(findTestObject('Web/GeoServer/Page_ImportData/span_buildings.zip'))
 WebUI.click(findTestObject('Web/GeoServer/Page_ImportData/a_Next'))
 
 WebUI.click(findTestObject('Web/GeoServer/Page_ImportTasks/input_taskslistContaineritems1'))
+
+WebUI.delay(5)
 
 WebUI.click(findTestObject('Web/GeoServer/Page_ImportTasks/span_Import'))
 

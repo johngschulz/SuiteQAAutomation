@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Create New Non-Admin User
+
+Username = QA
+Password = QA</description>
+   <name>Web_Create_New_Non_Admin_User</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>644491ad-3803-4d52-acbd-06533f79c163</testCaseGuid>
+</TestCaseEntity>
