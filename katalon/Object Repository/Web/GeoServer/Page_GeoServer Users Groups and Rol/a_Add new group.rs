@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>a_Add new group</name>
+   <tag></tag>
+   <elementGuidId>7d9bd3d6-a8fe-4bf0-8e3e-6ed409bcffe4</elementGuidId>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>a</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>add-link</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>./org.geoserver.security.web.UserGroupRoleServicesPage?5-2.ILinkListener-panel-panel-usersgroups-form-services-0-panel-groups-header-addNew</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Add new group</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;id40&quot;)/ul[1]/li[2]/div[1]/div[@class=&quot;clearBoth&quot;]/ul[1]/li[2]/div[1]/form[1]/ul[1]/li[1]/ul[1]/li[2]/a[@class=&quot;add-link&quot;]</value>
+   </webElementProperties>
+</WebElementEntity>
