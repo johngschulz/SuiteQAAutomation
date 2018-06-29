@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Create a new Public and Private Group
+
+QAPub_lg
+QAPriv_lg</description>
+   <name>Web_Create_New_Groups</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>c34e5f91-7734-4d53-b54f-388131874ed4</testCaseGuid>
+</TestCaseEntity>
