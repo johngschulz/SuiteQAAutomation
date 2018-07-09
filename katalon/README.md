@@ -14,7 +14,7 @@ In addition, the [test data bundle](../test_data) must be copied into the GeoSer
 
 ### Running Tests using Katalon Studio
 
-*Katalon Studio must be installed*
+*Katalon Studio 5.4 or greater must be installed*
 
 Open Katalon Studio.
 
@@ -25,7 +25,7 @@ Under "Test Suites", select the Test Suite you wish to run. Click the "Run" butt
 
 ### Running Tests using Command Line
 
-*Katalon Studio must be installed*
+*Katalon Studio 5.4 or greater must be installed*
 
 Windows:
 
