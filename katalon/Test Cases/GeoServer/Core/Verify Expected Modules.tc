@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Verify that all the expected modules are listed in the about screen</description>
+   <name>Verify Expected Modules</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b5e0c9cf-f551-4f30-89de-d5b184d87129</testCaseGuid>
+</TestCaseEntity>
