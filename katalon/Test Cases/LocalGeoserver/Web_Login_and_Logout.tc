@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Basic Login and Logout test</description>
+   <name>Web_Login_and_Logout</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>58cbc8de-6b71-4389-985b-cb071e275eed</testCaseGuid>
+</TestCaseEntity>

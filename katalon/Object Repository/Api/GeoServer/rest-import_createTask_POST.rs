@@ -7,6 +7,8 @@
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <httpBody></httpBody>
+   <httpBodyContent></httpBodyContent>
+   <httpBodyType></httpBodyType>
    <httpHeaderProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
@@ -21,6 +23,7 @@
       <type>Main</type>
       <value>application/zip</value>
    </httpHeaderProperties>
+   <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>POST</restRequestMethod>
    <restUrl>http://localhost:8080/geoserver/rest/imports/1/tasks</restUrl>
    <serviceType>RESTful</serviceType>

@@ -10,6 +10,12 @@
 &lt;workspace>
 	&lt;name>test&lt;/name>
 &lt;/workspace></httpBody>
+   <httpBodyContent>{
+  &quot;text&quot;: &quot;\u003c?xml version\u003d\&quot;1.0\&quot; encoding\u003d\&quot;UTF-8\&quot;?\u003e\n\u003cworkspace\u003e\n\t\u003cname\u003etest\u003c/name\u003e\n\u003c/workspace\u003e&quot;,
+  &quot;contentType&quot;: &quot;text/plain&quot;,
+  &quot;charset&quot;: &quot;UTF-8&quot;
+}</httpBodyContent>
+   <httpBodyType>text</httpBodyType>
    <httpHeaderProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
@@ -24,6 +30,7 @@
       <type>Main</type>
       <value>application/xml</value>
    </httpHeaderProperties>
+   <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>POST</restRequestMethod>
    <restUrl>http://localhost:8080/geoserver/rest/workspaces</restUrl>
    <serviceType>RESTful</serviceType>

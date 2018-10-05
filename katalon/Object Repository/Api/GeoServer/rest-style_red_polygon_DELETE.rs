@@ -7,6 +7,8 @@
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <httpBody></httpBody>
+   <httpBodyContent></httpBodyContent>
+   <httpBodyType></httpBodyType>
    <httpHeaderProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
@@ -14,6 +16,7 @@
       <type>Main</type>
       <value>Basic YWRtaW46Z2Vvc2VydmVy</value>
    </httpHeaderProperties>
+   <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>DELETE</restRequestMethod>
    <restUrl>http://localhost:8080/geoserver/rest/styles/red_polygon</restUrl>
    <serviceType>RESTful</serviceType>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Remove QA Public and Private Groups</description>
+   <name>Web_Remove_Groups</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>b5d93c61-457d-4f44-9bcc-682676fd7266</testCaseGuid>
+</TestCaseEntity>

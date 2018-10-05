@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Remove Styles</description>
+   <name>Web_Remove_Styles</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>ab9dff4a-85fe-467d-ab59-b3fa9714f749</testCaseGuid>
+</TestCaseEntity>

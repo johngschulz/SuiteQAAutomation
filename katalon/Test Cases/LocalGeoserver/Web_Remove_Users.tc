@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Remove QA Admin and Non-Admin users</description>
+   <name>Web_Remove_Users</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e5f94fa2-ff0f-4cdf-a053-c286180a0337</testCaseGuid>
+</TestCaseEntity>

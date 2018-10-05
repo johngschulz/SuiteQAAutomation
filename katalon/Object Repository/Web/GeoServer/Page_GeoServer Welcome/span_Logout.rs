@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>span_Login</name>
+   <name>span_Logout</name>
    <tag></tag>
-   <elementGuidId>854e6b9b-1614-43b3-b9b5-4506b2633d3f</elementGuidId>
+   <elementGuidId>08492861-d745-4bb4-827e-ab3f3356ac82</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//span[(text() = 'Login' or . = 'Login')]</value>
+         <value>//span[(text() = 'Logout' or . = 'Logout')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -24,7 +24,7 @@
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>Login</value>
+      <value>Logout</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>

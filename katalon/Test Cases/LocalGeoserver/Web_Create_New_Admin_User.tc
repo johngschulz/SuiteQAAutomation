@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Create New Admin User
+
+Username = QAAdmin
+Password = QA</description>
+   <name>Web_Create_New_Admin_User</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>95128087-63c9-49f0-84f4-4e2f63b85b4d</testCaseGuid>
+</TestCaseEntity>

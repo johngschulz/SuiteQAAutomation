@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>span_Login</name>
+   <name>span_Geoserver</name>
    <tag></tag>
-   <elementGuidId>854e6b9b-1614-43b3-b9b5-4506b2633d3f</elementGuidId>
+   <elementGuidId>88006e9e-99e0-4fa6-a036-77023b9bc8bf</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//span[(text() = 'Login' or . = 'Login')]</value>
+         <value>//span[(text() = 'GeoServer 2.13.0' or . = 'GeoServer 2.13.0')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -24,13 +24,13 @@
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>Login</value>
+      <value>GeoServer 2.13.0</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;header&quot;)/div[@class=&quot;wrap&quot;]/div[@class=&quot;button-group selfclear&quot;]/span[1]/form[1]/button[@class=&quot;positive icon&quot;]/div[1]/span[1]</value>
+      <value>/html/body/div[1]/div/h2/a/span</value>
    </webElementProperties>
 </WebElementEntity>

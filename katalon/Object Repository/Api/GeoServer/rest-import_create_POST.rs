@@ -15,6 +15,12 @@
     }
   }
 }</httpBody>
+   <httpBodyContent>{
+  &quot;text&quot;: &quot;{\n  \&quot;import\&quot;: {\n    \&quot;targetWorkspace\&quot;: {\n      \&quot;workspace\&quot;: {\n        \&quot;name\&quot;: \&quot;test\&quot;\n      }\n    }\n  }\n}&quot;,
+  &quot;contentType&quot;: &quot;text/plain&quot;,
+  &quot;charset&quot;: &quot;UTF-8&quot;
+}</httpBodyContent>
+   <httpBodyType>text</httpBodyType>
    <httpHeaderProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
@@ -36,6 +42,7 @@
       <type>Main</type>
       <value>application/json</value>
    </httpHeaderProperties>
+   <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>POST</restRequestMethod>
    <restUrl>http://localhost:8080/geoserver/rest/imports</restUrl>
    <serviceType>RESTful</serviceType>

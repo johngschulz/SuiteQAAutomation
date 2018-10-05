@@ -35,6 +35,12 @@
     &lt;/UserStyle>
   &lt;/NamedLayer>
 &lt;/StyledLayerDescriptor></httpBody>
+   <httpBodyContent>{
+  &quot;text&quot;: &quot;\u003c?xml version\u003d\&quot;1.0\&quot; encoding\u003d\&quot;ISO-8859-1\&quot;?\u003e\n\u003cStyledLayerDescriptor version\u003d\&quot;1.0.0\&quot; \n    xsi:schemaLocation\u003d\&quot;http://www.opengis.net/sld StyledLayerDescriptor.xsd\&quot; \n    xmlns\u003d\&quot;http://www.opengis.net/sld\&quot; \n    xmlns:ogc\u003d\&quot;http://www.opengis.net/ogc\&quot; \n    xmlns:xlink\u003d\&quot;http://www.w3.org/1999/xlink\&quot; \n    xmlns:xsi\u003d\&quot;http://www.w3.org/2001/XMLSchema-instance\&quot;\u003e\n  \u003cNamedLayer\u003e\n    \u003cUserStyle\u003e\n      \u003cName\u003ered_polygon\u003c/Name\u003e\n      \u003cTitle\u003eA red polygon style\u003c/Title\u003e\n      \u003cFeatureTypeStyle\u003e\n        \u003cRule\u003e\n          \u003cName\u003eRule 1\u003c/Name\u003e\n          \u003cTitle\u003eRed Fill\u003c/Title\u003e\n          \u003cPolygonSymbolizer\u003e\n            \u003cFill\u003e\n              \u003cCssParameter name\u003d\&quot;fill\&quot;\u003e#FF0000\u003c/CssParameter\u003e\n            \u003c/Fill\u003e\n            \u003cStroke\u003e\n              \u003cCssParameter name\u003d\&quot;stroke\&quot;\u003e#000000\u003c/CssParameter\u003e\n              \u003cCssParameter name\u003d\&quot;stroke-width\&quot;\u003e1\u003c/CssParameter\u003e\n            \u003c/Stroke\u003e\n          \u003c/PolygonSymbolizer\u003e\n        \u003c/Rule\u003e\n        \u003c/FeatureTypeStyle\u003e\n    \u003c/UserStyle\u003e\n  \u003c/NamedLayer\u003e\n\u003c/StyledLayerDescriptor\u003e&quot;,
+  &quot;contentType&quot;: &quot;text/plain&quot;,
+  &quot;charset&quot;: &quot;UTF-8&quot;
+}</httpBodyContent>
+   <httpBodyType>text</httpBodyType>
    <httpHeaderProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
@@ -49,6 +55,7 @@
       <type>Main</type>
       <value>Basic YWRtaW46Z2Vvc2VydmVy</value>
    </httpHeaderProperties>
+   <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>POST</restRequestMethod>
    <restUrl>http://localhost:8080/geoserver/rest/styles</restUrl>
    <serviceType>RESTful</serviceType>

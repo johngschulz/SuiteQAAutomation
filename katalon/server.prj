@@ -4,5 +4,21 @@
    <name>server</name>
    <tag></tag>
    <UUID>a04eb199-ce83-485d-b35a-1f9173efc59d</UUID>
+   <migratedVersion>5.7.0</migratedVersion>
    <pageLoadTimeout>30</pageLoadTimeout>
+   <sourceContent>
+      <sourceFolderList>
+         <sourceFolderConfiguration>
+            <url>Include/scripts/groovy</url>
+         </sourceFolderConfiguration>
+      </sourceFolderList>
+      <systemFolderList>
+         <systemFolderConfiguration>
+            <url>Include/scripts/groovy</url>
+         </systemFolderConfiguration>
+         <systemFolderConfiguration>
+            <url>Include/features</url>
+         </systemFolderConfiguration>
+      </systemFolderList>
+   </sourceContent>
 </Project>
