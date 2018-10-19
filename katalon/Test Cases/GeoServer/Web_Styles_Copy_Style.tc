@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description>Copy style from SLD to MBStyle</description>
-   <name>Web_Styles_Copy_Style</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>45a278bb-ade0-4422-a3aa-d2da1cdee1c0</testCaseGuid>
-</TestCaseEntity>

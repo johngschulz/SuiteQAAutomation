@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description></description>
-   <name>Verify WPS GetCapabilities</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>bf529b6c-2382-41fb-aa20-ebbb1423e2d2</testCaseGuid>
-</TestCaseEntity>

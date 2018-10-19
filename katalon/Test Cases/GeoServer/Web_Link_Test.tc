@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description>Basic Link Test</description>
-   <name>Web_Link_Test</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>91b111bb-449f-4b7f-8edb-81ba7baa9310</testCaseGuid>
-</TestCaseEntity>

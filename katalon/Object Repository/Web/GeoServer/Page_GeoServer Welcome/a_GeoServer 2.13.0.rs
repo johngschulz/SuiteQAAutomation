@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//a[@href = './' and (text() = 'GeoServer 2.13.0' or . = 'GeoServer 2.13.0')]</value>
+         <value>//a[@class = 'pngfix' and @href = './']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -20,7 +20,7 @@
       <value>a</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
@@ -34,11 +34,11 @@
       <value>./</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
+      <isSelected>false</isSelected>
+      <matchCondition>contains</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>GeoServer 2.13.0</value>
+      <value>GeoServer 2</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>

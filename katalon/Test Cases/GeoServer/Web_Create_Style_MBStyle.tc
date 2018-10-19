@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description>Create a new style MBStyle</description>
-   <name>Web_Create_Style_MBStyle</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>415017a3-d668-461b-8728-6583821c59a3</testCaseGuid>
-</TestCaseEntity>
