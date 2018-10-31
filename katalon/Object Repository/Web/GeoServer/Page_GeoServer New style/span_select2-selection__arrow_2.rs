@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;select2-id4e-container&quot;)</value>
+         <value>/html/body/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/fieldset[1]/ul/li[3]/span/span[1]/span/span[2][count(. | //span[@class = 'select2-selection__arrow']) = count(//span[@class = 'select2-selection__arrow'])]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -20,7 +20,7 @@
       <value>span</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
@@ -38,7 +38,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;select2-id4e-container&quot;)</value>
+      <value>/html/body/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/fieldset[1]/ul/li[3]/span/span[1]/span/span[2]</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>

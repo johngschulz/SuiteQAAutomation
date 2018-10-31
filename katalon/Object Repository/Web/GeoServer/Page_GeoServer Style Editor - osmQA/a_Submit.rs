@@ -4,6 +4,12 @@
    <name>a_Submit</name>
    <tag></tag>
    <elementGuidId>05f963b8-3ef5-4c75-bcde-5b2d33b04811</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//a[@href = 'javascript:;' and (text() = 'Submit' or . = 'Submit')]</value>
+      </entry>
+   </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -21,7 +27,7 @@
       <value>javascript:;</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>

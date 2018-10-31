@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>html body div#_wicket_window_0.wicket-modal form div#_wicket_window_1.w_blue div#_wicket_window_7.w_left div.w_right_1 div#_wicket_window_8.w_right div.w_content_1 div.w_content_2 div.w_content_3 div.w_content div#_wicket_window_3.w_content_container div#id5f div#id60 div.button-group.rightwise a#id61</value>
+         <value>//a[@href = 'javascript:;' and (text() = 'OK' or . = 'OK')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -27,7 +27,7 @@
       <value>javascript:;</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
@@ -48,7 +48,7 @@
       <value>id(&quot;id68&quot;)</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>css</name>
       <type>Main</type>

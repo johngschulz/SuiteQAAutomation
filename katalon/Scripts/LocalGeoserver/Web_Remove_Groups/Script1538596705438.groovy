@@ -30,7 +30,7 @@ WebUI.setText(findTestObject('Web/GeoServer/Page_GeoServer Users Groups and Rol/
 
 WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Layer Preview/span_Login'))
 
-WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Users Groups and Rol/span_Users Groups Roles'))
+WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Welcome/span_Users Groups Roles'))
 
 WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Users Groups and Rol/span_UsersGroups'))
 

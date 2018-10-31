@@ -4,6 +4,12 @@
    <name>a_OK</name>
    <tag></tag>
    <elementGuidId>9266f8c0-f6c8-40c8-823a-ab4b6b4a705a</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//a[@href = 'javascript:;' and (text() = 'OK' or . = 'OK')]</value>
+      </entry>
+   </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -21,7 +27,7 @@
       <value>javascript:;</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>

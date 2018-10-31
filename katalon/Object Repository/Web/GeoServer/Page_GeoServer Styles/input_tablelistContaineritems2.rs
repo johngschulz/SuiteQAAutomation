@@ -4,6 +4,12 @@
    <name>input_tablelistContaineritems2</name>
    <tag></tag>
    <elementGuidId>f9472217-0abe-4156-97c1-e11ffcd97c0f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//input[@type = 'checkbox' and @name = 'table:listContainer:items:2:selectItemContainer:selectItem']</value>
+      </entry>
+   </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -28,7 +34,7 @@
       <value>table:listContainer:items:2:selectItemContainer:selectItem</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>
@@ -39,6 +45,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;id7&quot;)</value>
+      <value>/html/body/div[2]/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/th</value>
    </webElementProperties>
 </WebElementEntity>

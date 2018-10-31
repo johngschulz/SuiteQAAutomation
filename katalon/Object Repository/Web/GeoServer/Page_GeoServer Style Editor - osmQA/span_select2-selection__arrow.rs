@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>#id5b > div.tab-panel > div > fieldset.leftwise > div > fieldset > ul > li:nth-child(2) > span > span.selection > span > span.select2-selection__arrow</value>
+         <value>/html/body/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/fieldset[1]/div/fieldset/ul/li[2]/span/span[1]/span/span[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -38,10 +38,10 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;id5b&quot;)/div[@class=&quot;tab-panel&quot;]/div[@class=&quot;selfclear clearBoth&quot;]/fieldset[@class=&quot;leftwise&quot;]/div[1]/fieldset[1]/ul[1]/li[2]/span[@class=&quot;select2 select2-container select2-container--default select2-container--open select2-container--above&quot;]/span[@class=&quot;selection&quot;]/span[@class=&quot;select2-selection select2-selection--single&quot;]/span[@class=&quot;select2-selection__arrow&quot;]</value>
+      <value>/html/body/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/fieldset[1]/div/fieldset/ul/li[2]/span/span[1]/span/span[2]</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>css</name>
       <type>Main</type>

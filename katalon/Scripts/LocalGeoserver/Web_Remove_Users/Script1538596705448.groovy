@@ -40,7 +40,7 @@ WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Users Groups and Rol/in
 
 WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Users Groups and Rol/a_Remove Selected'))
 
-WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Users Groups and Rol/a_OK0'))
+WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Users Groups and Rol/a_OK'))
 
 WebUI.closeBrowser()
 

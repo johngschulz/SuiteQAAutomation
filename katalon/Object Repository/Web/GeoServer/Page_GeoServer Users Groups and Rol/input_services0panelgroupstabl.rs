@@ -4,6 +4,12 @@
    <name>input_services0panelgroupstabl</name>
    <tag></tag>
    <elementGuidId>150c1c64-4c1e-4e09-8085-5c17fda8e7be</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//input[@type = 'checkbox' and @name = 'services:0:panel:groups:table:listContainer:items:1:selectItemContainer:selectItem']</value>
+      </entry>
+   </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -28,7 +34,7 @@
       <value>services:0:panel:groups:table:listContainer:items:1:selectItemContainer:selectItem</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>id</name>
       <type>Main</type>

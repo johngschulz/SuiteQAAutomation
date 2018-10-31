@@ -4,6 +4,12 @@
    <name>input_select2-search__field</name>
    <tag></tag>
    <elementGuidId>aaabec79-afcc-4bb7-98b3-f446d0b293cb</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//input[contains(@class, 'select2-search__field') and @type = 'search']</value>
+      </entry>
+   </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -14,8 +20,8 @@
       <value>input</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
+      <isSelected>true</isSelected>
+      <matchCondition>contains</matchCondition>
       <name>class</name>
       <type>Main</type>
       <value>select2-search__field</value>
