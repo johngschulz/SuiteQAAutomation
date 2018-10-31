@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>html body div#main div.wrap.selfclear div#page.selfclear div.page-pane.selfclear div div.tab-panel div form#id43 ul li#id44 ul li div div.clearBoth ul li div form ul li ul li a#id52.remove-link</value>
+         <value>//a[@class = 'remove-link' and @href = 'javascript:;' and (contains(text(), 'Remove Selected') or contains(., 'Remove Selected'))]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,27 +35,13 @@
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>id</name>
-      <type>Main</type>
-      <value>id49</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
+      <matchCondition>contains</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>Remove Selected</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath</name>
-      <type>Main</type>
-      <value>id(&quot;id49&quot;)</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>css</name>
       <type>Main</type>

@@ -3,7 +3,7 @@
    <description></description>
    <name>a_GeoServer 2.13.0-BSE-00005</name>
    <tag></tag>
-   <elementGuidId>d6f26781-07c5-489f-9eb0-22bda29ab63d</elementGuidId>
+   <elementGuidId>57010bbe-1872-4822-b920-9ead7162ab4e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>

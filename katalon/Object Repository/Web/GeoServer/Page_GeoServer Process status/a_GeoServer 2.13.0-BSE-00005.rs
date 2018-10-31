@@ -4,6 +4,12 @@
    <name>a_GeoServer 2.13.0-BSE-00005</name>
    <tag></tag>
    <elementGuidId>121ddfde-cf1d-46e1-86f3-d23b8f84d5b5</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//a[@href = '../../' and (text() = 'GeoServer 2' or . = 'GeoServer 2')]</value>
+      </entry>
+   </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -29,10 +35,10 @@
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
+      <matchCondition>contains</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>GeoServer 2.13.0-BSE-00005</value>
+      <value>GeoServer 2</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>

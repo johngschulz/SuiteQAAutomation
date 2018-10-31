@@ -52,7 +52,7 @@ WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Layers/span_Layer Group
 
 WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Layer Groups/span_Styles'))
 
-WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Styles/span_Backup  Restore'))
+not_run: WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Styles/span_Backup  Restore'))
 
 WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Backup  Restore/a_GeoServer 2.13.0-BSE-00005'))
 
@@ -66,7 +66,7 @@ WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Web Coverage Service/sp
 
 WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Web Map Tile Service/span_WPS'))
 
-WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Web Processing Servi/a_GeoServer 2.13.0-BSE-00005'))
+WebUI.click(findTestObject('Web/GeoServer/Page_Geoserver Web Processing Service/a_GeoServer 2.13.0-BSE-00005'))
 
 WebUI.click(findTestObject('Web/GeoServer/Page_GeoServer Welcome/span_Global'))
 

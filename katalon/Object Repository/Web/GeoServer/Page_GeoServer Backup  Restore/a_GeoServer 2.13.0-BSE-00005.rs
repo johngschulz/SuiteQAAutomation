@@ -4,6 +4,12 @@
    <name>a_GeoServer 2.13.0-BSE-00005</name>
    <tag></tag>
    <elementGuidId>b73de60d-6c13-45d3-b5ce-8df42f740f20</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//a[@class = 'pngfix' and @href = '../../' and (contains(text(), 'GeoServer 2') or contains(., 'GeoServer 2'))]</value>
+      </entry>
+   </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
@@ -14,7 +20,7 @@
       <value>a</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>
@@ -29,10 +35,10 @@
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
+      <matchCondition>contains</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>GeoServer 2.13.0-BSE-00005</value>
+      <value>GeoServer 2</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>

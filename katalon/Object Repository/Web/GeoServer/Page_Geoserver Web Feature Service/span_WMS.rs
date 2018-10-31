@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_GeoServer 2.13.0-BSE-00005</name>
+   <name>span_WMS</name>
    <tag></tag>
-   <elementGuidId>d6f26781-07c5-489f-9eb0-22bda29ab63d</elementGuidId>
+   <elementGuidId>0cf19fb8-1974-4455-821b-36a2404de7d6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//a[@href = '../../' and (text() = 'GeoServer 2' or . = 'GeoServer 2')]</value>
+         <value>//span[(text() = 'WMS' or . = 'WMS')]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,34 +17,20 @@
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>a</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>class</name>
-      <type>Main</type>
-      <value>pngfix</value>
+      <value>span</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>href</name>
-      <type>Main</type>
-      <value>../../</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>contains</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>GeoServer 2</value>
+      <value>WMS</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;header&quot;)/div[@class=&quot;wrap&quot;]/h2[1]/a[@class=&quot;pngfix&quot;]</value>
+      <value>id(&quot;navigation&quot;)/li[@class=&quot;navigation-tab&quot;]/ul[@class=&quot;navigation-tab-content plain&quot;]/li[@class=&quot;nav-administer-service&quot;]/a[1]/span[1]</value>
    </webElementProperties>
 </WebElementEntity>
